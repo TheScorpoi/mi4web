@@ -267,7 +267,7 @@ const routes = [
   {
     name: "github",
     icon: <GitHubIcon />,
-    href: "https://www.github.com/creativetimofficial/material-kit-react",
+    href: "https://github.com/TheScorpoi/mi4web",
   },
 ];
 
