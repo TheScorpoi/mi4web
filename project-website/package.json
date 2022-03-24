@@ -1,11 +1,11 @@
 {
-  "name": "material-kit-2-react",
+  "name": "mi4web",
   "version": "2.0.0",
   "private": true,
-  "author": "Creative Tim",
+  "author": "MI4WEB",
   "license": "See license in https://www.creative-tim.com/license",
-  "description": "React version of Material Kit 2 by Creative Tim",
-  "homepage": "https://demos.creative-tim.com/material-kit-react/#/",
+  "description": "Medical Imaging 4 Web",
+  "homepage": "https://TheScorpoi.github.io",
   "bugs": {
     "url": "https://github.com/creativetimofficial/ct-material-kit-react/issues"
   },
@@ -45,6 +45,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
   },
   "eslintConfig": {
@@ -74,6 +76,7 @@
     "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-react": "7.24.0",
     "eslint-plugin-react-hooks": "4.2.0",
+    "gh-pages": "^3.2.3",
     "prettier": "2.3.2"
   }
 }

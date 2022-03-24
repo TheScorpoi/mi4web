@@ -42,12 +42,11 @@ function Information() {
                 icon="touch_app"
                 title={
                   <>
-                    Feel the
+                    GOALS
                     <br />
-                    Material Kit
                   </>
                 }
-                description="All the MUI components that you need in a development have been re-design with the new look."
+                description=""
               />
               <RotatingCardBack
                 image={bgBack}
@@ -66,16 +65,17 @@ function Information() {
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
                   icon="content_copy"
-                  title="Full Documentation"
-                  description="Built by developers for developers. Check the foundation and you will find
-                    everything inside our documentation."
+                  title="WEB PLATAFORM"
+                  description="Having a web plataform in the Web that allows us to visualize image studies using a visualizer
+                  in conjunction with a server"
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
                   icon="flip_to_front"
-                  title="MUI Ready"
-                  description="The world's most popular react components library for building user interfaces."
+                  title="VIEWS"
+                  description="The visualisation of the images will have to allow canonical views and three-dimensional
+                  object views"
                 />
               </Grid>
             </Grid>
@@ -83,15 +83,15 @@ function Information() {
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
                   icon="price_change"
-                  title="Save Time & Money"
-                  description="Creating your design from scratch with dedicated designers can be very expensive. Start with our Design System."
+                  title="DISTRIBUTION (?????)"
+                  description="The implemented system will have to be distributed."
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
                   icon="devices"
-                  title="Fully Responsive"
-                  description="Regardless of the screen size, the website content will naturally fit the given resolution."
+                  title="CLIENT-SERVER"
+                  description="The services will have to run in the web, in a client-server structure;"
                 />
               </Grid>
             </Grid>

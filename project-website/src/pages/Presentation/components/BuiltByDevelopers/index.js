@@ -45,18 +45,15 @@ function BuiltByDevelopers() {
     >
       <Container>
         <Grid container item xs={12} lg={6} sx={{ ml: { xs: 0, lg: 6 } }}>
-          <MKTypography variant="h4" color="white" fontWeight="bold">
-            Quanto à qualidade?
-          </MKTypography>
           <MKTypography variant="h1" color="white" mb={1}>
-            Complex Documentation
+            Documentation
           </MKTypography>
           <MKTypography variant="body1" color="white" opacity={0.8} mb={2}>
-            Somos bue bons a construir aplicações de alta qualidade
+            Here you can find all the documentation for the components
           </MKTypography>
           <MKTypography
             component="a"
-            href="https://www.creative-tim.com/learning-lab/react/overview/material-kit/"
+            href="https://drive.google.com/drive/folders/1-hUIkkTqyByItie7QjvyHMO3qNoHl9sL?usp=sharing"
             target="_blank"
             rel="noreferrer"
             variant="body2"
@@ -77,7 +74,7 @@ function BuiltByDevelopers() {
               },
             }}
           >
-            Read docs <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
+            See documentation <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
           </MKTypography>
         </Grid>
       </Container>
