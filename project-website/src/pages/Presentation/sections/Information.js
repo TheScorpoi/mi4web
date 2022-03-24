@@ -42,7 +42,7 @@ function Information() {
                 icon="touch_app"
                 title={
                   <>
-                    GOALS
+                    OUR GOALS
                     <br />
                   </>
                 }
@@ -50,12 +50,11 @@ function Information() {
               />
               <RotatingCardBack
                 image={bgBack}
-                title="Discover More"
-                description="You will save a lot of time going from prototyping to full-functional code because all elements are implemented."
+                icon="touch_app"
+                title="OUR GOALS"
                 action={{
                   type: "internal",
                   route: "/sections/page-sections/page-headers",
-                  label: "start with header",
                 }}
               />
             </RotatingCard>

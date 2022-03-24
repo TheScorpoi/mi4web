@@ -60,7 +60,7 @@ function Pages() {
             sx={{ mb: 2 }}
           />
           <MKTypography variant="h2" fontWeight="bold">
-            With our coded pages
+            WHO ARE WE?
           </MKTypography>
           <MKTypography variant="body1" color="text">
             The easiest way to get started is to use one of our
