@@ -66,7 +66,7 @@ function Information() {
                   icon="content_copy"
                   title="WEB PLATAFORM"
                   description="Having a web plataform in the Web that allows us to visualize image studies using a visualizer
-                  in conjunction with a server"
+                  in conjunction with a server."
                 />
               </Grid>
               <Grid item xs={12} md={6}>
@@ -74,15 +74,15 @@ function Information() {
                   icon="flip_to_front"
                   title="VIEWS"
                   description="The visualisation of the images will have to allow canonical views and three-dimensional
-                  object views"
+                  object views."
                 />
               </Grid>
             </Grid>
             <Grid container spacing={3} sx={{ mt: { xs: 0, md: 6 } }}>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
-                  icon="price_change"
-                  title="DISTRIBUTION (?????)"
+                  icon="settings_suggest"
+                  title="DISTRIBUTED SYSTEM"
                   description="The implemented system will have to be distributed."
                 />
               </Grid>
@@ -90,7 +90,39 @@ function Information() {
                 <DefaultInfoCard
                   icon="devices"
                   title="CLIENT-SERVER"
-                  description="The services will have to run in the web, in a client-server structure;"
+                  description="The services will have to run in the web, in a client-server structure."
+                />
+              </Grid>
+            </Grid>
+            <Grid container spacing={3} sx={{ mt: { xs: 0, md: 6 } }}>
+              <Grid item xs={12} md={6}>
+                <DefaultInfoCard
+                  icon="move_up"
+                  title="TRANSACTIONS"
+                  description="Basic transactions for medical imaging storage and retrieval."
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <DefaultInfoCard
+                  icon="image_search"
+                  title="MEXER NA IMAGEM"
+                  description="Core 2D image display functionalities."
+                />
+              </Grid>
+            </Grid>
+            <Grid container spacing={3} sx={{ mt: { xs: 0, md: 6 } }}>
+              <Grid item xs={12} md={6}>
+                <DefaultInfoCard
+                  icon="burst_mode"
+                  title="IMAGE SEGMENTATION"
+                  description="Interactive image segmentation tools."
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <DefaultInfoCard
+                  icon="storage"
+                  title="PACS SERVER"
+                  description="Usage of PACS server to acess medical images."
                 />
               </Grid>
             </Grid>

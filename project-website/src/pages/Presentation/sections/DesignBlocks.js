@@ -14,7 +14,6 @@ Coded by www.creative-tim.com
 */
 
 // react-router-dom components
-import { Link } from "react-router-dom";
 
 // @mui material components
 import Container from "@mui/material/Container";
@@ -45,11 +44,11 @@ function DesignBlocks() {
       </Grid>
       <Grid item xs={12} lg={9}>
         <Grid container spacing={3}>
-          {items.map(({ image, name, count, route, pro }) => (
+          {items.map(({ image, name, route }) => (
             <Grid item xs={12} md={4} sx={{ mb: 2 }} key={name}>
-              <Link to={pro ? "/" : route}>
-                <ExampleCard image={image} name={name} count={count} pro={pro} />
-              </Link>
+              <a rel="noopener noreferrer" target="_blank" href={route}>
+                <ExampleCard image={image} name={name} />
+              </a>
             </Grid>
           ))}
         </Grid>
@@ -58,7 +57,7 @@ function DesignBlocks() {
   ));
 
   return (
-    <MKBox component="section" my={6} py={6}>
+    <MKBox component="section" my={6} py={4}>
       <Container>
         <Grid
           container

@@ -1,3 +1,11 @@
+import sobral from "assets/images/equipa_cords/sobral.png";
+import eva from "assets/images/equipa_cords/eva.png";
+import dani from "assets/images/equipa_cords/dani.png";
+import andre from "assets/images/equipa_cords/andre.png";
+import marta from "assets/images/equipa_cords/marta.jpeg";
+import profaugusto from "assets/images/equipa_cords/augusto.jpeg";
+import profmadeira from "assets/images/equipa_cords/madeira.jpg";
+
 /*
 =========================================================
 * Material Kit 2 React - v2.0.0
@@ -19,32 +27,29 @@ export default [
     description: "",
     items: [
       {
-        image: "https://www.pedrosobral.com.br/aulas/media/img/professor.jpg",
+        image: sobral,
         name: "Pedro Sobral",
         route: "https://github.com/TheScorpoi",
       },
       {
-        image: "https://cdn.record.pt/images/2022-03/img_476x268$2022_03_21_23_27_30_1975377.jpg",
+        image: dani,
         name: "Daniel Figueiredo",
-        route: "/sections/page-sections/features",
+        route: "https://github.com/daniff15",
       },
       {
-        image:
-          "https://media-exp1.licdn.com/dms/image/D4D35AQHQkgeDcGwnCw/profile-framedphoto-shrink_800_800/0/1630773603269?e=1648339200&v=beta&t=XiSCmujFRYPVeJEYY8oYzMrx0WtrkUq8jxQOOz2zk1w",
+        image: eva,
         name: "Eva Bartolomeu",
-        route: "/sections/page-sections/page-headers",
+        route: "https://github.com/eva-pomposo",
       },
       {
-        image:
-          "https://www.cafehistoria.com.br/wp-content/uploads/2017/01/Andre-de-lemos-freixo.jpg",
+        image: andre,
         name: "André Freixo",
-        route: "/sections/page-sections/features",
+        route: "https://github.com/andre180701",
       },
       {
-        image:
-          "https://i1.rgstatic.net/ii/profile.image/996486326267908-1614592262604_Q512/Teresa-Fradique.jpg",
+        image: marta,
         name: "Marta Fradique",
-        route: "/sections/page-sections/page-headers",
+        route: "https://github.com/MartaFradique",
       },
     ],
   },
@@ -53,15 +58,14 @@ export default [
     description: "",
     items: [
       {
-        image: "http://sweet.ua.pt/augusto.silva/imagens/652-AFS.jpeg",
+        image: profaugusto,
         name: "Augusto Silva",
-        route: "/sections/navigation/navbars",
+        route: "https://www.ua.pt/pt/p/10309634",
       },
       {
-        image:
-          "https://lh3.googleusercontent.com/xJIX7q_QuGViCrmRKWc5y_fKgr1SiLZwK2FQ7ZO4AgPzk8dE8T1UaKBz3Ujee4IC_X9i8Q=s85",
+        image: profmadeira,
         name: "Joaquim Madeira",
-        route: "/sections/navigation/nav-tabs",
+        route: "https://www.ua.pt/pt/p/10320092",
       },
     ],
   },
