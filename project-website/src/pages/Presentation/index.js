@@ -52,8 +52,8 @@ function Presentation() {
         routes={routes}
         action={{
           type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "See the Project",
+          route: "https://github.com/TheScorpoi/mi4web",
+          label: "Visit our MEDICAL IMAGE viewer",
           color: "info",
         }}
         sticky

@@ -15,13 +15,13 @@ Coded by www.creative-tim.com
 
 export default [
   {
-    title: "Equipa",
-    description: "Os 5 bonitos que fazem parte da equipa maravilha...",
+    title: "Team",
+    description: "",
     items: [
       {
         image: "https://www.pedrosobral.com.br/aulas/media/img/professor.jpg",
         name: "Pedro Sobral",
-        route: "/sections/page-sections/page-headers",
+        route: "https://github.com/TheScorpoi",
       },
       {
         image: "https://cdn.record.pt/images/2022-03/img_476x268$2022_03_21_23_27_30_1975377.jpg",
@@ -49,8 +49,8 @@ export default [
     ],
   },
   {
-    title: "Coordenadores",
-    description: "Coordenadores do nosso proji",
+    title: "Coordinators",
+    description: "",
     items: [
       {
         image: "http://sweet.ua.pt/augusto.silva/imagens/652-AFS.jpeg",

@@ -24,6 +24,7 @@ import MKBox from "components/MKBox";
 import RotatingCard from "examples/Cards/RotatingCard";
 import RotatingCardFront from "examples/Cards/RotatingCard/RotatingCardFront";
 import RotatingCardBack from "examples/Cards/RotatingCard/RotatingCardBack";
+import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
 
 // Images
 import bgFront from "assets/images/rotating-card-bg-front.jpeg";
@@ -57,6 +58,42 @@ function Information() {
                 }}
               />
             </RotatingCard>
+          </Grid>
+          <Grid item xs={12} lg={7} sx={{ ml: "auto" }}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={6}>
+                <DefaultInfoCard
+                  icon="content_copy"
+                  title="WEB PLATAFORM"
+                  description="Having a web plataform in the Web that allows us to visualize image studies using a visualizer
+                  in conjunction with a server"
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <DefaultInfoCard
+                  icon="flip_to_front"
+                  title="VIEWS"
+                  description="The visualisation of the images will have to allow canonical views and three-dimensional
+                  object views"
+                />
+              </Grid>
+            </Grid>
+            <Grid container spacing={3} sx={{ mt: { xs: 0, md: 6 } }}>
+              <Grid item xs={12} md={6}>
+                <DefaultInfoCard
+                  icon="price_change"
+                  title="DISTRIBUTION (?????)"
+                  description="The implemented system will have to be distributed."
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <DefaultInfoCard
+                  icon="devices"
+                  title="CLIENT-SERVER"
+                  description="The services will have to run in the web, in a client-server structure;"
+                />
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Container>
