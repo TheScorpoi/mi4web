@@ -31,7 +31,6 @@ function Counters() {
         <Grid container item xs={12} lg={9} sx={{ mx: "auto" }}>
           <Grid item xs={12} md={4}>
             <DefaultCounterCard
-              count={70}
               suffix="+"
               title="DICOM IMAGES"
               description="Our project allows you to manage DICOM images."
@@ -40,7 +39,6 @@ function Counters() {
           <Grid item xs={12} md={4} display="flex">
             <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, mx: 0 }} />
             <DefaultCounterCard
-              count={15}
               suffix="+"
               title="3D MODELS OF MEDICAL IMAGES"
               description="It is possible to manage 3D models of medical images."
@@ -49,7 +47,6 @@ function Counters() {
           </Grid>
           <Grid item xs={12} md={4}>
             <DefaultCounterCard
-              count={4}
               title="Syncronized view of multiple images"
               description="You can have a synchronized view of different cuts of a determinated exam."
             />
@@ -59,5 +56,7 @@ function Counters() {
     </MKBox>
   );
 }
+
+// Se se voltar a querer meter os numeros, é dentro do defaultcountercard mete-se count={numero}
 
 export default Counters;
