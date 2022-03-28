@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.js": "/static/js/main.fe09f6e5.chunk.js",
+    "main.js.map": "/static/js/main.fe09f6e5.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.05126c3a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.05126c3a.js.map",
+    "static/js/2.59d8090a.chunk.js": "/static/js/2.59d8090a.chunk.js",
+    "static/js/2.59d8090a.chunk.js.map": "/static/js/2.59d8090a.chunk.js.map",
+    "index.html": "/index.html",
+    "static/js/2.59d8090a.chunk.js.LICENSE.txt": "/static/js/2.59d8090a.chunk.js.LICENSE.txt",
+    "static/media/BG.e969b087.png": "/static/media/BG.e969b087.png",
+    "static/media/andre.786da5c1.png": "/static/media/andre.786da5c1.png",
+    "static/media/dani.f63f0ad7.png": "/static/media/dani.f63f0ad7.png",
+    "static/media/deti-teste.567fe4c4.jpg": "/static/media/deti-teste.567fe4c4.jpg",
+    "static/media/eva.26141f6c.png": "/static/media/eva.26141f6c.png",
+    "static/media/ieeta.d6faa426.jpg": "/static/media/ieeta.d6faa426.jpg",
+    "static/media/marta.90418c24.jpeg": "/static/media/marta.90418c24.jpeg",
+    "static/media/rotating-card-bg-back.183088de.jpeg": "/static/media/rotating-card-bg-back.183088de.jpeg",
+    "static/media/rotating-card-bg-front.bdcdfadc.jpeg": "/static/media/rotating-card-bg-front.bdcdfadc.jpeg",
+    "static/media/sobral.5cb6a0db.png": "/static/media/sobral.5cb6a0db.png",
+    "static/media/ua-logo.28e964fd.png": "/static/media/ua-logo.28e964fd.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.05126c3a.js",
+    "static/js/2.59d8090a.chunk.js",
+    "static/js/main.fe09f6e5.chunk.js"
+  ]
+}
