@@ -60,9 +60,11 @@ function Information() {
               color="text"
               opacity={0.8}
             >
-              Here you can find all the documentation for the components asHere you can find all the
-              documentation for the components asHere you can find all the documentation for the
-              components asHere you can find all the documentation for the components as
+              In this project we are going to create a platform in the Web that allows us to
+              visualize medical image studies using a visualizer based on OHIF in conjunction with
+              ORTHANC, which implements PACS system. The main objective of this project is to
+              develop extensions capable of adding functionalities to treat and visualize medical
+              images, both in 2D and 3D.
             </MKTypography>
             <MKTypography
               component="a"
