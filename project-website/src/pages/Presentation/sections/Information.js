@@ -61,10 +61,21 @@ function Information() {
               opacity={0.8}
             >
               In this project we are going to create a platform in the Web that allows us to
-              visualize medical image studies using a visualizer based on OHIF in conjunction with
-              ORTHANC, which implements PACS system. The main objective of this project is to
-              develop extensions capable of adding functionalities to treat and visualize medical
-              images, both in 2D and 3D.
+              visualize medical image{" "}
+              <a target="_blank" rel="noreferrer" href="https://www.dicomstandard.org">
+                (DICOM)
+              </a>{" "}
+              studies using a visualizer based on{" "}
+              <a target="_blank" rel="noreferrer" href="https://ohif.org">
+                OHIF
+              </a>{" "}
+              in conjunction with{" "}
+              <a target="_blank" rel="noreferrer" href="https://www.orthanc-server.com">
+                ORTHANC
+              </a>
+              , which implements PACS system. The main objective of this project is to develop
+              extensions capable of adding functionalities to treat and visualize medical images,
+              both in 2D and 3D.
             </MKTypography>
             <MKTypography
               component="a"
