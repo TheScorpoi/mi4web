@@ -44,7 +44,7 @@ function BuiltByDevelopers() {
       }}
     >
       <Container>
-        <Grid container item xs={12} lg={7} sx={{ ml: { xs: 0, lg: 6 } }}>
+        <Grid container item xs={12} lg={6} sx={{ ml: { xs: 0, lg: 6 } }}>
           <MKTypography variant="h1" color="white" mb={1}>
             Documentation
           </MKTypography>
