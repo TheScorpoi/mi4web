@@ -17,6 +17,47 @@ Coded by www.creative-tim.com
 import PropTypes from "prop-types";
 
 // react-countup component
+
+// Material Kit 2 React components
+import MKBox from "components/MKBox";
+import MKTypography from "components/MKTypography";
+
+function DefaultCounterCard({ title, description }) {
+  return (
+    <MKBox p={2} textAlign="center" lineHeight={1}>
+      {title && (
+        <MKTypography variant="h5" mt={2} mb={1}>
+          {title}
+        </MKTypography>
+      )}
+      {description && (
+        <MKTypography variant="body2" color="text">
+          {description}
+        </MKTypography>
+      )}
+    </MKBox>
+  );
+}
+
+// Setting default props for the DefaultCounterCard
+DefaultCounterCard.defaultProps = {
+  description: "",
+  title: "",
+};
+
+// Typechecking props for the DefaultCounterCard
+DefaultCounterCard.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+};
+
+export default DefaultCounterCard;
+
+/*
+// prop-types is a library for typechecking of props.
+import PropTypes from "prop-types";
+
+// react-countup component
 import CountUp from "react-countup";
 
 // Material Kit 2 React components
@@ -68,3 +109,5 @@ DefaultCounterCard.propTypes = {
 };
 
 export default DefaultCounterCard;
+
+*/

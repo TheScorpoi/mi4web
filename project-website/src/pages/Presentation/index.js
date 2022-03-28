@@ -91,7 +91,7 @@ function Presentation() {
               px={{ xs: 6, lg: 12 }}
               mt={1}
             >
-              A plataform of medical images totally web based
+              Fully web-based platform for Medical Imaging
             </MKTypography>
           </Grid>
         </Container>
@@ -118,7 +118,6 @@ function Presentation() {
           <Grid container spacing={3}>
             <Grid item xs={12} lg={4}>
               <FilledInfoCard
-                variant="gradient"
                 color="info"
                 icon="flag"
                 title="Architecture"

@@ -19,7 +19,7 @@ import MKBox from "components/MKBox";
 
 // Images
 function Download() {
-  return <MKBox component="section" py={{ xs: 0, sm: 12 }} />;
+  return <MKBox component="section" py={{ xs: 0, sm: 0 }} />;
 }
 
 export default Download;
