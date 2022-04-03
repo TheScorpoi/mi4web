@@ -27,12 +27,6 @@ import Grid from "@mui/material/Grid";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 
-import Image from "react-bootstrap/Image";
-
-import ieeta from "assets/images/footer_logos/ieeta.jpg";
-import deti from "assets/images/footer_logos/deti-teste.jpg";
-import ua from "assets/images/footer_logos/ua-logo.png";
-
 function DefaultFooter({ content }) {
   const { socials, menus, copyright } = content;
 
@@ -101,19 +95,6 @@ function DefaultFooter({ content }) {
               </MKBox>
             </Grid>
           ))}
-          <Grid item xs={12} sx={{ textAlign: "center", my: 3 }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-around",
-                marginLeft: "-10%",
-              }}
-            >
-              <Image src={ua} height={100} />
-              <Image src={deti} height={100} />
-              <Image src={ieeta} height={100} />
-            </div>
-          </Grid>
           <Grid item xs={12} sx={{ textAlign: "center", my: 3 }}>
             {copyright}
           </Grid>
