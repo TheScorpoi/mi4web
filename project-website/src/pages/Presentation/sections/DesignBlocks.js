@@ -44,10 +44,10 @@ function DesignBlocks() {
       </Grid>
       <Grid item xs={12} lg={9}>
         <Grid container spacing={3}>
-          {items.map(({ image, name, route }) => (
+          {items.map(({ image, name, route, role }) => (
             <Grid item xs={12} md={4} sx={{ mb: 2 }} key={name}>
               <a rel="noopener noreferrer" target="_blank" href={route}>
-                <ExampleCard image={image} name={name} />
+                <ExampleCard image={image} name={name} role={role} />
               </a>
             </Grid>
           ))}
