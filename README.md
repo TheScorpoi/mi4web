@@ -1,6 +1,5 @@
 # mi4web
 
-# test
 ## Group members
 
 | NMec | Name | Github | Email |
@@ -9,3 +8,4 @@
 | 98495 | **André Freixo** | [andre180701](https://github.com/andre180701) | andrefreixo18@ua.pt |
 | 98491 | **Pedro Sobral** | [TheScorpoi](https://github.com/TheScorpoi) | sobral@ua.pt |
 | 98513 | **Eva Bartolomeu** | [eva-pomposo](https://github.com/eva-pomposo) | evabartolomeu@ua.pt |
+| 98629 | **Marta Fradique** | [MartaFradique](https://github.com/MartaFradique) | martafradique@ua.pt |
