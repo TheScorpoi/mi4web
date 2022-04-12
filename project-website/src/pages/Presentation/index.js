@@ -45,6 +45,11 @@ import footerRoutes from "footer.routes";
 // Images
 import bgImage from "assets/images/BG.png";
 
+// Documentation
+import m1 from "Documents/MI4WEB-M1.pdf";
+import m2 from "Documents/MI4WEB-M2.pdf";
+import arquiteture from "Documents/MI4-ArchitectureDecisions.pdf";
+
 function Presentation() {
   return (
     <>
@@ -120,11 +125,24 @@ function Presentation() {
               <FilledInfoCard
                 color="info"
                 icon="flag"
-                title="Architecture"
+                title="M1 Presentation"
                 description=""
                 action={{
                   type: "external",
-                  route: "https://tinyurl.com/mrye8274",
+                  route: m1,
+                  label: "Click here",
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} lg={4}>
+              <FilledInfoCard
+                color="info"
+                icon="flag"
+                title="M2 Presentation"
+                description=""
+                action={{
+                  type: "external",
+                  route: m2,
                   label: "Click here",
                 }}
               />
@@ -133,11 +151,41 @@ function Presentation() {
               <FilledInfoCard
                 color="info"
                 icon="precision_manufacturing"
-                title="Requirements"
+                title="Architeture"
                 description=""
                 action={{
                   type: "external",
-                  route: "https://tinyurl.com/mrye8274",
+                  route: arquiteture,
+                  label: "Click here",
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Container>
+        <Container sx={{ mt: 3 }}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} lg={4}>
+              <FilledInfoCard
+                color="info"
+                icon="flag"
+                title="Not Yet..."
+                description=""
+                action={{
+                  type: "external",
+                  route: "",
+                  label: "Click here",
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} lg={4}>
+              <FilledInfoCard
+                color="info"
+                icon="precision_manufacturing"
+                title="Not Yet..."
+                description=""
+                action={{
+                  type: "external",
+                  route: "",
                   label: "Click here",
                 }}
               />
@@ -146,11 +194,11 @@ function Presentation() {
               <FilledInfoCard
                 color="info"
                 icon="apps"
-                title="Techical Report"
+                title="Not Yet..."
                 description=""
                 action={{
                   type: "external",
-                  route: "https://tinyurl.com/mrye8274",
+                  route: "",
                   label: "Click here",
                 }}
               />
