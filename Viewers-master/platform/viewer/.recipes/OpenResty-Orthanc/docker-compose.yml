@@ -29,15 +29,7 @@ services:
     #depends_on:
     #  - orthanc
     restart: on-failure
-    networks:
-      - all
 
-networks:
-  all:
-    ipam:
-      driver: default
-      config:
-        - subnet: 10.1.0.0/16
 
   # # LINK: https://hub.docker.com/r/jodogne/orthanc-plugins/
   # # TODO: Update to use Postgres
