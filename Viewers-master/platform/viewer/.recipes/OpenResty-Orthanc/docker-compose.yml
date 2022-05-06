@@ -25,7 +25,7 @@ services:
       # - letsencrypt_challenges:/var/www/letsencrypt
     ports:
       - '8083:443' # SSL
-      - '8083:80' # Web
+      - '8084:80' # Web
     #depends_on:
     #  - orthanc
     restart: on-failure
