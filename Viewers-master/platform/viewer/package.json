@@ -15,7 +15,7 @@
     "npm": ">=6",
     "yarn": ">=1.16.0"
   },
-  "proxy": "http://172.27.150.66:8763",
+  "proxy": "http://localhost:3000",
   "scripts": {
     "build:package": "cross-env NODE_ENV=production node --max_old_space_size=4096 ./../../node_modules/webpack/bin/webpack.js --config .webpack/webpack.commonjs.js --progress",
     "build:viewer": "cross-env NODE_ENV=production node --max_old_space_size=4096 ./../../node_modules/webpack/bin/webpack.js --config .webpack/webpack.pwa.js --progress",
@@ -66,6 +66,7 @@
     "cornerstone-math": "^0.1.9",
     "cornerstone-tools": "^6.0.6",
     "cornerstone-wado-image-loader": "^4.1.0",
+    "cross-env": "^7.0.3",
     "dcmjs": "0.19.9",
     "dicom-parser": "^1.8.11",
     "dicomweb-client": "^0.8.3",
