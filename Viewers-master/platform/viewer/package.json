@@ -23,7 +23,7 @@
     "build:viewer:demo": "cross-env NODE_ENV=production APP_CONFIG=config/demo.js HTML_TEMPLATE=rollbar.html QUICK_BUILD=true node --max_old_space_size=4096 ./../../node_modules/webpack/bin/webpack.js --progress --config .webpack/webpack.pwa.js",
     "build:viewer:package": "yarn run build:package",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config .webpack/webpack.pwa.js",
-    "dev:orthanc": "cross-env NODE_ENV=development PROXY_TARGET=/dicom-web PROXY_DOMAIN=http://172.27.150.66:8083 APP_CONFIG=config/docker_nginx-orthanc.js webpack-dev-server --config .webpack/webpack.pwa.js",
+    "dev:orthanc": "cross-env NODE_ENV=development PROXY_TARGET=/dicom-web PROXY_DOMAIN=http://mednat.ieeta.pt:8763 APP_CONFIG=config/docker_nginx-orthanc.js webpack-dev-server --config .webpack/webpack.pwa.js",
     "dev:viewer": "yarn run dev",
     "start": "yarn run dev",
     "test:e2e": "cypress open",
