@@ -31,6 +31,19 @@ services:
     restart: on-failure
     networks:
       - all
+  orthanc:
+    image: jodogne/orthanc-plugins:1.9.7
+    hostname: orthanc
+    container_name: orthanc
+    volumes:
+      # Config
+      - ./config/orthanc.json:/etc/orthanc/orthanc.json:ro
+      # Persist data
+      - ./volumes/orthanc-db/:/var/lib/orthanc/db/
+    restart: unless-stopped
+    networks:
+      - all
+
 
 networks:
  all:
