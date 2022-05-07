@@ -6,9 +6,9 @@ window.config = {
     dicomWeb: [
       {
         name: 'Orthanc',
-        wadoUriRoot: 'http://172.27.150.66:8763/wado',
-        qidoRoot: 'http://172.27.150.66:8763/dicom-web',
-        wadoRoot: 'http://172.27.150.66:8763/dicom-web',
+        wadoUriRoot: 'http://mednat.ieeta.pt:8763/wado',
+        qidoRoot: 'http://mednat.ieeta.pt:8763/dicom-web',
+        wadoRoot: 'http://mednat.ieeta.pt:8763/dicom-web',
         qidoSupportsIncludeField: false,
         imageRendering: 'wadors',
         thumbnailRendering: 'wadors',
