@@ -26,8 +26,8 @@ services:
     ports:
       - '8083:443' # SSL
       - '8084:80' # Web
-    #depends_on:
-    #  - orthanc
+    depends_on:
+      - orthanc
     restart: on-failure
     networks:
       - all
