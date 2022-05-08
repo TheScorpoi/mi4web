@@ -43,6 +43,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.5.5",
+    "@coreui/coreui": "^4.1.5",
+    "@coreui/icons": "^2.1.0",
+    "@coreui/icons-react": "^2.0.1",
+    "@coreui/react": "^4.2.0",
     "core-js": "^3.2.1"
   },
   "devDependencies": {
