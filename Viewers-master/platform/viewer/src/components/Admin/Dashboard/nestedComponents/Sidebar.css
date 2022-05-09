@@ -1,0 +1,40 @@
+.sidebar {
+    flex: 1;
+    background-color: rgb(46, 45, 45);
+    color: white;
+    height: calc(100vh - 75px);
+    position: sticky;
+    top: 50px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+}
+
+.sidebarWrapper {
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.list{
+    list-style: none;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 155px);
+}
+
+.listElem {
+    font-size: 1.25rem;
+    padding: 15px;
+    margin-bottom: 50px;
+    border-radius: 10px;
+}
+
+.listElem2 {
+    font-size: 1.25rem;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.listElem.active, .listElem:hover, .listElem2.active, .listElem2:hover {
+    background-color: aqua;
+}

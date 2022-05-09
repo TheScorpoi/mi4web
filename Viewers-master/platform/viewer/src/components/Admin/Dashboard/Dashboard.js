@@ -1,10 +1,31 @@
 import React, { Component } from 'react';
 import './Dashboard.css';
+import Sidebar from './nestedComponents/Sidebar';
+import Topbar from './nestedComponents/Topbar';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import UsersRequests from './pages/UsersRequests';
 
-class Dashboard extends Component {
-  render() {
-    return <h1 className="hello">Hello</h1>;
-  }
+function Dashboard() {
+  return (
+    <Router>
+      <div className="interface">
+        <Topbar />
+        <div className="container">
+          <Sidebar />
+          <Switch>
+            <Route exact path="/">
+              <div className="middle">SOU O 1</div>
+            </Route>
+            <Route path="/users">
+              <div className="middle">
+                <UsersRequests />
+              </div>
+            </Route>
+          </Switch>
+        </div>
+      </div>
+    </Router>
+  );
 }
 
 export default Dashboard;

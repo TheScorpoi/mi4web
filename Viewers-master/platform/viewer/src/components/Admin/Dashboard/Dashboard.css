@@ -1,3 +1,13 @@
-.hello {
-  color: white;
+.interface {
+  margin-top: 0;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+}
+
+.middle{
+  flex: 4;
+  background-color: rgb(34, 6, 70);
 }
