@@ -31,21 +31,21 @@ services:
     restart: on-failure
     networks:
       - all
-  orthanc:
-    image: jodogne/orthanc-plugins:1.9.7
-    hostname: orthanc
-    container_name: orthanc
-    volumes:
-      # Config
-      - ./config/orthanc.json:/etc/orthanc/orthanc.json:ro
-      # Persist data
-      - ./volumes/orthanc-db/:/var/lib/orthanc/db/
-    ports:
-      - '8085:4242' # REST
-      - '8086:8042' # REST
-    restart: unless-stopped
-    networks:
-      - all
+  # orthanc:
+  #   image: jodogne/orthanc-plugins:1.9.7
+  #   hostname: orthanc
+  #   container_name: orthanc
+  #   volumes:
+  #     # Config
+  #     - ./config/orthanc.json:/etc/orthanc/orthanc.json:ro
+  #     # Persist data
+  #     - ./volumes/orthanc-db/:/var/lib/orthanc/db/
+  #   ports:
+  #     - '8085:4242' # REST
+  #     - '8086:8042' # REST
+  #   restart: unless-stopped
+  #   networks:
+  #     - all
 
 
 networks:
@@ -53,7 +53,7 @@ networks:
   ipam:
    driver: default
    config:
-    - subnet: 10.1.0.0/16  
+    - subnet: 10.1.0.0/16
 
 
   # # LINK: https://hub.docker.com/r/jodogne/orthanc-plugins/
