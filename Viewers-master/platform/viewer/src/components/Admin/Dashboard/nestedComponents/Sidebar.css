@@ -38,3 +38,11 @@
 .listElem.active, .listElem:hover, .listElem2.active, .listElem2:hover {
     background-color: aqua;
 }
+
+
+@media only screen and (max-width: 1026px) {
+    #sidebarDeasapear {
+        display: none;
+    }
+}
+
