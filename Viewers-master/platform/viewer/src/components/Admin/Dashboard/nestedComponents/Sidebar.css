@@ -36,5 +36,6 @@
 }
 
 .listElem.active, .listElem:hover, .listElem2.active, .listElem2:hover {
-    background-color: aqua;
+    background-color: rgb(36, 39, 39);
+    cursor: pointer;
 }
