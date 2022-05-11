@@ -144,7 +144,7 @@ const definitions = [
     //
     CustomComponent: VTKMPRToolbarButton,
     type: TOOLBAR_BUTTON_TYPES.COMMAND,
-    commandName: 'render',
+    commandName: 'command3D',
     context: 'ACTIVE_VIEWPORT::CORNERSTONE',
   },
 ];

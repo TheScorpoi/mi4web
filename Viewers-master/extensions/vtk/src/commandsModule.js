@@ -487,6 +487,30 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
         }
       }
     },
+    command3D: async ({ viewports }) => {
+      const displaySet =
+        viewports.viewportSpecificData[viewports.activeViewportIndex];
+      const viewportProps = [
+        {
+          orientation: {
+            sliceNormal: [0, 0, 1],
+            viewUp: [0, -1, 0],
+          },
+        },
+      ];
+      try {
+        await setMPRLayout(displaySet, viewportProps, 1, 1);
+      } catch (error) {
+        throw new Error(error);
+      }
+      const vistaActivada = Array.from(
+        document.getElementsByClassName('vtk-viewport-handler')
+      );
+      vistaActivada[0].innerHTML = '';
+      //vistaActivada[0].innerHTML = VTKVolumeRenderingExample.VTKFusionExample.render();
+      //ReactDOM.render(VTKVolumeRenderingExample, vistaActivada[0]);
+      //Render3D.botones(false);
+    },
   };
 
   window.vtkActions = actions;
@@ -578,6 +602,12 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
     },
     mpr2d: {
       commandFn: actions.mpr2d,
+      storeContexts: ['viewports'],
+      options: {},
+      context: 'VIEWER',
+    },
+    command3D: {
+      commandFn: actions.command3D,
       storeContexts: ['viewports'],
       options: {},
       context: 'VIEWER',
