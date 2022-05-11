@@ -27,15 +27,19 @@
     padding: 15px;
     margin-bottom: 50px;
     border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .listElem2 {
     font-size: 1.25rem;
     padding: 15px;
     border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .listElem.active, .listElem:hover, .listElem2.active, .listElem2:hover {
-    background-color: rgb(36, 39, 39);
+    background-color: rgb(53, 58, 58);
     cursor: pointer;
 }

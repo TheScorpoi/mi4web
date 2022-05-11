@@ -1,6 +1,8 @@
 import React from 'react';
 import './Topbar.css';
 
+import PersonOutlineRoundedIcon from '@material-ui/icons/PersonOutlineRounded';
+
 function Topbar() {
   return (
     <div className="topbar">
@@ -9,7 +11,10 @@ function Topbar() {
           <div className="logo">System Manager Dashboard - MI4WEB</div>
         </div>
         <div className="topRigth">
-          <div className="icons">Icones</div>
+          <div className="icons">
+            Logout
+            <PersonOutlineRoundedIcon />
+          </div>
         </div>
       </div>
     </div>

@@ -19,3 +19,13 @@
     color: rgb(134, 134, 235);
     cursor: pointer;
 }
+
+.icons {
+    color: white;
+    padding: 10px;
+}
+
+.icons:hover {
+    background-color: rgb(53, 58, 58);
+    cursor: pointer;
+}
