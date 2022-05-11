@@ -4,6 +4,7 @@ import Sidebar from './nestedComponents/Sidebar';
 import Topbar from './nestedComponents/Topbar';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import UsersRequests from './pages/UsersRequests';
+import InitialDashboard from './pages/InitialDashboard';
 
 function Dashboard() {
   return (
@@ -14,7 +15,9 @@ function Dashboard() {
           <Sidebar />
           <Switch>
             <Route exact path="/">
-              <div className="middle">SOU O 1</div>
+              <div className="middle">
+                <InitialDashboard />
+              </div>
             </Route>
             <Route path="/users">
               <div className="middle">
