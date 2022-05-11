@@ -21,30 +21,28 @@ function Sidebar() {
   };
 
   return (
-    <div className="sidebarWrapper">
-      <div className="sidebarMenu">
-        <div className="sidebar">
-          <div className="list">
-            <div id="sidebarDeasapear">
-              <div>
-                <li className="listElem" onClick={initDashboard}>
-                  Dashboard <DashboardOut />
-                </li>
-                <li className="listElem" onClick={users}>
-                  Manage Acess <PeopleRoundedIcon />
-                </li>
-                <li className="listElem">
-                  SW Versions <Versions />
-                </li>
-                <li className="listElem">
-                  DICOM Nodes <TreeRounded />
-                </li>
-              </div>
-              <div>
-                <li className="listElem2">
-                  Extensions Installation <ContentCopyRoundedIcon />
-                </li>
-              </div>
+    <div className="sidebarMenu">
+      <div className="sidebar">
+        <div className="list">
+          <div id="sidebarDeasapear">
+            <div>
+              <li className="listElem" onClick={initDashboard}>
+                Dashboard <DashboardOut />
+              </li>
+              <li className="listElem" onClick={users}>
+                Manage Acess <PeopleRoundedIcon />
+              </li>
+              <li className="listElem">
+                SW Versions <Versions />
+              </li>
+              <li className="listElem">
+                DICOM Nodes <TreeRounded />
+              </li>
+            </div>
+            <div>
+              <li className="listElem2">
+                Extensions Installation <ContentCopyRoundedIcon />
+              </li>
             </div>
           </div>
         </div>

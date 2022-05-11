@@ -1,6 +1,6 @@
 .sidebar {
     flex: 1;
-    background-color: rgb(46, 45, 45);
+    background-color: #15181f;
     color: white;
     height: calc(100vh - 75px);
     position: sticky;
@@ -8,10 +8,7 @@
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
 }
 
-.sidebarWrapper {
-    padding: 20px;
-    margin-top: 20px;
-}
+
 
 .list{
     list-style: none;
@@ -23,7 +20,7 @@
 }
 
 .listElem {
-    font-size: 1.25rem;
+    font-size: 1rem;
     padding: 15px;
     margin-bottom: 50px;
     border-radius: 10px;
@@ -32,7 +29,7 @@
 }
 
 .listElem2 {
-    font-size: 1.25rem;
+    font-size: 1rem;
     padding: 15px;
     border-radius: 10px;
     display: flex;
