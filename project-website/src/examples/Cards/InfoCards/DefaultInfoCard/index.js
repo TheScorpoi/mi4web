@@ -42,8 +42,25 @@ function DefaultInfoCard({ color, icon, title, description, direction, small, ac
     },
   };
 
+  const presentationsStyles = {
+    width: "300px",
+    "background-color": `#F7F7F7`,
+    "border-radius": `10px`,
+    padding: `10px`,
+    "padding-left": `20px`,
+
+    "&:hover": {
+      "background-color": `#F3F3F3`,
+    },
+  };
+
   return (
-    <MKBox lineHeight={1} p={direction === "center" ? 2 : 0} textAlign={direction}>
+    <MKBox
+      lineHeight={1}
+      p={direction === "center" ? 2 : 0}
+      textAlign={direction}
+      sx={presentationsStyles}
+    >
       {typeof icon === "string" ? (
         <MKTypography
           display="block"

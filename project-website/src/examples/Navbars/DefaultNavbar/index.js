@@ -487,19 +487,6 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             ml="auto"
             mr={center ? "auto" : 0}
           >
-            <MKBox
-              component={Link}
-              to="/documentation"
-              lineHeight={1}
-              py={transparent ? 1.5 : 0.75}
-              pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
-              mt="4px"
-            >
-              <MKTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-                Documentation
-              </MKTypography>
-            </MKBox>
-
             {renderNavbarItems}
           </MKBox>
 
