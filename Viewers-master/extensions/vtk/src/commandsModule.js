@@ -11,6 +11,7 @@ import setMPRLayout from './utils/setMPRLayout.js';
 import setViewportToVTK from './utils/setViewportToVTK.js';
 import Constants from 'vtk.js/Sources/Rendering/Core/VolumeMapper/Constants.js';
 import OHIFVTKViewport from './OHIFVTKViewport';
+import VTKVolumeRenderingExample from './VTKVolumeRenderingExample.js';
 
 const { BlendMode } = Constants;
 
@@ -506,7 +507,19 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
       const vistaActivada = Array.from(
         document.getElementsByClassName('vtk-viewport-handler')
       );
-      vistaActivada[0].innerHTML = '';
+
+      const url = 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs';
+      const studyInstanceUID =
+        '1.3.6.1.4.1.14519.5.2.1.7009.2403.334240657131972136850343327463';
+      const searchInstanceOptions = {
+        studyInstanceUID,
+      };
+
+      vistaActivada[0].innerHTML = VTKVolumeRenderingExample.createStudyImageIds(
+        url,
+        searchInstanceOptions
+      );
+      
       //vistaActivada[0].innerHTML = VTKVolumeRenderingExample.VTKFusionExample.render();
       //ReactDOM.render(VTKVolumeRenderingExample, vistaActivada[0]);
       //Render3D.botones(false);
