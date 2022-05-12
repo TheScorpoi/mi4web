@@ -127,7 +127,7 @@ function UsersRequests() {
           rows={rows}
           disableSelectionOnClick
           columns={columns}
-          pageSize={5}
+          pageSize={6}
           checkboxSelection
         />
       </div>
