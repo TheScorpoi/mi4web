@@ -34,7 +34,7 @@
     touch-action: manipulation;
     white-space: nowrap;
     will-change: box-shadow,transform;
-    font-size: 10px;
+    font-size: 11px;
     margin-right: 15px;
 
 }
@@ -47,7 +47,7 @@
     border-width: 0;
     box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
     box-sizing: border-box;
-    color: #36395A;
+    color: #000000;
     cursor: pointer;
     display: inline-flex;
     font-family: "JetBrains Mono",monospace;
@@ -67,7 +67,7 @@
     touch-action: manipulation;
     white-space: nowrap;
     will-change: box-shadow,transform;
-    font-size: 10px;
+    font-size: 11px;
 }
 
 .title {

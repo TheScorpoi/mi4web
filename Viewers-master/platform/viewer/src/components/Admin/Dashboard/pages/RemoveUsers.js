@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { DataGrid } from '@material-ui/data-grid';
-import './UsersRequests';
+import './RemoveUsers.css';
 function RemoveUsers() {
   const history = useHistory();
 
@@ -19,7 +19,7 @@ function RemoveUsers() {
     {
       field: 'hospital',
       headerName: 'Hospital',
-      width: 200,
+      width: 180,
     },
     {
       field: 'license',
@@ -29,18 +29,18 @@ function RemoveUsers() {
     {
       field: 'email',
       headerName: 'Email',
-      width: 200,
+      width: 180,
     },
     {
       field: 'action',
       headerName: 'Action',
-      width: 200,
+      width: 230,
       renderCell: params => {
         return (
           <>
-            <button className="declineBtn">Eliminate</button>
-            <button className="declineBtn">Activate</button>
-            <button className="declineBtn">Decline</button>
+            <button className="eliminateBtn">Eliminate</button>
+            <button className="activateBtn">Activate</button>
+            <button className="deactivateBtn">Deactivate</button>
           </>
         );
       },
