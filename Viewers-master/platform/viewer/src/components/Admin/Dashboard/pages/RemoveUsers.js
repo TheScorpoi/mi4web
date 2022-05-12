@@ -9,12 +9,12 @@ function RemoveUsers() {
     history.push('/users');
   };
   const columns = [
-    { field: 'id', headerName: 'ID', width: 35 },
+    { field: 'id', headerName: 'ID', width: 50 },
     {
       field: 'fullName',
       headerName: 'Full Name',
       sortable: false,
-      width: 200,
+      width: 225,
     },
     {
       field: 'hospital',
@@ -24,7 +24,7 @@ function RemoveUsers() {
     {
       field: 'license',
       headerName: 'License Number',
-      width: 200,
+      width: 225,
     },
     {
       field: 'email',
@@ -124,7 +124,9 @@ function RemoveUsers() {
     <>
       <h2 className="title">Remove Acess</h2>
       <div className="btns">
-        <button className="request" onClick={initDashboard} >Accounts Requests </button>
+        <button className="request" onClick={initDashboard}>
+          Accounts Requests{' '}
+        </button>
         <button className="current">Current Accounts</button>
       </div>
       <div className="userList">

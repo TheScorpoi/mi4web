@@ -239,3 +239,7 @@
     will-change: box-shadow,transform;
     font-size: 12px;
 }
+
+.actions {
+    margin: auto;
+}

@@ -17,33 +17,33 @@ function UsersRequests() {
       field: 'fullName',
       headerName: 'Full Name',
       sortable: false,
-      width: 250,
+      width: 225,
     },
     {
       field: 'hospital',
       headerName: 'Hospital',
-      width: 250,
+      width: 225,
     },
     {
       field: 'license',
       headerName: 'License Number',
-      width: 250,
+      width: 225,
     },
     {
       field: 'email',
       headerName: 'Email',
-      width: 250,
+      width: 225,
     },
     {
       field: 'action',
       headerName: 'Action',
-      width: 200,
+      width: 300,
       renderCell: params => {
         return (
-          <>
+          <div className="actions">
             <button className="acceptBtn">Accept</button>
             <button className="declineBtn">Decline</button>
-          </>
+          </div>
         );
       },
     },
