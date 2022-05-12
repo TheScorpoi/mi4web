@@ -5,27 +5,27 @@ import './UsersRequests.css';
 
 function UsersRequests() {
   const columns = [
-    { field: 'id', headerName: 'ID', width: 35 },
+    { field: 'id', headerName: 'ID', width: 50 },
     {
       field: 'fullName',
       headerName: 'Full Name',
       sortable: false,
-      width: 200,
+      width: 250,
     },
     {
       field: 'hospital',
       headerName: 'Hospital',
-      width: 200,
+      width: 250,
     },
     {
       field: 'license',
       headerName: 'License Number',
-      width: 200,
+      width: 250,
     },
     {
       field: 'email',
       headerName: 'Email',
-      width: 200,
+      width: 250,
     },
     {
       field: 'action',
