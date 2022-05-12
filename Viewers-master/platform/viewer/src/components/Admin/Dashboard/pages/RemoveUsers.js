@@ -19,7 +19,7 @@ function RemoveUsers() {
     {
       field: 'hospital',
       headerName: 'Hospital',
-      width: 180,
+      width: 225,
     },
     {
       field: 'license',
@@ -34,7 +34,7 @@ function RemoveUsers() {
     {
       field: 'action',
       headerName: 'Action',
-      width: 230,
+      width: 300,
       renderCell: params => {
         return (
           <>
