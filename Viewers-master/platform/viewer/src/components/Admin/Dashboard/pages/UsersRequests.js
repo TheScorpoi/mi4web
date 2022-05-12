@@ -1,7 +1,8 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { DataGrid } from '@material-ui/data-grid';
-import './RemoveUsers.css';
+
+import { useHistory } from 'react-router-dom';
+import './UsersRequests.css';
 
 function UsersRequests() {
   const history = useHistory();
@@ -9,6 +10,7 @@ function UsersRequests() {
   const initDashboard = () => {
     history.push('/eliminateUsers');
   };
+
   const columns = [
     { field: 'id', headerName: 'ID', width: 50 },
     {
@@ -123,10 +125,12 @@ function UsersRequests() {
   return (
     <>
       <h2 className="title">Manage Acess</h2>
-      <div className="btns-wrappers">
+      <div className="btns-wrapper">
         <div className="btns">
           <button className="request">Request Accounts</button>
-          <button className="current" onClick={initDashboard}>Current Accounts</button>
+          <button className="current" onClick={initDashboard}>
+            Current Accounts
+          </button>
         </div>
       </div>
       <div className="userList">
