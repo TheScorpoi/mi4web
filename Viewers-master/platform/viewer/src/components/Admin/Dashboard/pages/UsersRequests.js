@@ -10,27 +10,27 @@ function UsersRequests() {
     history.push('/eliminateUsers');
   };
   const columns = [
-    { field: 'id', headerName: 'ID', width: 35 },
+    { field: 'id', headerName: 'ID', width: 50 },
     {
       field: 'fullName',
       headerName: 'Full Name',
       sortable: false,
-      width: 200,
+      width: 250,
     },
     {
       field: 'hospital',
       headerName: 'Hospital',
-      width: 200,
+      width: 250,
     },
     {
       field: 'license',
       headerName: 'License Number',
-      width: 200,
+      width: 250,
     },
     {
       field: 'email',
       headerName: 'Email',
-      width: 200,
+      width: 250,
     },
     {
       field: 'action',
@@ -123,16 +123,18 @@ function UsersRequests() {
   return (
     <>
       <h2 className="title">Manage Acess</h2>
-      <div className="btns">
-        <button className="request">Request Accounts</button>
-        <button className="current" onClick={initDashboard}>Current Accounts</button>
+      <div className="btns-wrappers">
+        <div className="btns">
+          <button className="request">Request Accounts</button>
+          <button className="current" onClick={initDashboard}>Current Accounts</button>
+        </div>
       </div>
       <div className="userList">
         <DataGrid
           rows={rows}
           disableSelectionOnClick
           columns={columns}
-          pageSize={5}
+          pageSize={6}
           checkboxSelection
         />
       </div>
