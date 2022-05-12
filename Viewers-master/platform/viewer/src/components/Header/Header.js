@@ -91,7 +91,7 @@ function Header(props) {
             onClick={() =>
               show({
                 content: Login,
-                title: t('Login'),
+                title: t('Initiate Session'),
               })
             }
           >
