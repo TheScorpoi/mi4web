@@ -118,9 +118,11 @@ function UsersRequests() {
   return (
     <>
       <h2 className="title">Manage Acess</h2>
-      <div className="btns">
-        <button className="request">Request Accounts</button>
-        <button className="current">Current Accounts</button>
+      <div className="btns-wrapper">
+        <div className="btns">
+          <button className="request">Request Accounts</button>
+          <button className="current">Current Accounts</button>
+        </div>
       </div>
       <div className="userList">
         <DataGrid

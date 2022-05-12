@@ -3,6 +3,7 @@
     width: 80%;
     margin-left: 10%;
     margin-top: 7%;
+    position: relative;
 }
 
 .acceptBtn {
@@ -80,8 +81,17 @@
     color: white;
 }
 
+.btns-wrapper {
+    display: block;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+    display: flex;
+}
+
 .btns {
-    float: right;
+    justify-content: flex-end;
+    display: flex;
     margin-right: 10%;
 }
 
