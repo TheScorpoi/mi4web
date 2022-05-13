@@ -506,25 +506,12 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
       } catch (error) {
         throw new Error(error);
       }
+
+      buttons(false);
+
       const vistaActivada = Array.from(
         document.getElementsByClassName('vtk-viewport-handler')
       );
-
-      const toolBar = Array.from(document.getElementsByClassName('ToolbarRow'));
-
-      for (let index = 2; index < 7; index++) {
-        let element = toolBar[0].children[index];
-        element.style.visibility = 'hidden';
-      }
-
-      toolBar[0].children[1].children[1].innerText = 'Exit 3D';
-
-      let view = document.getElementsByClassName(
-        'viewport-drop-target viewport-container active'
-      );  
-
-      view[0].children[0].style.visibility = 'hidden';
-      view[0].children[1].style.visibility = 'hidden';
 
       ReactDOM.render(<VTKFusionExample />, vistaActivada[0]);
     },
@@ -640,5 +627,31 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
     defaultContext: 'ACTIVE_VIEWPORT::VTK',
   };
 };
+
+function buttons(activate) {
+  let msgExit;
+  let state;
+  if (activate) {
+    msgExit = 'Exit 2D MPR';
+    state = 'visible';
+  } else {
+    msgExit = 'Exit 3D';
+    state = 'hidden';
+  }
+
+  const toolBar = Array.from(document.getElementsByClassName('ToolbarRow'));
+
+  for (let index = 2; index < 7; index++) {
+    let element = toolBar[0].children[index];
+    element.style.visibility = state;
+  }
+
+  toolBar[0].children[1].children[1].innerText = msgExit;
+  toolBar[0].children[1].addEventListener('click', event => {
+    buttons(true);
+  });
+
+  console.clear();
+}
 
 export default commandsModule;
