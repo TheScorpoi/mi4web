@@ -10,7 +10,7 @@ import MKTypography from "components/MKTypography";
 import data from "pages/LandingPages/Documentation/sections/data/imageBlockData";
 
 function ImageBlock() {
-  const renderData = data.map(({ title, image }) => (
+  const renderData = data.map(({ title, image, image2 }) => (
     <Grid container spacing={3} sx={{ mb: 10 }} key={title}>
       <Grid item xs={12} lg={5}>
         <MKBox position="sticky" top="100px" pb={{ xs: 2, lg: 6 }}>
@@ -21,7 +21,14 @@ function ImageBlock() {
       </Grid>
       <Grid item xs={12} lg={7}>
         <Grid container spacing={3}>
-          <img alt={title} src={image} />
+          {image2 !== "" ? (
+            <>
+              <img style={{ width: "800px" }} alt={title} src={image} />
+              <img style={{ width: "800px", "margin-top": "50px" }} alt={title} src={image2} />
+            </>
+          ) : (
+            <img alt={title} src={image} />
+          )}
         </Grid>
       </Grid>
     </Grid>
