@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SIOWiki | Login</title>
+    <style>
+        #butaoError {
+            font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+        }
+    </style>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../static/AdminLTE-3.1.0/plugins/fontawesome-free/css/all.min.css">
+<!--/AdminLTE-3.1.0/plugins/fontawesome-free/css/all.min.css-->
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="../static/AdminLTE-3.1.0/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../static/AdminLTE-3.1.0/dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href=""><b>SIO</b>Wiki</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Inicie a sua sessão em <b>{{page}}</b></p>
+            
+                <form method="post" action="{{ url_for('get_informations')}}">
+                    <div class="input-group mb-3">
+                        <input class="form-control" placeholder="username" name="uid" id="uid">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Password" name="password" id="password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3 ml-4">
+                        <input type="checkbox" class="form-check-input" name="store_credentials" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Guardar credenciais</label>
+                        <small>Se este username já existir na base de dados, a password será atualizada.</small>
+                    </div>
+                    {%if incorrectPassword%}
+                    <p style="color:#FF0000">Invalid password!</p>
+                    {% endif %}
+                    {%if userNotFound%}
+                    <p style="color:#FF0000">User Not Found!</p>
+                    {% endif %}
+                    <div class="">
+                        <button type="submit" value="submit" class="btn btn-primary btn-block" onclick="loading()" >Log In</button>
+                    </div>
+                </form>
+                <!--
+                <div class="text-center mt-3">
+                    <a style="cursor: pointer" onclick="document.location.href='regist.php'" >Criar uma conta</a>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+    <!-- /.login-box -->
+
+    {%if bd%}
+        <div class="card mt-3">
+            <div class="card-body">
+                <p class="mb-1">Tem estas contas guardadas, deseja usar alguma?</p>
+                <table class="table">
+                    <tr>
+                        <th>Username</th>
+                        <th></th>
+                    </tr>
+                    {% for credential in bd %}
+                        <tr>
+                            <td>{{ credential["username"] }}</td>
+                            <td><button class="btn btn-sm btn-primary" onclick="use('{{ credential['username'] }}', '{{ credential['password'] }}')">Usar</button></td>
+                        </tr>
+                    {% endfor %}
+                   
+                </table>
+            </div>
+        </div>
+    {%endif%}
+    {%if not logged_in%}
+        <div class="card mt-3">
+            <div class="card-body">
+                <p class="mb-1 text-center" style="color: #FF0000">Não tem sessão iniciada.</p>
+                <p class="mb-1 text-center">Se desejar ver as suas credenciais guardadas inicie sessão <a href="{{ url_for('confirm_password')}}">aqui</a></p>
+            </div>
+        </div>
+    {%endif%}
+    {%if logged_in%}
+        <div class="card mt-3">
+            <div class="card-body">
+                <p class="mb-1 text-center"><a href="{{ url_for('update_password')}}">Mudar password da base de dados de credenciais</a></p>
+            </div>
+        </div>
+    {%endif%}
+<!-- jQuery -->
+<script src="../static/AdminLTE-3.1.0/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../static/AdminLTE-3.1.0/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../static/AdminLTE-3.1.0/dist/js/adminlte.min.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{%if serverFicticio%}
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'O servidor está a fazer passar-se por outra entidade!',
+    })
+</script>
+{%endif%}
+
+<script>
+    function loading() {
+        Swal.fire({
+            title: 'A carregar usando o protocolo E-CHAP...',
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            showConfirmButton: false
+        });
+    }
+    function use(username, password) {
+        document.getElementById("uid").value = username;
+        document.getElementById("password").value = password;
+    }
+</script>
+
+</body>
+</html>

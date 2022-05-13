@@ -88,12 +88,10 @@ function Header(props) {
           <Dropdown title={t('Options')} list={options} align="right" />
           <button
             className="button"
-            onClick={() =>
-              show({
-                content: Login,
-                title: t('Initiate Session'),
-              })
-            }
+            onClick={e => {
+              e.preventDefault();
+              window.location.href = 'http://localhost:9874/show_login';
+            }}
           >
             Login
           </button>
