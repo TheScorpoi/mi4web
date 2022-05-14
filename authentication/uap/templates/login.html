@@ -20,19 +20,19 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/css/adminlte.min.css">
 </head>
-<body class="hold-transition login-page" style="background-color: #0F1115;">
-    <div class="login-box" style="background-color: #151A1F; border-radius: 15px;">
+<body class="hold-transition login-page" style="background-color: #151A1F;">
+    <div class="login-box" style="display: block; background-color: #2C363F; border-radius: 15px; height: 70%; width: 30%;">
         <div class="login-logo">
-            <a class="text-white" href=""><b>MI4WEB</b> AUTHENTICATION</a>
+            <a class="text-white" style="font-size: large;" href=""><b>MI4WEB</b> AUTHENTICATION</a>
         </div>
         <!-- /.login-logo -->
-        <div class="card">
-            <div class="card-body login-card-body">
-                <p class="login-box-msg">Inicie a sua sessão em <b>{{page}}</b></p>
+        <div class="card" style="margin: 15px; margin-top: 25%;">
+            <div class="card-body login-card-body" style="background-color: #2C363F;">
+                <p class="login-box-msg" style="color: white;">Inicie a sua sessão em <b>{{page}}</b></p>
             
                 <form method="post" action="{{ url_for('get_informations')}}">
                     <div class="input-group mb-3">
-                        <input class="form-control" placeholder="username" name="uid" id="uid">
+                        <input class="form-control" placeholder="Username" name="uid" id="uid">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -57,11 +57,12 @@
                         <button type="submit" value="submit" class="btn btn-primary btn-block" onclick="loading()" >Log In</button>
                     </div>
                 </form>
-                <!--
-                <div class="text-center mt-3">
-                    <a style="cursor: pointer" onclick="document.location.href='regist.php'" >Criar uma conta</a>
-                </div>
-                -->
+            </div>
+        </div>
+        <div class="card mt-3 col-lg-10" style="margin: 0 auto; background-color: #2C363F; border: 1px solid white;">
+            <div style="margin: 15px;">
+                <p class="mb-1 text-center" style="color: #c43c3c">Não tem conta?</p>
+                <p class="mb-1 text-center" style="color: white;">Crie uma <a style="color: #0d93d1;" href="{{ url_for('register')}}">aqui</a></p>
             </div>
         </div>
     </div>
@@ -84,14 +85,6 @@
                     {% endfor %}
                    
                 </table>
-            </div>
-        </div>
-    {%endif%}
-    {%if not logged_in%}
-        <div class="card mt-3">
-            <div class="card-body">
-                <p class="mb-1 text-center" style="color: #FF0000">Não tem sessão iniciada.</p>
-                <p class="mb-1 text-center">Se desejar ver as suas credenciais guardadas inicie sessão <a href="{{ url_for('confirm_password')}}">aqui</a></p>
             </div>
         </div>
     {%endif%}
