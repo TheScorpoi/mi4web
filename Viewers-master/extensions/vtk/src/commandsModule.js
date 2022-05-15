@@ -1,3 +1,4 @@
+import React from 'react';
 import throttle from 'lodash.throttle';
 import {
   vtkInteractorStyleMPRWindowLevel,
@@ -12,7 +13,6 @@ import setViewportToVTK from './utils/setViewportToVTK.js';
 import Constants from 'vtk.js/Sources/Rendering/Core/VolumeMapper/Constants.js';
 import OHIFVTKViewport from './OHIFVTKViewport';
 import VTKVolumeRenderingExample from './VTKVolumeRenderingExample.js';
-import VTKFusionExample from './VTKVolumeRenderingExample.js';
 import ReactDOM from 'react-dom';
 
 const { BlendMode } = Constants;
@@ -503,17 +503,16 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
       ];
       try {
         await setMPRLayout(displaySet, viewportProps, 1, 1);
+        buttons(false);
       } catch (error) {
         throw new Error(error);
       }
 
-      buttons(false);
-
       const vistaActivada = Array.from(
         document.getElementsByClassName('vtk-viewport-handler')
       );
-
-      ReactDOM.render(<VTKFusionExample />, vistaActivada[0]);
+      vistaActivada[0].innerHTML = '';
+      ReactDOM.render(<VTKVolumeRenderingExample />, vistaActivada[0]);
     },
   };
 

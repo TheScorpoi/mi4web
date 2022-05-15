@@ -15,7 +15,7 @@ const url = 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs';
 const studyInstanceUID =
   '1.3.6.1.4.1.14519.5.2.1.7009.2403.334240657131972136850343327463';
 const ctSeriesInstanceUID =
-  '1.3.6.1.4.1.14519.5.2.1.7009.2403.879445243400782656317561081015';
+  '1.3.6.1.4.1.14519.5.2.1.7009.2403.226151125820845824875394858561';
 
 const searchInstanceOptions = {
   studyInstanceUID,
@@ -342,17 +342,7 @@ class VTKFusionExample extends Component {
     const progressString = `Progress: ${percentComplete}%`;
 
     return (
-      <div className="row">
-        <div className="col-xs-12">
-          <h1>Volume Rendering</h1>
-          <p>This example demonstrates volume rendering of a CT Volume.</p>
-          <p>
-            Images are retrieved via DICOMWeb from a publicly available server
-            and constructed into <code>vtkImageData</code> volumes before they
-            are provided to the component. When each slice arrives, its pixel
-            data is dumped into the proper location in the volume array.
-          </p>
-        </div>
+      <div style={{ color: 'white' }} className="row">
         <div className="col-xs-12">
           <div>
             <label htmlFor="select_CT_xfer_fn">
