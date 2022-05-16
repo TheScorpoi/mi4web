@@ -33,7 +33,6 @@ import OHIFDicomPDFExtension from '@ohif/extension-dicom-pdf';
 // Add this for Debugging purposes:
 //import OHIFDebuggingExtension from '@ohif/extension-debugging';
 import { version } from '../package.json';
-import Dashboard from './components/Admin/Dashboard/Dashboard.js';
 
 /*
  * Default Settings
@@ -59,13 +58,13 @@ const appProps = {
   ],
 };
 
-/*
- * /** Create App
- * const app = React.createElement(App, appProps, null);
- *
- * /** Render
- * ReactDOM.render(app, document.getElementById('root'));
- */
 
-const app = React.createElement(Dashboard);
+// Create App
+const app = React.createElement(App, appProps, null);
+
+// Render
 ReactDOM.render(app, document.getElementById('root'));
+ 
+
+//const app = React.createElement(Dashboard);
+//ReactDOM.render(app, document.getElementById('root'));

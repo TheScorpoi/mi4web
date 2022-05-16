@@ -128,7 +128,7 @@ def redirectPage():
     cursor.execute(query)
     result = cursor.fetchone()
     token = result[0]
-    return redirect('http://localhost:3000?token=' + token, code=302)
+    return redirect('http://localhost:3000/users?token=' + token, code=302)
 
 def connect_db():
     global connection, cursor
