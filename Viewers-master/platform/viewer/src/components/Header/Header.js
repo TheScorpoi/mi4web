@@ -3,11 +3,12 @@ import { Link, withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Dropdown, AboutContent, withModal } from '@ohif/ui';
+import { Dropdown, withModal } from '@ohif/ui';
 //
 import { UserPreferences } from './../UserPreferences';
 import OHIFLogo from '../OHIFLogo/OHIFLogo.js';
 import './Header.css';
+import { Login } from '../Login/Login';
 
 function Header(props) {
   const {
@@ -27,15 +28,6 @@ function Header(props) {
 
   useEffect(() => {
     const optionsValue = [
-      {
-        title: t('About'),
-        icon: { name: 'info' },
-        onClick: () =>
-          show({
-            content: AboutContent,
-            title: t('OHIF Viewer - About'),
-          }),
-      },
       {
         title: t('Preferences'),
         icon: {
@@ -94,6 +86,15 @@ function Header(props) {
         <div className="header-menu">
           <span className="research-use">{t('INVESTIGATIONAL USE ONLY')}</span>
           <Dropdown title={t('Options')} list={options} align="right" />
+          <button
+            className="button"
+            onClick={e => {
+              e.preventDefault();
+              window.location.href = 'http://localhost:9874/show_login';
+            }}
+          >
+            Login
+          </button>
         </div>
       </div>
     </>
