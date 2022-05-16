@@ -202,8 +202,8 @@ function createStudyImageIds(baseUrl, studySearchOptions) {
 
   var data = JSON.parse(localStorage.getItem('viewportData0'));
 
-  alert(data);
-  alert(data['StudyInstanceUID']);
+  //alert(data);
+  //alert(data['StudyInstanceUID']);
 
   /*
   for (var a in localStorage) {

@@ -512,8 +512,8 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
         document.getElementsByClassName('vtk-viewport-handler')
       );
       vistaActivada[0].innerHTML = '';
-      alert('QWE');
-      alert(viewports.activeViewportIndex);
+      //alert('QWE');
+      //alert(viewports.activeViewportIndex);
       localStorage.setItem('indice', viewports.activeViewportIndex);
       ReactDOM.render(<VTKVolumeRenderingExample />, vistaActivada[0]);
     },
