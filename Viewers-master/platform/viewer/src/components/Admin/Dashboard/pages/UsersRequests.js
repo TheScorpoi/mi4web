@@ -8,7 +8,7 @@ function UsersRequests() {
   const history = useHistory();
 
   const initDashboard = () => {
-    history.push('/eliminateUsers');
+    history.push('/currentUsers');
   };
 
   const columns = [
@@ -127,7 +127,7 @@ function UsersRequests() {
       <h2 className="title">Manage Acess</h2>
       <div className="btns-wrapper">
         <div className="btns">
-          <button className="request">Request Accounts</button>
+          <button className="request active">Request Accounts</button>
           <button className="current" onClick={initDashboard}>
             Current Accounts
           </button>

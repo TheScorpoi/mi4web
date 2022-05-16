@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { DataGrid } from '@material-ui/data-grid';
-import './RemoveUsers.css';
-function RemoveUsers() {
+import './UsersAccounts.css';
+function UsersAccounts() {
   const history = useHistory();
 
   const initDashboard = () => {
@@ -29,7 +29,7 @@ function RemoveUsers() {
     {
       field: 'email',
       headerName: 'Email',
-      width: 180,
+      width: 225,
     },
     {
       field: 'action',
@@ -37,11 +37,11 @@ function RemoveUsers() {
       width: 300,
       renderCell: params => {
         return (
-          <>
+          <div className="actions">
             <button className="eliminateBtn">Eliminate</button>
             <button className="activateBtn">Activate</button>
             <button className="deactivateBtn">Deactivate</button>
-          </>
+          </div>
         );
       },
     },
@@ -122,12 +122,14 @@ function RemoveUsers() {
 
   return (
     <>
-      <h2 className="title">Remove Acess</h2>
-      <div className="btns">
-        <button className="request" onClick={initDashboard}>
-          Accounts Requests{' '}
-        </button>
-        <button className="current">Current Accounts</button>
+      <h2 className="title">Current Accounts</h2>
+      <div className="btns-wrapper">
+        <div className="btns">
+          <button className="request" onClick={initDashboard}>
+            Request Accounts
+          </button>
+          <button className="current active">Current Accounts</button>
+        </div>
       </div>
       <div className="userList">
         <DataGrid
@@ -142,4 +144,4 @@ function RemoveUsers() {
   );
 }
 
-export default RemoveUsers;
+export default UsersAccounts;

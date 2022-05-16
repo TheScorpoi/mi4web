@@ -111,22 +111,23 @@
 }
 
 .btns {
-    float: right;
+    justify-content: flex-end;
+    display: flex;
     margin-right: 10%;
 }
 
 .request {
-    margin-right: 20px;
+  margin-right: 20px;
   align-items: center;
   appearance: none;
-  background-color: #15181f;
+  background-color: #FCFCFD;
   border-radius: 4px;
   border-width: 0;
   /* box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset; */
   box-sizing: border-box;
-  color: #FCFCFD;
   cursor: pointer;
   display: inline-flex;
+  color: #15181f;
   font-family: "JetBrains Mono",monospace;
   height: 40px;
   justify-content: center;
@@ -148,44 +149,52 @@
 }
 .current {
     margin-right: 20px;
-  align-items: center;
-  appearance: none;
-  background-color: #FCFCFD;
-  border-radius: 4px;
-  border-width: 0;
-  /* box-shadow:  #D6D6E7  0 2px 4px,#D6D6E8 0 7px 13px -3px,rgba(45, 35, 66, 0.3) 0 -3px 0 inset; */
-  box-sizing: border-box;
-  color: #15181f;
-  cursor: pointer;
-  display: inline-flex;
-  font-family: "JetBrains Mono",monospace;
-  height: 40px;
-  justify-content: center;
-  line-height: 1;
-  list-style: none;
-  overflow: hidden;
-  padding-left: 16px;
-  padding-right: 16px;
-  position: relative;
-  text-align: left;
-  text-decoration: none;
-  transition: box-shadow .15s,transform .15s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-  will-change: box-shadow,transform;
-  font-size: 12px;
+    align-items: center;
+    appearance: none;
+    background-color: #15181f;
+    border-radius: 4px;
+    border-width: 0;
+    /* box-shadow:  #D6D6E7  0 2px 4px,#D6D6E8 0 7px 13px -3px,rgba(45, 35, 66, 0.3) 0 -3px 0 inset; */
+    box-sizing: border-box;
+    color: #FCFCFD;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono",monospace;
+    height: 40px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s,transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow,transform;
+    font-size: 12px;
 }
 
-.request:hover {
+.request:hover  {
     box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3a3a3d 0 -3px 0 inset;
     transform: translateY(-2px);
 }
 
-.current:hover {
+.current:hover, .active {
   box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
   transform: translateY(-2px);
+}
+
+.btns-wrapper {
+    display: block;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+    display: flex;
 }
 
 .Mui-even{
@@ -219,3 +228,6 @@
     background-color: #000000;
 }
 
+.actions {
+    margin: auto;
+}
