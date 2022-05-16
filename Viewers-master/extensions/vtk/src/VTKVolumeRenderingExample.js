@@ -12,11 +12,10 @@ import presets from './presets.js';
 
 window.cornerstoneWADOImageLoader = cornerstoneWADOImageLoader;
 const url = 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs';
-const studyInstanceUID =
+var studyInstanceUID =
   '1.3.6.1.4.1.14519.5.2.1.7009.2403.334240657131972136850343327463';
 const ctSeriesInstanceUID =
   '1.3.6.1.4.1.14519.5.2.1.7009.2403.226151125820845824875394858561';
-
 const searchInstanceOptions = {
   studyInstanceUID,
 };
@@ -200,6 +199,22 @@ function createStudyImageIds(baseUrl, studySearchOptions) {
   const SERIES_INSTANCE_UID = '0020000E';
 
   const client = new api.DICOMwebClient({ url });
+
+  var data = JSON.parse(localStorage.getItem('viewportData0'));
+
+  alert(data);
+  alert(data['StudyInstanceUID']);
+
+  /*
+  for (var a in localStorage) {
+    alert(a);
+    alert(localStorage[a]);
+  }*/
+
+  studyInstanceUID = data['StudyInstanceUID'];
+  studySearchOptions = {
+    studyInstanceUID,
+  };
 
   return new Promise((resolve, reject) => {
     client.retrieveStudyMetadata(studySearchOptions).then(instances => {

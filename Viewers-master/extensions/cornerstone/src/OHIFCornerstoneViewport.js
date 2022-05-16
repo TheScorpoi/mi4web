@@ -138,6 +138,10 @@ class OHIFCornerstoneViewport extends Component {
       stack,
     };
 
+    localStorage.setItem(
+      'viewportData' + this.props.viewportIndex,
+      JSON.stringify(viewportData)
+    );
     return viewportData;
   };
 
