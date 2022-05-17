@@ -1,6 +1,5 @@
 .interface {
   margin-top: 0;
-  min-height: 100vh;
 }
 
 .container {
@@ -8,6 +7,7 @@
 }
 
 .middle{
+  min-height: 100vh;
   flex: 4;
   background-color: #0f1213;
 }

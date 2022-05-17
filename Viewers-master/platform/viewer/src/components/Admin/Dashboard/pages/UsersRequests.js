@@ -22,7 +22,7 @@ function UsersRequests() {
     {
       field: 'hospital',
       headerName: 'Hospital',
-      width: 225,
+      width: 275,
     },
     {
       field: 'license',
@@ -37,7 +37,7 @@ function UsersRequests() {
     {
       field: 'action',
       headerName: 'Action',
-      width: 300,
+      width: 400,
       renderCell: params => {
         return (
           <div className="actions">

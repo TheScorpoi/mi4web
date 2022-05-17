@@ -19,7 +19,7 @@ function UsersAccounts() {
     {
       field: 'hospital',
       headerName: 'Hospital',
-      width: 225,
+      width: 275,
     },
     {
       field: 'license',
@@ -34,7 +34,7 @@ function UsersAccounts() {
     {
       field: 'action',
       headerName: 'Action',
-      width: 300,
+      width: 400,
       renderCell: params => {
         return (
           <div className="actions">
@@ -136,7 +136,7 @@ function UsersAccounts() {
           rows={rows}
           disableSelectionOnClick
           columns={columns}
-          pageSize={5}
+          pageSize={6}
           checkboxSelection
         />
       </div>

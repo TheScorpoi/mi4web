@@ -9,6 +9,8 @@ import TreeRounded from '@material-ui/icons/AccountTreeRounded';
 import DashboardOut from '@material-ui/icons/BarChartRounded';
 import ContentCopyRoundedIcon from '@material-ui/icons/ComputerRounded';
 
+import { slide as Menu } from 'react-burger-menu';
+
 function Sidebar() {
   const history = useHistory();
 
@@ -21,33 +23,38 @@ function Sidebar() {
   };
 
   return (
-    <div className="sidebarMenu">
-      <div className="sidebar">
-        <div className="list">
-          <div id="sidebarDeasapear">
-            <div>
-              <li className="listElem" onClick={initDashboard}>
-                Dashboard <DashboardOut />
-              </li>
-              <li className="listElem" onClick={users}>
-                Manage Acess <PeopleRoundedIcon />
-              </li>
-              <li className="listElem">
-                SW Versions <Versions />
-              </li>
-              <li className="listElem">
-                DICOM Nodes <TreeRounded />
-              </li>
-            </div>
-            <div>
-              <li className="listElem2">
-                Extensions Installation <ContentCopyRoundedIcon />
-              </li>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Menu>
+      <a className="menu-item" onClick={initDashboard}>
+        Dashboard{' '}
+        <span>
+          <DashboardOut />
+        </span>
+      </a>
+      <a className="menu-item" onClick={users}>
+        Manage Acess{' '}
+        <span>
+          <PeopleRoundedIcon />
+        </span>
+      </a>
+      <a className="menu-item">
+        SW Versions{' '}
+        <span>
+          <Versions />
+        </span>
+      </a>
+      <a className="menu-item">
+        DICOM Nodes{' '}
+        <span>
+          <TreeRounded />
+        </span>
+      </a>
+      <a className="menu-item">
+        Extensions Installation{' '}
+        <span>
+          <ContentCopyRoundedIcon />
+        </span>
+      </a>
+    </Menu>
   );
 }
 
