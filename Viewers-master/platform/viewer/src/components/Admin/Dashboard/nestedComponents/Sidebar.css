@@ -89,3 +89,7 @@
 .righti {
   float: right;
 }
+
+a { 
+  outline: none;
+}
