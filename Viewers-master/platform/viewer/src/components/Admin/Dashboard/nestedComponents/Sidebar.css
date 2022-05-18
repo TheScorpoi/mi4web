@@ -77,3 +77,15 @@
     background-color: rgb(53, 58, 58);
     cursor: pointer;
 }
+
+.menu-item {
+  padding-bottom: 35px;
+}
+
+.lefti {
+  float: left;
+}
+
+.righti {
+  float: right;
+}
