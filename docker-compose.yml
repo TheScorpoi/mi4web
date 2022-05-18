@@ -4,14 +4,10 @@ services:
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
     ports:
-      - "4545:4545"
+      - "3306:3306"
     environment:
       MYSQL_DATABASE: mi4web
-      MYSQL_ROOT_PASSWORD: root 
-      
-    volumes:
-      - datafiles:/var/lib/mysql
-      - ./mi4web.sql:/docker-entrypoint-initdb.d/mi4web.sql
+      MYSQL_ROOT_PASSWORD: mi4web 
     restart: always
 
 volumes:
