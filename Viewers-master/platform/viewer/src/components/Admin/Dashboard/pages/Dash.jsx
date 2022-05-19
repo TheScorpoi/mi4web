@@ -5,7 +5,8 @@ import api from './api';
 
 export default function Dash() {
 
-  const [data, setData] = React.useState([]);
+  const [data_stats, setData] = React.useState([]);
+  const [data_system, setDataSystem] = React.useState([]);
 
   console.log("aqui oh cornos");
 
@@ -16,13 +17,19 @@ export default function Dash() {
     });
   }, []);
 
-
+  React.useEffect(() => {
+    api.get('/system').then(res => {
+      setDataSystem(res.data);
+      console.log(res)
+    });
+  }, []);
+  
   return (
     <div className="dash">
       <div className="dashItem">
         <span className="dashTitle">Count Instances</span>
         <div className="dashInstancesContainer">
-          <span className="dashInstances">6590</span>
+          <span className="dashInstances">{ data_stats.CountInstances}</span>
           
         </div>
       </div>
@@ -30,24 +37,25 @@ export default function Dash() {
       <div className="dashItem">
         <span className="dashTitle">Count Patients</span>
         <div className="dashInstancesContainer">
-          <span className="dashInstances">4</span>
+          <span className="dashInstances">{ data_stats.CountPatients}</span>
         </div>
       </div>
 
       <div className="dashItem">
         <span className="dashTitle">Count Series</span>
         <div className="dashInstancesContainer">
-          <span className="dashInstances">26 </span>
+          <span className="dashInstances"> { data_stats.CountSeries}</span>
           <div className="dashIcons"><PeopleIcon size={70}/></div>
         </div>
       </div>
 
       <div className="dashItem">
-        <span className="dashTitle">Count Studies</span>
+        <span className="dashTitle">Total Disk Size</span>
         <div className="dashInstancesContainer">
-          <span className="dashInstances">8</span>
+          <span className="dashInstances">{ data_stats.TotalDiskSizeMB}</span>
         </div>
       </div>
-    </div>
+      </div>
+    
   );
 }
