@@ -1,33 +1,38 @@
 import React from 'react';
 import './dash.css';
+import PeopleIcon from '@material-ui/icons/People';
 
 export default function Dash() {
   return (
     <div className="dash">
       <div className="dashItem">
-        <span className="dashTitle">Dash1</span>
-        <div className="dash1Container">
-          <span className="dash1">money money</span>
-          <span className="dash1Butagain">again money money</span>
+        <span className="dashTitle">Count Instances</span>
+        <div className="dashInstancesContainer">
+          <span className="dashInstances">6590</span>
+          
         </div>
-        <span className="dash1 but again2">lalallala</span>
       </div>
       
       <div className="dashItem">
-        <span className="dashTitle">Dash2</span>
-        <div className="dash1Container">
-          <span className="dash1">money money2</span>
-          <span className="dash1Butagain">again money money</span>
+        <span className="dashTitle">Count Patients</span>
+        <div className="dashInstancesContainer">
+          <span className="dashInstances">4</span>
         </div>
-        <span className="dash1 but again2">lalallala</span>
       </div>
+
       <div className="dashItem">
-        <span className="dashTitle">Dash3</span>
-        <div className="dash1Container">
-          <span className="dash1">money money3</span>
-          <span className="dash1Butagain">again money money</span>
+        <span className="dashTitle">Count Series</span>
+        <div className="dashInstancesContainer">
+          <span className="dashInstances">26 </span>
+          <div className="dashIcons"><PeopleIcon size={70}/></div>
         </div>
-        <span className="dash1 but again2">lalallala</span>
+      </div>
+
+      <div className="dashItem">
+        <span className="dashTitle">Count Studies</span>
+        <div className="dashInstancesContainer">
+          <span className="dashInstances">8</span>
+        </div>
       </div>
     </div>
   );
