@@ -1,7 +1,8 @@
-version: "3.1"
+version: "3.3"
 services:
   db:
     image: mysql:8.0
+    platform: linux/amd64
     command: --default-authentication-plugin=mysql_native_password
     ports:
       - "3306:3306"
@@ -9,6 +10,5 @@ services:
       MYSQL_DATABASE: mi4web
       MYSQL_ROOT_PASSWORD: mi4web 
     restart: always
-
-volumes:
-  datafiles:
+    volumes:
+      - ./data/db:/var/lib/mysql
