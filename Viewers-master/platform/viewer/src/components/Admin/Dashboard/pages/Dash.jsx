@@ -1,7 +1,21 @@
 import React from 'react';
 import './dash.css';
+import api from './api';
 
 export default function Dash() {
+
+  const [data, setData] = React.useState([]);
+
+  console.log("aqui oh cornos");
+
+  React.useEffect(() => {
+    api.get('/statistics').then(res => {
+      setData(res.data);
+      console.log(res)
+    });
+  }, []);
+
+
   return (
     <div className="dash">
       <div className="dashItem">
