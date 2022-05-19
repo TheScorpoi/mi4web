@@ -9,7 +9,7 @@
   
   /* Color/shape of burger icon bars */
   .bm-burger-bars {
-    background: #373a47;
+    background: white;
   }
   
   /* Color/shape of burger icon bars on hover*/
@@ -76,4 +76,20 @@
     color: #ffffff;
     background-color: rgb(53, 58, 58);
     cursor: pointer;
+}
+
+.menu-item {
+  padding-bottom: 35px;
+}
+
+.lefti {
+  float: left;
+}
+
+.righti {
+  float: right;
+}
+
+a { 
+  outline: none;
 }

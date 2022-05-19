@@ -2,17 +2,26 @@ version: "3.1"
 services:
   db:
     image: mysql:8.0
-    command: --default-authentication-plugin=mysql_native_password
     ports:
-      - "3001:3306"
+      - "3002:3306" 
+    command: --default-authentication-plugin=mysql_native_password --secure-file-priv=''
     environment:
-      MYSQL_DATABASE: SIO_P1
-      MYSQL_ROOT_PASSWORD: root 
-      
+      MYSQL_DATABASE: MI4WEB
+      MYSQL_USER: admin
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_PASSWORD: admin 
     volumes:
-      - datafiles:/var/lib/mysql
-      - ./sqlitraining.sql:/docker-entrypoint-initdb.d/sqlitraining.sql
+      - ./db:/var/lib/mysql
+    networks:
+      - default
     restart: always
 
-volumes:
-  datafiles:
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      ports:
+          - '1234:80'
+      restart: always
+      environment:
+          PMA_HOST: db
+      depends_on:
+          - db

@@ -14,7 +14,7 @@ function Dashboard() {
         <div className="container">
           <Sidebar />
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/dashboard">
               <div className="middle">
                 <InitialDashboard />
               </div>

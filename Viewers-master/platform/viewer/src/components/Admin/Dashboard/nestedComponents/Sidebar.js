@@ -15,7 +15,7 @@ function Sidebar() {
   const history = useHistory();
 
   const initDashboard = () => {
-    history.push('/');
+    history.push('/dashboard');
   };
 
   const users = () => {
@@ -25,32 +25,32 @@ function Sidebar() {
   return (
     <Menu>
       <a className="menu-item" onClick={initDashboard}>
-        Dashboard{' '}
-        <span>
+        <span className="lefti">Dashboard </span>
+        <span className="righti">
           <DashboardOut />
         </span>
       </a>
       <a className="menu-item" onClick={users}>
-        Manage Acess{' '}
-        <span>
+        <span className="lefti">Manage Acess </span>
+        <span className="righti">
           <PeopleRoundedIcon />
         </span>
       </a>
       <a className="menu-item">
-        SW Versions{' '}
-        <span>
+        <span className="lefti">SW Versions </span>
+        <span className="righti">
           <Versions />
         </span>
       </a>
       <a className="menu-item">
-        DICOM Nodes{' '}
-        <span>
+        <span className="lefti">DICOM Nodes </span>
+        <span className="righti">
           <TreeRounded />
         </span>
       </a>
       <a className="menu-item">
-        Extensions Installation{' '}
-        <span>
+        <span className="lefti">Extensions Installation </span>
+        <span className="righti">
           <ContentCopyRoundedIcon />
         </span>
       </a>
