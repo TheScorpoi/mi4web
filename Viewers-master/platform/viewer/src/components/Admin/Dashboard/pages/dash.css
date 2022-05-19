@@ -1,0 +1,17 @@
+.dash{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: brown;
+    height: 50%;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 7%;
+    color: white;
+}
+
+.dashItem{
+    flex: 1;
+    margin
+
+}
