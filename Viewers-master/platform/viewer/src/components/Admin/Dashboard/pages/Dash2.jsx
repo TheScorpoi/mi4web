@@ -4,22 +4,13 @@ import PeopleIcon from '@material-ui/icons/People';
 import api from './api';
 
 export default function Dash2() {
-  const [data_stats, setData] = React.useState([]);
-  const [data_system, setDataSystem] = React.useState([]);
-
-  console.log('aqui oh cornos');
-
-  React.useEffect(() => {
-    api.get('/statistics').then(res => {
-      setData(res.data);
-      console.log(res);
-    });
-  }, []);
+  const [data , setData] = React.useState([]);
 
   React.useEffect(() => {
     api.get('/system').then(res => {
-      setDataSystem(res.data);
+      setData(res.data);
       console.log(res);
+      console.log(data.PluginsEnabled);
     });
   }, []);
 
@@ -28,21 +19,21 @@ export default function Dash2() {
       <div className="dashItem">
         <span className="dashTitle">Server Name</span>
         <div className="dashInstancesContainer">
-          <span className="dashInstances">{data_stats.CountInstances}</span>
+          <span className="dashInstances">{ data.Name}</span>
         </div>
       </div>
 
       <div className="dashItem">
         <span className="dashTitle">Server Version</span>
         <div className="dashInstancesContainer">
-          <span className="dashInstances">{data_stats.CountPatients}</span>
+          <span className="dashInstances">{ data.Version}</span>
         </div>
       </div>
 
       <div className="dashItem">
         <span className="dashTitle">DICOM Port</span>
         <div className="dashInstancesContainer">
-          <span className="dashInstances"> {data_stats.CountSeries}</span>
+          <span className="dashInstances">{ data.DicomPort}</span>
           <div className="dashIcons">
             <PeopleIcon size={70} />
           </div>
@@ -50,9 +41,9 @@ export default function Dash2() {
       </div>
 
       <div className="dashItem">
-        <span className="dashTitle">Puglins Enable</span>
+        <span className="dashTitle">Database Version</span>
         <div className="dashInstancesContainer">
-          <span className="dashInstances">{data_stats.TotalDiskSizeMB}</span>
+          <span className="dashInstances">{ data.DatabaseVersion}</span>
         </div>
       </div>
     </div>
