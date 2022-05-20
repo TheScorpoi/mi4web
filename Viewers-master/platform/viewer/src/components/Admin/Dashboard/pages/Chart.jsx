@@ -30,7 +30,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Chart.js Line Chart',
+      text: 'Studies On Server',
     },
   },
 };
@@ -41,7 +41,7 @@ export const data = {
   labels,
   datasets: [
     {
-      label: 'Dataset 1',
+      label: 'Studies',
       data: labels.map(() => [100, 200, 300, 302, 4, 543, 234]),
       borderColor: 'rgb(145, 185, 205)',
       backgroundColor: 'rgba(145, 185, 205, 1)',
