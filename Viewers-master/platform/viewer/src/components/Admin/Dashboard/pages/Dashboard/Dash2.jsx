@@ -1,7 +1,7 @@
 import React from 'react';
 import './dash2.css';
 import PeopleIcon from '@material-ui/icons/People';
-import api from './api';
+import api from '../api';
 
 export default function Dash2() {
   const [data , setData] = React.useState([]);
@@ -15,7 +15,8 @@ export default function Dash2() {
   }, []);
 
   return (
-      
+    <div>
+    <span className="titleDashboard">Statistcs</span>
     <div className="dash">
       <div className="dashItem">
         <span className="dashTitle">Server Name</span>
@@ -48,5 +49,6 @@ export default function Dash2() {
         </div>
       </div>
     </div>
+    </div>   
   );
 }

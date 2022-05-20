@@ -1,7 +1,7 @@
 import React from 'react';
 import './dash.css';
 import PeopleIcon from '@material-ui/icons/People';
-import api from './api';
+import api from '../api';
 
 export default function Dash() {
   const [data_stats, setData] = React.useState([]);
