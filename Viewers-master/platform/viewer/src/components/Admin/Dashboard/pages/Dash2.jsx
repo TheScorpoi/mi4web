@@ -24,6 +24,7 @@ export default function Dash2() {
   }, []);
 
   return (
+      
     <div className="dash">
       <div className="dashItem">
         <span className="dashTitle">Server Name</span>
