@@ -6,8 +6,11 @@ services:
     ports:
       - "3306:3306"
     environment:
+      MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: mi4web
-      MYSQL_ROOT_PASSWORD: mi4web 
+      MYSQL_USER: root
+      MYSQL_PASSWORD: mi4web
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     restart: always
     volumes:
       - ./data/db:/var/lib/mysql

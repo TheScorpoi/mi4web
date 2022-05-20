@@ -68,6 +68,8 @@
     "@ohif/i18n": "^0.53.0",
     "@ohif/ui": "^1.10.8",
     "@tanem/react-nprogress": "^1.1.25",
+    "axios": "^0.26.1",
+    "chart.js": "^3.7.1",
     "classnames": "^2.2.6",
     "core-js": "^3.2.1",
     "cornerstone-core": "^2.6.1",
@@ -87,6 +89,7 @@
     "oidc-client": "1.7.x",
     "prop-types": "^15.7.2",
     "react-burger-menu": "^3.0.6",
+    "react-chartjs-2": "^4.1.0",
     "react-dropzone": "^10.1.7",
     "react-i18next": "^10.11.0",
     "react-redux": "^7.1.0",
@@ -99,8 +102,7 @@
     "redux-oidc": "3.1.x",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "vtk.js": "^11.14.0",
-    "axios": "^0.26.1"
+    "vtk.js": "^11.14.0"
   },
   "devDependencies": {
     "cypress": "^6.0.0",

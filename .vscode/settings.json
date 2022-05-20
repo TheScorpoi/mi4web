@@ -11,7 +11,7 @@
             "name": "mi4web",
             "database": "mi4web",
             "username": "root",
-            "password": "YES"
+            "password": "mi4web"
         }
     ]
 }
