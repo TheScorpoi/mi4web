@@ -3,7 +3,9 @@
     display: flex;
     color: #ffffff;
     margin-top: 2%;
-
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
 }
 
 .chartItem{

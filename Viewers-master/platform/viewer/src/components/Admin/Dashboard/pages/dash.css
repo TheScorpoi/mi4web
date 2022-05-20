@@ -4,7 +4,10 @@
     justify-content: space-between;
     color: #ffffff;
     margin-top: 2%;
-
+    height: 50%;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 7%;
 }
 
 .dashItem{
