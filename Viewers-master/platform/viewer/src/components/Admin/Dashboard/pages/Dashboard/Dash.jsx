@@ -5,7 +5,6 @@ import api from '../api';
 
 export default function Dash() {
   const [data_stats, setData] = React.useState([]);
-  const [data_system, setDataSystem] = React.useState([]);
 
   React.useEffect(() => {
     api.get('/statistics').then(res => {

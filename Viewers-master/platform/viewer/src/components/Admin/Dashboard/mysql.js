@@ -4,6 +4,12 @@ const bodyParser = require('body-parser');
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 const db = mysql.createConnection({
   host: 'localhost',
@@ -30,6 +36,14 @@ app.get('/testar', function(req, res) {
   });
 });
 
+app.get('/staff', (req, res) => {
+  let sql_query = 'SELECT email, fullname, professional_id, hospital, type_user FROM `staff`';
+  db.query(sql_query, (error, results) => {
+    if (error) throw error;
+    res.send(results);
+  });
+});
+
 // para por parametros para fazer where's no sql
 // sqlquery .... where ${req.params.parameter_name}
 app.get('/testar_insert', (req, res) => {
@@ -42,7 +56,7 @@ app.get('/testar_insert', (req, res) => {
   db.query(sql_query, post, (error, results) => {
     if (error) throw error;
     res.send(results);
-    console.log(results);
+    //console.log(results);
   });
 });
 
@@ -57,18 +71,13 @@ app.get('/testar_insert_with_params/:email/:fullname/:password', (req, res) => {
   db.query(sql_query, post, (error, results) => {
     if (error) throw error;
     res.send(results);
-    console.log(results);
+    //console.log(results);
   });
 });
 
 // e o app.get fica ("/testar_insert/:parameter_name", (req, res) => {
 // para por parametros para fazer where's no sql
 // sqlquery .... where ${req.params.parameter_name}
-
-db.query('SELECT * FROM `user`', (error, results) => {
-  if (error) throw error;
-  return console.log(results);
-});
 
 app.listen(3005, () => {
   console.log('Server started on port 3005');
