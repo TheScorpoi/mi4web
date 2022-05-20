@@ -7,18 +7,9 @@ export default function Dash() {
   const [data_stats, setData] = React.useState([]);
   const [data_system, setDataSystem] = React.useState([]);
 
-  console.log('aqui oh cornos');
-
   React.useEffect(() => {
     api.get('/statistics').then(res => {
       setData(res.data);
-      console.log(res);
-    });
-  }, []);
-
-  React.useEffect(() => {
-    api.get('/system').then(res => {
-      setDataSystem(res.data);
       console.log(res);
     });
   }, []);
