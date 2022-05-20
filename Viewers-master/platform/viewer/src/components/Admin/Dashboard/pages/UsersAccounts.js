@@ -83,7 +83,6 @@ function UsersAccounts() {
           columns={columns}
           disableSelectionOnClick
           pageSize={6}
-          checkboxSelection
           getRowId={row => row.email}
         />
       </div>

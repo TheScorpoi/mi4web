@@ -44,6 +44,14 @@ app.get('/staff', (req, res) => {
   });
 });
 
+app.get("/request_account", (req, res) => {
+  let sql_query = 'SELECT email, fullname, professional_id, hospital, type_user FROM `request_account`';
+  db.query(sql_query, (error, results) => {
+    if (error) throw error;
+    res.send(results);
+  });
+});
+
 // para por parametros para fazer where's no sql
 // sqlquery .... where ${req.params.parameter_name}
 app.get('/testar_insert', (req, res) => {
