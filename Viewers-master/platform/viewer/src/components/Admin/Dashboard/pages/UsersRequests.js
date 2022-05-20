@@ -22,6 +22,12 @@ function UsersRequests() {
     history.push('/currentUsers');
   };
 
+  const accept = (id) => {
+    api.post('/accept_account', { id: id }).then(res => {
+      console.log(res);
+    });
+  };
+
   const columns = [
     { field: 'id', headerName: 'ID', width: 50 },
     {
@@ -81,8 +87,7 @@ function UsersRequests() {
           rows={data}
           disableSelectionOnClick
           columns={columns}
-          pageSize={6}
-          checkboxSelection
+          pageSize={9}
           getRowId={row => row.email}
         />
       </div>

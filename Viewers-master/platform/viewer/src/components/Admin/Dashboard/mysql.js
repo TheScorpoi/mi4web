@@ -45,7 +45,7 @@ app.get('/staff', (req, res) => {
 });
 
 app.get("/request_account", (req, res) => {
-  let sql_query = 'SELECT email, fullname, professional_id, hospital, type_user FROM `request_account`';
+  let sql_query = 'SELECT email, fullname, professional_id, hospital, type_user FROM `not_accepted`';
   db.query(sql_query, (error, results) => {
     if (error) throw error;
     res.send(results);
