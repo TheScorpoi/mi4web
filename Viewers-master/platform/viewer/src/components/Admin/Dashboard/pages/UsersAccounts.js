@@ -44,7 +44,12 @@ function UsersAccounts() {
             >
               Eliminate
             </button>
-            <button className="activateBtn">Activate</button>
+            <button
+              className="activateBtn"
+              onClick={() => handleActive(params.row.id)}
+            >
+              Activate
+            </button>
             <button className="deactivateBtn">Deactivate</button>
           </div>
         );
@@ -128,8 +133,11 @@ function UsersAccounts() {
   const [rowData, setRowData] = useState(rows);
 
   const handleDelete = id => {
-    console.log(rowData);
     setRowData(rowData.filter(item => item.id !== id));
+  };
+
+  const handleActive = id => {
+    console.log(rowData.filter(item => item.id === id));
   };
 
   return (
