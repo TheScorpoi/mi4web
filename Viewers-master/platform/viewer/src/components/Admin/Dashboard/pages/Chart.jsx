@@ -43,8 +43,8 @@ export const data = {
     {
       label: 'Dataset 1',
       data: labels.map(() => [100, 200, 300, 302, 4, 543, 234]),
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      borderColor: 'rgb(145, 185, 205)',
+      backgroundColor: 'rgba(145, 185, 205, 1)',
     },
   ],
 };
