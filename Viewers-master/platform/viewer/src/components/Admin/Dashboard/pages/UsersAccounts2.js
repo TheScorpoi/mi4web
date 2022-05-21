@@ -57,7 +57,11 @@ function UsersAccounts() {
       renderCell: params => {
         return (
           <div className="actions">
-            <button className="eliminateBtn">Eliminate</button>
+            <button
+              className="eliminateBtn"
+              onClick={() => handleDelete(params.row.email)}
+            >
+              Eliminate</button>
             <button className="activateBtn">Activate</button>
             <button className="deactivateBtn">Deactivate</button>
           </div>
@@ -65,6 +69,13 @@ function UsersAccounts() {
       },
     },
   ];
+
+  const handleDelete = (id) => {
+    api.get(`/staff/${id}`).then(res => {
+      console.log(res.affectedRows)
+      setData(data.filter(item => item.id !== id));
+    });
+  };
 
   return (
     <>

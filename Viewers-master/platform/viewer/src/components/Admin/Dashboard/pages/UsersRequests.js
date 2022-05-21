@@ -22,9 +22,10 @@ function UsersRequests() {
     history.push('/currentUsers');
   };
 
-  const accept = (id) => {
-    api.post('/accept_account', { id: id }).then(res => {
-      console.log(res);
+  const handleDelete = (id) => {
+    api.get(`/request_delete/${id}`).then(res => {
+      console.log(res.affectedRows)
+      setData(data.filter(item => item.id !== id));
     });
   };
 
@@ -64,7 +65,10 @@ function UsersRequests() {
         return (
           <div className="actions">
             <button className="acceptBtn">Accept</button>
-            <button className="declineBtn">Decline</button>
+            <button
+              className="declineBtn"
+              onClick={() => handleDelete(params.row.email)}
+            >Decline</button>
           </div>
         );
       },

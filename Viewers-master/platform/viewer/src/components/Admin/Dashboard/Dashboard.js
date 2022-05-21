@@ -5,7 +5,7 @@ import Topbar from './nestedComponents/Topbar';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import UsersRequests from './pages/UsersRequests';
 import InitialDashboard from './pages/InitialDashboard';
-import RemoveUsers from './pages/UsersAccounts';
+import RemoveUsers from './pages/UsersAccounts2';
 function Dashboard() {
   return (
     <Router>
