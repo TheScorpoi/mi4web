@@ -57,7 +57,7 @@ export default function Dash() {
 
       <div className="dashItem">
         <div className="part1">
-          <span className="dashTitle">Total Disk Size</span>
+          <span className="dashTitle">Total Disk Size (MB)</span>
           <div className="dashInstancesContainer">
             <span className="dashInstances">{data_stats.TotalDiskSizeMB}</span>
           </div>

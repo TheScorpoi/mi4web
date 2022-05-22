@@ -1,10 +1,9 @@
 import React from 'react';
 import './dash2.css';
-import {IconContext} from "react-icons";
-import PeopleIcon from '@material-ui/icons/People';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import MeetingRoom from '@material-ui/icons/MeetingRoom';
-import StorageIcon from '@material-ui/icons//Storage';
+import StorageIcon from '@material-ui/icons/Storage';
+import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard';
 import api from '../api';
 
 export default function Dash2() {
@@ -29,6 +28,10 @@ export default function Dash2() {
           <div className="dashInstancesContainer">
             <span className="dashInstances">{ data.Name}</span>
           </div>
+        
+        </div>
+          <div className="dashIcons">
+            <DeveloperBoardIcon  fontSize="large" />
         </div>
         
       </div>
