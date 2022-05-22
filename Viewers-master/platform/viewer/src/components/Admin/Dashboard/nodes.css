@@ -1,47 +1,23 @@
-.dash{
+.nodes{
     width:100%;
     display: flex;
-    justify-content: space-between;
     color: #ffffff;
     margin-top: 2%;
-    height: 50%;
     width: 80%;
     margin-left: 10%;
+    margin-top: 2%;
 }
 
-.dashItem{
-    display: flex;
-    justify-content: space-between;
+.nodesItem{
+    
     flex: 1;
     margin: 0px 20px;
     padding: 30px;
     border-radius: 10px;
     cursor: pointer;
     background-color: #181818;
-}
-.part1{
-
-}
-.dashItem{
     font-size:20px;
-}
-.dashInstancesContainer{
-    margin: 10px 0px;
-    display:flex;
-    align-items: center;
-
-}
-.dashInstances{
-    font-size: 30px;
-    font-weight: 600;
-    color: #ADADC9;
-}
-
-.dashIcons {
-    /* width: 200px;
-    margin-left: 350px; */
-    /* height:10px;
-    padding: 5px; */
+    color: #ffffff;
 }
 
 .titleDashboard{
