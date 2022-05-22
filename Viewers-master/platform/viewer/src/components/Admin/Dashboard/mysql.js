@@ -20,6 +20,7 @@ const db = mysql.createConnection({
   port: 3306,
 });
 
+// connection to database
 db.connect(function(error) {
   if (error) {
     console.log(error);
@@ -29,6 +30,7 @@ db.connect(function(error) {
   }
 });
 
+// get all staff data (withou delicated data)
 app.get('/staff', (req, res) => {
   let sql_query = 'SELECT email, fullname, professional_id, hospital, type_user FROM `staff`';
   db.query(sql_query, (error, results) => {
@@ -37,15 +39,24 @@ app.get('/staff', (req, res) => {
   });
 });
 
+//get all request accounts from not accepted table (without delicated data)
+app.get("/request_account", (req, res) => {
+  let sql_query = 'SELECT email, fullname, professional_id, hospital, type_user FROM `not_accepted`';
+  db.query(sql_query, (error, results) => {
+    if (error) throw error;
+    res.send(results);
+  });
+});
+// delete staff user on current users admin table
 app.get('/staff_delete/:id', (req, res) => {
   let sql_query = 'DELETE FROM `staff` WHERE `email` = ?';
   db.query(sql_query, req.params.id, (error, results) => {
     if (error) throw error;
     res.send(results);
-    //console.log("Deleted from Staff");
   });
 });
 
+// accept a new staff user from request account
 app.get('/request_accept/:id', (req, res) => {
   let sql_query = 'CALL AcceptOnStaff(?)';
   db.query(sql_query, req.params.id, (error, results) => {
@@ -54,6 +65,7 @@ app.get('/request_accept/:id', (req, res) => {
   });
 });
 
+// delete a request account from not accepted table
 app.get('/request_accepte_update/:id', (req, res) => {
   let sql_query = 'CALL DeleteOnNotAcceptedTable (?)';
   db.query(sql_query, req.params.id, (error, results) => {
@@ -62,6 +74,7 @@ app.get('/request_accepte_update/:id', (req, res) => {
   });
 });
 
+// delete a request account from not accepted table
 app.get('/request_delete/:id', (req, res) => {
   let sql_query = 'DELETE FROM `not_accepted` WHERE `email` = ?';
   db.query(sql_query, req.params.id, (error, results) => {
@@ -70,10 +83,12 @@ app.get('/request_delete/:id', (req, res) => {
   });
 });
 
+// just realise that i have 2 endpoints that do the same thing... oh well, i not gonna change it
 
-app.get("/request_account", (req, res) => {
-  let sql_query = 'SELECT email, fullname, professional_id, hospital, type_user FROM `not_accepted`';
-  db.query(sql_query, (error, results) => {
+// get user from token
+app.get("/getUserFromToken/:token", (req, res) => {
+  let sql_query = 'SELECT fullname, type_user FROM `staff` WHERE `token` = ?';
+  db.query(sql_query, req.params.token, (error, results) => {
     if (error) throw error;
     res.send(results);
   });
