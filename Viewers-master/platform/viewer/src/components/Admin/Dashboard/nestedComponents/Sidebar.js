@@ -22,6 +22,10 @@ function Sidebar() {
     history.push('/users');
   };
 
+  const nodes = () => {
+    history.push('/nodes')
+  }
+
   return (
     <Menu>
       <a className="menu-item" onClick={initDashboard}>
@@ -42,7 +46,7 @@ function Sidebar() {
           <Versions />
         </span>
       </a>
-      <a className="menu-item">
+      <a className="menu-item" onClick={nodes}>
         <span className="lefti">DICOM Nodes </span>
         <span className="righti">
           <TreeRounded />

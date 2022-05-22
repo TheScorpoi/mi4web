@@ -5,6 +5,7 @@ import Topbar from './nestedComponents/Topbar';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import UsersRequests from './pages/UsersRequests';
 import InitialDashboard from './pages/InitialDashboard';
+import Nodes from './Nodes';
 import RemoveUsers from './pages/UsersAccounts';
 function Dashboard() {
   return (
@@ -27,6 +28,11 @@ function Dashboard() {
             <Route path="/currentUsers">
               <div className="middle">
                 <RemoveUsers />
+              </div>
+            </Route>
+            <Route path="/nodes">
+              <div className="middle">
+                <Nodes />
               </div>
             </Route>
           </Switch>

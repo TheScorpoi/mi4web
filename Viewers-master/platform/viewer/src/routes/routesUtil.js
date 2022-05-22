@@ -42,6 +42,9 @@ const ViewerLocalFileData = asyncComponent(() =>
 const AdminDashboard = asyncComponent(() =>
   retryImport(() => import('../components/Admin/Dashboard/Dashboard.js'))
 );
+const NodesD = asyncComponent(() =>
+  retryImport(() => import('../components/Admin/Dashboard/Nodes.js'))
+);
 
 const reload = () => window.location.reload();
 
@@ -74,6 +77,11 @@ const ROUTES_DEF = {
     AdminDashboardDisplay: {
       path: '/users',
       component: AdminDashboard,
+    },
+
+    NodesDDisplay: {
+      path: '/nodes',
+      component: NodesD,
     },
   },
   gcloud: {
