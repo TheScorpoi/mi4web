@@ -1,6 +1,10 @@
 import React from 'react';
 import './dash2.css';
+import {IconContext} from "react-icons";
 import PeopleIcon from '@material-ui/icons/People';
+import AccountTreeIcon from '@material-ui/icons/AccountTree';
+import MeetingRoom from '@material-ui/icons/MeetingRoom';
+import StorageIcon from '@material-ui/icons//Storage';
 import api from '../api';
 
 export default function Dash2() {
@@ -18,37 +22,54 @@ export default function Dash2() {
     <div>
     <span className="titleDashboard">Statistcs</span>
     <div className="dash">
-      <div className="dashItem">
-        <span className="dashTitle">Server Name</span>
-        <div className="dashInstancesContainer">
-          <span className="dashInstances">{ data.Name}</span>
-        </div>
-      </div>
 
       <div className="dashItem">
-        <span className="dashTitle">Server Version</span>
-        <div className="dashInstancesContainer">
-          <span className="dashInstances">{ data.Version}</span>
-        </div>
-      </div>
-
-      <div className="dashItem">
-        <span className="dashTitle">DICOM Port</span>
-        <div className="dashInstancesContainer">
-          <span className="dashInstances">{ data.DicomPort}</span>
-          <div className="dashIcons">
-            <PeopleIcon size={70} />
+        <div className="part1">
+          <span className="dashTitle">Server Name</span>
+          <div className="dashInstancesContainer">
+            <span className="dashInstances">{ data.Name}</span>
           </div>
         </div>
+        
       </div>
 
       <div className="dashItem">
-        <span className="dashTitle">Database Version</span>
-        <div className="dashInstancesContainer">
-          <span className="dashInstances">{ data.DatabaseVersion}</span>
+        <div className="part1">
+          <span className="dashTitle">Server Version</span>
+          <div className="dashInstancesContainer">
+            <span className="dashInstances">{ data.Version}</span>
+          </div>
+        </div>
+        <div className="dashIcons">
+            <AccountTreeIcon  fontSize="large" />
         </div>
       </div>
-    </div>
-    </div>   
+
+      <div className="dashItem">
+        <div className="part1">
+          <span className="dashTitle">DICOM Port</span>
+          <div className="dashInstancesContainer">
+            <span className="dashInstances">{ data.DicomPort}</span>
+          </div>
+        </div>
+        <div className="dashIcons">
+            <MeetingRoom  fontSize="large" />
+        </div>
+      </div>
+
+      <div className="dashItem">
+        <div className="part1">
+          <span className="dashTitle">Database Version</span>
+          <div className="dashInstancesContainer">
+            <span className="dashInstances">{ data.DatabaseVersion}</span>
+          </div>
+        </div>
+        <div className="dashIcons">
+            <StorageIcon  fontSize="large" />
+        </div>
+      </div>
+
+    </div> 
+    </div> 
   );
 }
