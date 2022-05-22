@@ -44,6 +44,25 @@ app.get('/staff', (req, res) => {
   });
 });
 
+app.get('/staff_delete/:id', (req, res) => {
+  let sql_query = 'DELETE FROM `staff` WHERE `email` = ?';
+  db.query(sql_query, req.params.id, (error, results) => {
+    if (error) throw error;
+    res.send(results);
+    //console.log("Deleted from Staff");
+  });
+});
+
+app.get('/request_delete/:id', (req, res) => {
+  let sql_query = 'DELETE FROM `not_accepted` WHERE `email` = ?';
+  db.query(sql_query, req.params.id, (error, results) => {
+    if (error) throw error;
+    res.send(results);
+    //console.log("Deleted from Not Accepted");
+  });
+});
+
+
 app.get("/request_account", (req, res) => {
   let sql_query = 'SELECT email, fullname, professional_id, hospital, type_user FROM `not_accepted`';
   db.query(sql_query, (error, results) => {
