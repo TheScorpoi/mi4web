@@ -8,7 +8,7 @@ const state = {
   labels: ['January', 'February', 'March', 'April', 'May'],
   datasets: [
     {
-      label: 'Rainfall',
+      label: 'Studies per week',
       fill: true,
       lineTension: 0.01,
       backgroundColor: 'rgba(75,192,192,1)',

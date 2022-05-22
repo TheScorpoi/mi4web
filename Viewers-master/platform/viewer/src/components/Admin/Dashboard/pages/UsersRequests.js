@@ -9,11 +9,15 @@ function UsersRequests() {
 
   const [data, setData] = React.useState([]);
 
-  React.useEffect(() => {
+  const loadTheFuckingData = () => {
     api.get('/request_account').then(res => {
       setData(res.data);
       console.log(res.data);
     });
+  };
+
+  React.useEffect(() => {
+    loadTheFuckingData();
   }, []);
 
   const history = useHistory();
@@ -24,8 +28,7 @@ function UsersRequests() {
 
   const handleDelete = (id) => {
     api.get(`/request_delete/${id}`).then(res => {
-      console.log(res.affectedRows)
-      setData(data.filter(item => item.id !== id));
+      loadTheFuckingData()
     });
   };
 
@@ -38,6 +41,7 @@ function UsersRequests() {
       console.log(res.affectedRows)
       setData(data.filter(item => item.id !== id));
     });
+    loadTheFuckingData()
 
   };
 
