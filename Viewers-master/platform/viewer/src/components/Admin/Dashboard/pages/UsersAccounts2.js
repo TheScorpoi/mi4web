@@ -71,7 +71,7 @@ function UsersAccounts() {
   ];
 
   const handleDelete = (id) => {
-    api.get(`/staff/${id}`).then(res => {
+    api.get(`/staff_delete/${id}`).then(res => {
       console.log(res.affectedRows)
       setData(data.filter(item => item.id !== id));
     });
