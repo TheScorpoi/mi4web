@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(function(req, res, next) {
+
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -28,14 +29,6 @@ db.connect(function(error) {
   }
 });
 
-app.get('/testar', function(req, res) {
-  let sql_query = 'SELECT * FROM `user`';
-  db.query(sql_query, (error, results) => {
-    if (error) throw error;
-    res.send(results);
-  });
-});
-
 app.get('/staff', (req, res) => {
   let sql_query = 'SELECT email, fullname, professional_id, hospital, type_user FROM `staff`';
   db.query(sql_query, (error, results) => {
@@ -53,12 +46,27 @@ app.get('/staff_delete/:id', (req, res) => {
   });
 });
 
+app.get('/request_accept/:id', (req, res) => {
+  let sql_query = 'CALL AcceptOnStaff(?)';
+  db.query(sql_query, req.params.id, (error, results) => {
+    if (error) throw error;
+    res.send(results);
+  });
+});
+
+app.get('/request_accepte_update/:id', (req, res) => {
+  let sql_query = 'CALL DeleteOnNotAcceptedTable (?)';
+  db.query(sql_query, req.params.id, (error, results) => {
+    if (error) throw error;
+    res.send(results);
+  });
+});
+
 app.get('/request_delete/:id', (req, res) => {
   let sql_query = 'DELETE FROM `not_accepted` WHERE `email` = ?';
   db.query(sql_query, req.params.id, (error, results) => {
     if (error) throw error;
     res.send(results);
-    //console.log("Deleted from Not Accepted");
   });
 });
 

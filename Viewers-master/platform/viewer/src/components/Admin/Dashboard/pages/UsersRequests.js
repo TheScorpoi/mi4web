@@ -29,6 +29,18 @@ function UsersRequests() {
     });
   };
 
+  const handleAccept = (id) => {
+    api.get(`/request_accept/${id}`).then(res => {
+      console.log(res.affectedRows)
+      setData(data.filter(item => item.id !== id));
+    });
+    api.get(`/request_accepte_update/${id}`).then(res => {
+      console.log(res.affectedRows)
+      setData(data.filter(item => item.id !== id));
+    });
+
+  };
+
   const columns = [
     { field: 'id', headerName: 'ID', width: 50 },
     {
@@ -64,7 +76,10 @@ function UsersRequests() {
       renderCell: params => {
         return (
           <div className="actions">
-            <button className="acceptBtn">Accept</button>
+            <button
+              className="acceptBtn"
+              onClick={() => handleAccept(params.row.email)}
+            >Accept</button>
             <button
               className="declineBtn"
               onClick={() => handleDelete(params.row.email)}
