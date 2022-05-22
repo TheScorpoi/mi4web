@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import UsersRequests from './pages/UsersRequests';
 import InitialDashboard from './pages/InitialDashboard';
 import Nodes from './Nodes';
-import RemoveUsers from './pages/UsersAccounts2';
+import RemoveUsers2 from './pages/UsersAccounts2';
 function Dashboard() {
   return (
     <Router>
