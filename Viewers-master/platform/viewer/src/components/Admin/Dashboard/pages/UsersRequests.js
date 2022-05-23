@@ -3,10 +3,9 @@ import { DataGrid } from '@material-ui/data-grid';
 import { useHistory } from 'react-router-dom';
 import './UsersRequests.css';
 import api from './apiManageAccess';
-
+import Popup from 'reactjs-popup';
 
 function UsersRequests() {
-
   const [data, setData] = React.useState([]);
 
   const loadTheFuckingData = () => {
@@ -26,23 +25,22 @@ function UsersRequests() {
     history.push('/currentUsers');
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = id => {
     api.get(`/request_delete/${id}`).then(res => {
-      loadTheFuckingData()
+      loadTheFuckingData();
     });
   };
 
-  const handleAccept = (id) => {
+  const handleAccept = id => {
     api.get(`/request_accept/${id}`).then(res => {
-      console.log(res.affectedRows)
+      console.log(res.affectedRows);
       setData(data.filter(item => item.id !== id));
     });
     api.get(`/request_accepte_update/${id}`).then(res => {
-      console.log(res.affectedRows)
+      console.log(res.affectedRows);
       setData(data.filter(item => item.id !== id));
     });
-    loadTheFuckingData()
-
+    loadTheFuckingData();
   };
 
   const columns = [
@@ -80,14 +78,73 @@ function UsersRequests() {
       renderCell: params => {
         return (
           <div className="actions">
-            <button
-              className="acceptBtn"
-              onClick={() => handleAccept(params.row.email)}
-            >Accept</button>
-            <button
-              className="declineBtn"
-              onClick={() => handleDelete(params.row.email)}
-            >Decline</button>
+            <Popup
+              trigger={<button className="acceptBtn"> Accept </button>}
+              modal
+              nested
+            >
+              {close => (
+                <div className="modal">
+                  <button className="close" onClick={close}>
+                    &times;
+                  </button>
+                  <div className="header"> Confirmation - Accept</div>
+                  <div className="content">
+                    {' '}
+                    Are you sure you want to accept this user?
+                  </div>
+                  <div className="actions">
+                    <button
+                      className="declineBtn"
+                      onClick={() => {handleAccept(params.row.email); close();}}
+                    >
+                      Yes
+                    </button>
+                    <button
+                      className="acceptBtn"
+                      onClick={() => {
+                        close();
+                      }}
+                    >
+                      No
+                    </button>
+                  </div>
+                </div>
+              )}
+            </Popup>
+
+            <Popup
+              trigger={<button className="declineBtn"> Decline </button>}
+              modal
+              nested
+            >
+              {close => (
+                <div className="modal">
+                  <button className="close" onClick={close}>
+                    &times;
+                  </button>
+                  <div className="header"> Confirmation - Decline </div>
+                  <div className="content">
+                    {' '}
+                    Are you sure you want to decline this user?
+                  </div>
+                  <div className="actions">
+                    <button
+                      className="declineBtn"
+                      onClick={() => {handleDelete(params.row.email); close();}}
+                    >
+                      Yes
+                    </button>
+                    <button
+                      className="acceptBtn"
+                      onClick={() => { close(); }}
+                    >
+                      No
+                    </button>
+                  </div>
+                </div>
+              )}
+            </Popup>
           </div>
         );
       },
