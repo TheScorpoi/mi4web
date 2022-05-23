@@ -1,6 +1,11 @@
 import React from 'react';
 import { Component } from 'react';
-import { getImageData, loadImageData, View3D } from 'react-vtkjs-viewport';
+import {
+  getImageData,
+  loadImageData,
+  View3D,
+  imageDataCache,
+} from 'react-vtkjs-viewport';
 import vtkVolume from 'vtk.js/Sources/Rendering/Core/Volume';
 import vtkVolumeMapper from 'vtk.js/Sources/Rendering/Core/VolumeMapper';
 import { api } from 'dicomweb-client';
@@ -14,9 +19,9 @@ window.cornerstoneWADOImageLoader = cornerstoneWADOImageLoader;
 const url = 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs';
 var studyInstanceUID =
   '1.3.6.1.4.1.14519.5.2.1.7009.2403.334240657131972136850343327463';
-const ctSeriesInstanceUID =
+var ctSeriesInstanceUID =
   '1.3.6.1.4.1.14519.5.2.1.7009.2403.226151125820845824875394858561';
-const searchInstanceOptions = {
+var searchInstanceOptions = {
   studyInstanceUID,
 };
 
@@ -200,18 +205,23 @@ function createStudyImageIds(baseUrl, studySearchOptions) {
 
   const client = new api.DICOMwebClient({ url });
 
-  var data = JSON.parse(localStorage.getItem('viewportData0'));
+  //var key = 'viewportData' + localStorage['indice'];
+  //var data = JSON.parse(localStorage.getItem(key));
 
   //alert(data);
   //alert(data['StudyInstanceUID']);
-
   /*
+  alert('FOR');
   for (var a in localStorage) {
-    alert(a);
-    alert(localStorage[a]);
+    alert('key:' + a);
+    alert('value:' + localStorage[a]);
   }*/
 
-  studyInstanceUID = data['StudyInstanceUID'];
+  studyInstanceUID = localStorage.getItem('StudyInstanceUID');
+  //ctSeriesInstanceUID = localStorage.getItem('SeriesInstanceUID');
+  searchInstanceOptions = {
+    studyInstanceUID,
+  };
   studySearchOptions = {
     studyInstanceUID,
   };
@@ -309,6 +319,8 @@ class VTKFusionExample extends Component {
   };
 
   loadDataset(imageIds, displaySetInstanceUid) {
+    //imageDataCache.clear();
+    //localStorage.clear();
     const imageDataObject = getImageData(imageIds, displaySetInstanceUid);
 
     loadImageData(imageDataObject);
@@ -341,7 +353,7 @@ class VTKFusionExample extends Component {
 
   render() {
     if (!this.state.volumeRenderingVolumes) {
-      return <h4>Loading...</h4>;
+      return <h4 style={{ color: 'white' }}>Loading...</h4>;
     }
 
     const ctTransferFunctionPresetOptions = presets.map(preset => {
