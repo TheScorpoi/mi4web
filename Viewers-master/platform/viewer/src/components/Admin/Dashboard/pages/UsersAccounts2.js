@@ -3,17 +3,21 @@ import { useHistory } from 'react-router-dom';
 import { DataGrid } from '@material-ui/data-grid';
 import './UsersAccounts.css';
 import api from './apiManageAccess';
+import Popup from 'reactjs-popup';
+
 
 function UsersAccounts() {
-
   const [data, setData] = React.useState([]);
 
-  
-  React.useEffect(() => {
+  const loadTheFuckingData = () => {
     api.get('/staff').then(res => {
-      setData(res.data);
-      console.log(res.data);
+        setData(res.data);
+        console.log(res.data);
     });
+  };
+
+  React.useEffect(() => {
+      loadTheFuckingData();
   }, []);
 
   const history = useHistory();
@@ -57,24 +61,55 @@ function UsersAccounts() {
       renderCell: params => {
         return (
           <div className="actions">
-            <button
-              className="eliminateBtn"
-              onClick={() => handleDelete(params.row.email)}
+            <Popup
+              trigger={<button className="declineBtn"> Eliminate </button>}
+              modal
+              nested
             >
-              Eliminate</button>
-            <button className="activateBtn">Activate</button>
-            <button className="deactivateBtn">Deactivate</button>
+              {close => (
+                <div className="modal">
+                  <button className="close" onClick={close}>
+                    &times;
+                  </button>
+                  <div className="header"> Confirmation - Elimination </div>
+                  <div className="content">
+                    {' '}
+                    Are you sure you want to eliminate this user?
+                  </div>
+                  <div className="actions">
+                    <button
+                      className="declineBtn"
+                      onClick={() => {
+                        handleDelete(params.row.email);
+                        close();
+                      }}
+                    >
+                      Yes
+                    </button>
+                    <button
+                      className="acceptBtn"
+                      onClick={() => {
+                        close();
+                      }}
+                    >
+                      No
+                    </button>
+                  </div>
+                </div>
+              )}
+            </Popup>
           </div>
         );
       },
     },
   ];
 
-  const handleDelete = (id) => {
+  const handleDelete = id => {
     api.get(`/staff_delete/${id}`).then(res => {
-      console.log(res.affectedRows)
+      console.log(res.affectedRows);
       setData(data.filter(item => item.id !== id));
     });
+    loadTheFuckingData();
   };
 
   return (
@@ -90,7 +125,7 @@ function UsersAccounts() {
       </div>
       <div className="userList">
         <DataGrid
-          rows={ data }
+          rows={data}
           columns={columns}
           disableSelectionOnClick
           pageSize={6}
