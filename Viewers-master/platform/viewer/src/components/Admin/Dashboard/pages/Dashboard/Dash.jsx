@@ -4,7 +4,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import Filter9PlusIcon from '@material-ui/icons/Filter9Plus';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import SaveIcon from '@material-ui/icons//Save';
-import api from '../api';
+import api from '../ApiConnections/api';
 
 export default function Dash() {
   const [data_stats, setData] = React.useState([]);

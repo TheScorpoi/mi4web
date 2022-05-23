@@ -2,7 +2,7 @@ import React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import { useHistory } from 'react-router-dom';
 import './UsersRequests.css';
-import api from './apiManageAccess';
+import api from '../ApiConnections/apiManageAccess';
 
 
 function UsersRequests() {
