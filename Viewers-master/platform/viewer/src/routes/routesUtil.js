@@ -75,7 +75,7 @@ const ROUTES_DEF = {
     },
 
     AdminDashboardDisplay: {
-      path: '/users',
+      path: '/dashboard',
       component: AdminDashboard,
     },
 

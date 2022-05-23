@@ -102,6 +102,7 @@
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-transition-group": "^4.1.1",
+    "reactjs-popup": "^2.0.5",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-oidc": "3.1.x",
