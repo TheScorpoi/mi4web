@@ -2,8 +2,13 @@ import React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import { useHistory } from 'react-router-dom';
 import './UsersRequests.css';
+<<<<<<< HEAD:Viewers-master/platform/viewer/src/components/Admin/Dashboard/pages/UsersManagement/UsersRequests.js
+import api from '../ApiConnections/apiManageAccess';
+
+=======
 import api from './apiManageAccess';
 import Popup from 'reactjs-popup';
+>>>>>>> c0616d10e85f96603730bf6b6479f91b596e8a84:Viewers-master/platform/viewer/src/components/Admin/Dashboard/pages/UsersRequests.js
 
 function UsersRequests() {
   const [data, setData] = React.useState([]);

@@ -4,7 +4,7 @@ import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import MeetingRoom from '@material-ui/icons/MeetingRoom';
 import StorageIcon from '@material-ui/icons/Storage';
 import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard';
-import api from '../api';
+import api from '../ApiConnections/api';
 
 export default function Dash2() {
   const [data , setData] = React.useState([]);

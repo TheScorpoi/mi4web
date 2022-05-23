@@ -2,8 +2,12 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { DataGrid } from '@material-ui/data-grid';
 import './UsersAccounts.css';
+<<<<<<< HEAD:Viewers-master/platform/viewer/src/components/Admin/Dashboard/pages/UsersAccounts2.js
 import api from './apiManageAccess';
 import Popup from 'reactjs-popup';
+=======
+import api from '../ApiConnections/apiManageAccess';
+>>>>>>> f6d8fe3c755d32c4dec4864feadc2ab9bf0cc6a2:Viewers-master/platform/viewer/src/components/Admin/Dashboard/pages/UsersManagement/UsersAccounts2.js
 
 
 function UsersAccounts() {
