@@ -43,7 +43,11 @@ const AdminDashboard = asyncComponent(() =>
   retryImport(() => import('../components/Admin/Dashboard/Dashboard.js'))
 );
 const NodesD = asyncComponent(() =>
-  retryImport(() => import('../components/Admin/Dashboard/Nodes.js'))
+  retryImport(() =>
+    import(
+      '../components/Admin/Dashboard/pages/UsersManagement/DicomNodes/Nodes.js'
+    )
+  )
 );
 
 const reload = () => window.location.reload();

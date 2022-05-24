@@ -23,8 +23,16 @@ function Sidebar() {
   };
 
   const nodes = () => {
-    history.push('/nodes')
-  }
+    history.push('/nodes');
+  };
+
+  const swversions = () => {
+    history.push('/swversions');
+  };
+
+  const extInstall = () => {
+    history.push('/extInstallation');
+  };
 
   return (
     <Menu>
@@ -40,7 +48,7 @@ function Sidebar() {
           <PeopleRoundedIcon />
         </span>
       </a>
-      <a className="menu-item">
+      <a className="menu-item" onClick={swversions}>
         <span className="lefti">SW Versions </span>
         <span className="righti">
           <Versions />
@@ -52,7 +60,7 @@ function Sidebar() {
           <TreeRounded />
         </span>
       </a>
-      <a className="menu-item">
+      <a className="menu-item" onClick={extInstall}>
         <span className="lefti">Extensions Installation </span>
         <span className="righti">
           <ContentCopyRoundedIcon />

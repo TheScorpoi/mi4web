@@ -1,0 +1,11 @@
+.titleDashboard{
+    font-size: 30px;
+    font-weight: 600;
+    width:100%;
+    display: flex;
+    color: #ffffff;
+    margin-top: 2%;
+    width: 80%;
+    margin-left: 11%;
+    margin-top: 5%;
+}
