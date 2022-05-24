@@ -99,7 +99,6 @@ app.get("/chart_dash", (req, res) => {
   db.query(sql_query, (error, results) => {
     if (error) throw error;
     res.send(results);
-    return console.log(results);
   });
 });
 
