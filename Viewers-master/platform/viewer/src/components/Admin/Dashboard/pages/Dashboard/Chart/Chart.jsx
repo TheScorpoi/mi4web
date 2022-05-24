@@ -19,6 +19,10 @@ const state = {
   ],
 };
 
+
+//TODO: https://stackoverflow.com/questions/51508665/using-data-from-api-with-chart-js
+//TODO: Ver cenas no link acima, para ver como se faz isso dinamico, e fazer uma querie a base de dados, com os ultimos x dias/meses whatever do que for, e mostrar no grafico 
+
 export default function Chart() {
   return (
     <div className="chart">
@@ -27,7 +31,7 @@ export default function Chart() {
           data={state}
           options={{
             title: {
-              display: true,
+              display: false,
               text: 'Average Rainfall per month',
               fontSize: 20,
             },
