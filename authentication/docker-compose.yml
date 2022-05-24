@@ -1,27 +1,6 @@
-version: "3.1"
-services:
-  db:
-    image: mysql:8.0
-    ports:
-      - "3002:3306" 
-    command: --default-authentication-plugin=mysql_native_password --secure-file-priv=''
-    environment:
-      MYSQL_DATABASE: MI4WEB
-      MYSQL_USER: admin
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_PASSWORD: admin 
-    volumes:
-      - ./db:/var/lib/mysql
-    networks:
-      - default
-    restart: always
-
-  phpmyadmin:
-      image: phpmyadmin/phpmyadmin
-      ports:
-          - '1234:80'
-      restart: always
-      environment:
-          PMA_HOST: db
-      depends_on:
-          - db
+version: '3.3' 
+services: 
+  web: 
+    build: uap 
+    ports: 
+      - '5000:5000'
