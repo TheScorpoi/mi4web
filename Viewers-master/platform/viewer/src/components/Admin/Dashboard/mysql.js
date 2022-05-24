@@ -94,8 +94,15 @@ app.get("/getUserFromToken/:token", (req, res) => {
   });
 });
 
-// para por parametros para fazer where's no sql
-// sqlquery .... where ${req.params.parameter_name}
+app.get("/chart_dash", (req, res) => {
+  let sql_query = 'SELECT * FROM `chart_info`';
+  db.query(sql_query, (error, results) => {
+    if (error) throw error;
+    res.send(results);
+    return console.log(results);
+  });
+});
+
 app.get('/testar_insert', (req, res) => {
   let post = {
     email: 'santos@incesto.pt',
@@ -107,14 +114,6 @@ app.get('/testar_insert', (req, res) => {
     if (error) throw error;
     res.send(results);
     //console.log(results);
-  });
-});
-
-app.get("/chart", (req, res) => {
-  let sql_query = 'SELECT * FROM `chart_info`';
-  db.query(sql_query, (error, results) => {
-    if (error) throw error;
-    res.send(results);
   });
 });
 

@@ -18,7 +18,6 @@ export default function Dash() {
 
   return (
     <div className="dash">
-
       <div className="dashItem">
         <div className="part1">
           <span className="dashTitle">Count Instances</span>
