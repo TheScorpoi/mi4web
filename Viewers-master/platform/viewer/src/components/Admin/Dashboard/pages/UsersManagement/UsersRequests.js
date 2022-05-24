@@ -55,12 +55,12 @@ function UsersRequests() {
     {
       field: 'hospital',
       headerName: 'Hospital',
-      width: 275,
+      width: 250,
     },
     {
       field: 'professional_id',
       headerName: 'License Number',
-      width: 225,
+      width: 200,
     },
     {
       field: 'email',
@@ -75,7 +75,7 @@ function UsersRequests() {
     {
       field: 'action',
       headerName: 'Action',
-      width: 400,
+      width: 300,
       renderCell: params => {
         return (
           <div className="actions">
@@ -97,7 +97,10 @@ function UsersRequests() {
                   <div className="actions">
                     <button
                       className="declineBtn"
-                      onClick={() => {handleAccept(params.row.email); close();}}
+                      onClick={() => {
+                        handleAccept(params.row.email);
+                        close();
+                      }}
                     >
                       Yes
                     </button>
@@ -132,13 +135,18 @@ function UsersRequests() {
                   <div className="actions">
                     <button
                       className="declineBtn"
-                      onClick={() => {handleDelete(params.row.email); close();}}
+                      onClick={() => {
+                        handleDelete(params.row.email);
+                        close();
+                      }}
                     >
                       Yes
                     </button>
                     <button
                       className="acceptBtn"
-                      onClick={() => { close(); }}
+                      onClick={() => {
+                        close();
+                      }}
                     >
                       No
                     </button>

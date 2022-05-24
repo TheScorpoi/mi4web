@@ -5,19 +5,18 @@ import './UsersAccounts.css';
 import Popup from 'reactjs-popup';
 import api from '../ApiConnections/apiManageAccess';
 
-
 function UsersAccounts() {
   const [data, setData] = React.useState([]);
 
   const loadTheFuckingData = () => {
     api.get('/staff').then(res => {
-        setData(res.data);
-        console.log(res.data);
+      setData(res.data);
+      console.log(res.data);
     });
   };
 
   React.useEffect(() => {
-      loadTheFuckingData();
+    loadTheFuckingData();
   }, []);
 
   const history = useHistory();
@@ -37,12 +36,12 @@ function UsersAccounts() {
     {
       field: 'hospital',
       headerName: 'Hospital',
-      width: 275,
+      width: 250,
     },
     {
       field: 'professional_id',
       headerName: 'License Number',
-      width: 225,
+      width: 200,
     },
     {
       field: 'email',
@@ -57,7 +56,7 @@ function UsersAccounts() {
     {
       field: 'action',
       headerName: 'Action',
-      width: 400,
+      width: 300,
       renderCell: params => {
         return (
           <div className="actions">
