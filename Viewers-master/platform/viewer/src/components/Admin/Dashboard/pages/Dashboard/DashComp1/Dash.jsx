@@ -4,7 +4,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import Filter9PlusIcon from '@material-ui/icons/Filter9Plus';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import SaveIcon from '@material-ui/icons//Save';
-import api from '../ApiConnections/api';
+import api from '../../ApiConnections/api';
 
 export default function Dash() {
   const [data_stats, setData] = React.useState([]);
@@ -18,7 +18,6 @@ export default function Dash() {
 
   return (
     <div className="dash">
-
       <div className="dashItem">
         <div className="part1">
           <span className="dashTitle">Count Instances</span>
@@ -27,7 +26,7 @@ export default function Dash() {
           </div>
         </div>
         <div className="dashIcons">
-            <Filter9PlusIcon  fontSize="large" />
+          <Filter9PlusIcon fontSize="large" />
         </div>
       </div>
 
@@ -39,7 +38,7 @@ export default function Dash() {
           </div>
         </div>
         <div className="dashIcons">
-            <PeopleIcon  fontSize="large" />
+          <PeopleIcon fontSize="large" />
         </div>
       </div>
 
@@ -51,7 +50,7 @@ export default function Dash() {
           </div>
         </div>
         <div className="dashIcons">
-            <ViewModuleIcon  fontSize="large" />
+          <ViewModuleIcon fontSize="large" />
         </div>
       </div>
 
@@ -63,10 +62,9 @@ export default function Dash() {
           </div>
         </div>
         <div className="dashIcons">
-            <SaveIcon  fontSize="large" />
+          <SaveIcon fontSize="large" />
         </div>
       </div>
-
     </div>
   );
 }
