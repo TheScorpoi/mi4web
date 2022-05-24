@@ -27,7 +27,7 @@ def response():
     """Envia a resposta à mensagem da UAP. Verifica se o utilizador existe no servidor. Em caso afirmatico envia o challenge, em caso negativo envia uma mensagem de erro"""
     global connection, cursor, dict_info
     user = request.form.get('username')
-    query = "Select username, pass from Users where username='"+user+"';"
+    query = "Select email, password from user where email='"+user+"';"
     cursor = connection.cursor()
     cursor.execute(query)
     result = cursor.fetchone()
@@ -133,7 +133,7 @@ def redirectPage():
 def connect_db():
     global connection, cursor
     try:
-        connection = mysql.connector.connect(host='localhost',port=3002, database='MI4WEB', user='admin', passwd='admin')
+        connection = mysql.connector.connect(host='localhost',port=3306, database='MI4WEB', user='root', passwd='YES')
         if connection.is_connected():
             db_Info = connection.get_server_info()
             print("Connected to MySQL Server version ", db_Info)
