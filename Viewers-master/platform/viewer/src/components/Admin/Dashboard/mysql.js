@@ -110,6 +110,14 @@ app.get('/testar_insert', (req, res) => {
   });
 });
 
+app.get("/chart", (req, res) => {
+  let sql_query = 'SELECT * FROM `chart_info`';
+  db.query(sql_query, (error, results) => {
+    if (error) throw error;
+    res.send(results);
+  });
+});
+
 //! NO URL PARA PASSAR ESPAÇOS TEMOS DE USAR ISTO: %20 QUE É O CODIGO PARA O ESPAÇO
 app.get('/testar_insert_with_params/:email/:fullname/:password', (req, res) => {
   let post = {

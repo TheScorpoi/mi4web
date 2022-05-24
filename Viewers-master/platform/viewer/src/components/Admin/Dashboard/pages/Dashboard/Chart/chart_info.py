@@ -1,6 +1,11 @@
+#! /opt/homebrew/bin/python3.9
+
 import mysql.connector
 from mysql.connector import Error
 import requests
+import time
+import datetime
+from datetime import datetime, timedelta
 
 class ChartInformation:
     
@@ -33,17 +38,14 @@ class ChartInformation:
     
     def store_on_db(self, count_studies: int, day: str):
         try:
-            self.cursor.execute("INSERT INTO chart_info (day, count_studies) VALUES (%s, %s)", (day, count_studies))
+            self.cursor.execute("INSERT INTO chart_info (day_, count_studies) VALUES (%s, %s)", (day, count_studies))
             self.connection.commit()
             print(self.cursor.rowcount, "record inserted on chart_info.")
         except Error as e:
             print("Error while storing on DB", e)
-
-        
-    def make_requests_periodically(self):
-        pass
     
 if __name__ == "__main__":
     chart_info = ChartInformation()
     chart_info.connectionDB()
-    print(chart_info.make_request_to_server())
+    study = chart_info.make_request_to_server()
+    chart_info.store_on_db(study, datetime.now().strftime("%Y-%m-%d"))
