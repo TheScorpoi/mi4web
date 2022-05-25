@@ -104,7 +104,7 @@ def response_to_chanllenge():
             for i in range(10):
                 token+=choice(letters)
 
-            query = "Update Users SET token='" + token +"' where username='"+user+"';"
+            query = "Update user SET token='" + token +"' where email='"+user+"';"
             cursor = connection.cursor()
             cursor.execute(query)
             connection.commit()
@@ -123,17 +123,17 @@ def redirectPage():
     token_tmp = request.args.get('token_tmp')
     user = dict_info[token_tmp]['user']
     dict_info.pop(token_tmp)
-    query = "Select token from Users where username='"+user+"';"
+    query = "Select token from user where email='"+user+"';"
     cursor = connection.cursor()
     cursor.execute(query)
     result = cursor.fetchone()
     token = result[0]
-    return redirect('http://localhost:3000/users?token=' + token, code=302)
+    return redirect('http://localhost:3000/?token=' + token, code=302)
 
 def connect_db():
     global connection, cursor
     try:
-        connection = mysql.connector.connect(host='localhost',port=3306, database='MI4WEB', user='root', passwd='YES')
+        connection = mysql.connector.connect(host='localhost',port=3306, database='mi4web', user='root', passwd='password')
         if connection.is_connected():
             db_Info = connection.get_server_info()
             print("Connected to MySQL Server version ", db_Info)
