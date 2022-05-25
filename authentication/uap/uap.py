@@ -341,18 +341,18 @@ def get_informations():
             serverFicticio = True
             valores_errados = False
             # fazer warning a dizer que o user não existe no server
-            return render_template('login.html', page=page1, serverFicticio=serverFicticio, bd=bd[page1], logged_in=logged_in)
+            return render_template('login.html', serverFicticio=serverFicticio, logged_in=logged_in)
         else:
             #!este é para quando a password esta mal
             serverFicticio = False
             incorrectPassword = True
             valores_errados = False
             # fazer warning a dizer que o user não existe no server
-            return render_template('login.html', page=page1, incorrectPassword=incorrectPassword, bd=bd[page1], logged_in=logged_in)
+            return render_template('login.html', incorrectPassword=incorrectPassword, logged_in=logged_in)
     else:
         userNotFound = True
         # fazer warning a dizer que o user não existe no server
-        return render_template('login.html', page=page1, userNotFound=userNotFound, bd=bd[page1], logged_in=logged_in)
+        return render_template('login.html', userNotFound=userNotFound, logged_in=logged_in)
 
     # if true -> continua a falar c ele e começa a fazer os desafios
     # if false -> retorna-mos ao login e dizeos username invalido
