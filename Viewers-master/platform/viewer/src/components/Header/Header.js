@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, useSearchParams } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -25,6 +25,10 @@ function Header(props) {
 
   const [options, setOptions] = useState([]);
   const hasLink = linkText && linkPath;
+
+  const token = props.location.search;
+  console.log('Header', token.split('=')[1]);
+  
 
   useEffect(() => {
     const optionsValue = [
