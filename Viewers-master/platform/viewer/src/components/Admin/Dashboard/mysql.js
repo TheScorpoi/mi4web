@@ -86,9 +86,9 @@ app.get('/request_delete/:id', (req, res) => {
 // just realise that i have 2 endpoints that do the same thing... oh well, i not gonna change it
 
 // get user from token
-app.get("/getUserFromToken/:token", (req, res) => {
-  let sql_query = 'SELECT s.fullname, s.type_user FROM staff AS s JOIN user as u ON u.email = s.email WHERE u.token = ?';
-  db.query(sql_query, req.params.token, (error, results) => {
+app.get("/get_user_from_token/:id", (req, res) => {
+  let sql_query = 'SELECT u.fullname, s.type_user FROM staff AS s JOIN user as u ON u.email = s.email WHERE u.token = ?';
+  db.query(sql_query, req.params.id , (error, results) => {
     if (error) throw error;
     res.send(results);
   });

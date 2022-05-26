@@ -4,11 +4,13 @@ import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Dropdown, withModal } from '@ohif/ui';
+//
 import { UserPreferences } from './../UserPreferences';
 import OHIFLogo from '../OHIFLogo/OHIFLogo.js';
 import './Header.css';
 import { Login } from '../Login/Login';
-//import api from '../Admin/pages/apiConnections/apiManageAccess';
+
+import api from '../Admin/Dashboard/pages/ApiConnections/apiManageAccess';
 
 function Header(props) {
   const {
@@ -27,15 +29,16 @@ function Header(props) {
   const hasLink = linkText && linkPath;
 
   const token = props.location.search;
-  console.log('Header', token.split('=')[1]);
+  const id = token.split('=');
 
-//   React.useEffect(() => {
-//     api.get('/chart_dash').then(res => {
-//       setData(res.data);
-//       console.log("aqui oh corno");
-//       console.log(res.data);
-//     });
-// }, []);
+  const [data, setData] = React.useState([]);
+
+  React.useEffect(() => {
+    api.get(`/get_user_from_token/?token=${id}`).then(res => {
+      setData(res.data);
+      console.log(res.data);
+    });
+  }, []);
 
   useEffect(() => {
     const optionsValue = [
