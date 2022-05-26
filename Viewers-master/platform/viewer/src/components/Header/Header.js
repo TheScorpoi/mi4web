@@ -29,16 +29,22 @@ function Header(props) {
   const hasLink = linkText && linkPath;
 
   const token = props.location.search;
-  const id = token.split('=');
+  const id = token.split('=')[1];
+  console.log("id: " + id);
 
   const [data, setData] = React.useState([]);
 
   React.useEffect(() => {
-    api.get(`/get_user_from_token/?token=${id}`).then(res => {
+    api.get(`/get_user_from_token/${id}`).then(res => {
       setData(res.data);
-      console.log(res.data);
     });
   }, []);
+
+
+  console.log(data.map(d => d.fullname));
+
+  localStorage.setItem('user', data.map(d => d.fullname));
+  localStorage.setItem('type_user', data.map(d => d.type_user));
 
   useEffect(() => {
     const optionsValue = [
