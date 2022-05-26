@@ -4,11 +4,11 @@ import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Dropdown, withModal } from '@ohif/ui';
-//
 import { UserPreferences } from './../UserPreferences';
 import OHIFLogo from '../OHIFLogo/OHIFLogo.js';
 import './Header.css';
 import { Login } from '../Login/Login';
+//import api from '../Admin/pages/apiConnections/apiManageAccess';
 
 function Header(props) {
   const {
@@ -28,7 +28,14 @@ function Header(props) {
 
   const token = props.location.search;
   console.log('Header', token.split('=')[1]);
-  
+
+//   React.useEffect(() => {
+//     api.get('/chart_dash').then(res => {
+//       setData(res.data);
+//       console.log("aqui oh corno");
+//       console.log(res.data);
+//     });
+// }, []);
 
   useEffect(() => {
     const optionsValue = [

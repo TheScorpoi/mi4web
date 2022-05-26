@@ -11,6 +11,16 @@ ChartJS.register(...registerables);
 export default function Chart() {
   const [data, setData] = React.useState([]);
 
+
+  React.useEffect(() => {
+      api.get('/chart_dash').then(res => {
+        setData(res.data);
+        console.log("aqui oh corno");
+        console.log(res.data);
+      });
+  }, []);
+  
+  
   const state = {
     labels: data.map(d => d.day_),
     datasets: [
@@ -21,16 +31,12 @@ export default function Chart() {
         backgroundColor: 'rgba(75,192,192,1)',
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 2,
-        data: data.map(d => d.n_studies),
+        data: data.map(d => d.count_studies),
       },
     ],
   };
 
-  React.useEffect(() => {
-    api.get('/chart_dash').then(res => {
-      setData(res.data);
-    });
-  }, []);
+  
 
   return (
     <div className="chart">

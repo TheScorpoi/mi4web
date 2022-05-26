@@ -32,7 +32,7 @@ db.connect(function(error) {
 
 // get all staff data (withou delicated data)
 app.get('/staff', (req, res) => {
-  let sql_query = 'SELECT email, fullname, professional_id, hospital, type_user FROM `staff`';
+  let sql_query = 'SELECT u.email, u.fullname, s.professional_id, s.hospital, s.type_user FROM staff as s JOIN user as u ON s.email = u.email';
   db.query(sql_query, (error, results) => {
     if (error) throw error;
     res.send(results);
@@ -49,7 +49,7 @@ app.get("/request_account", (req, res) => {
 });
 // delete staff user on current users admin table
 app.get('/staff_delete/:id', (req, res) => {
-  let sql_query = 'DELETE FROM `staff` WHERE `email` = ?';
+  let sql_query = 'DELETE FROM user WHERE `email` = ?';
   db.query(sql_query, req.params.id, (error, results) => {
     if (error) throw error;
     res.send(results);
@@ -87,7 +87,7 @@ app.get('/request_delete/:id', (req, res) => {
 
 // get user from token
 app.get("/getUserFromToken/:token", (req, res) => {
-  let sql_query = 'SELECT fullname, type_user FROM `staff` WHERE `token` = ?';
+  let sql_query = 'SELECT s.fullname, s.type_user FROM staff AS s JOIN user as u ON u.email = s.email WHERE u.token = ?';
   db.query(sql_query, req.params.token, (error, results) => {
     if (error) throw error;
     res.send(results);
@@ -95,7 +95,7 @@ app.get("/getUserFromToken/:token", (req, res) => {
 });
 
 app.get("/chart_dash", (req, res) => {
-  let sql_query = 'SELECT * FROM `chart_info`';
+  let sql_query = 'SELECT * FROM chart_info';
   db.query(sql_query, (error, results) => {
     if (error) throw error;
     res.send(results);
