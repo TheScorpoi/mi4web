@@ -218,7 +218,8 @@ function createStudyImageIds(baseUrl, studySearchOptions) {
   }*/
 
   studyInstanceUID = localStorage.getItem('StudyInstanceUID');
-  //ctSeriesInstanceUID = localStorage.getItem('SeriesInstanceUID');
+  //alert(studyInstanceUID);
+  ctSeriesInstanceUID = localStorage.getItem('SeriesInstanceUID');
   searchInstanceOptions = {
     studyInstanceUID,
   };
