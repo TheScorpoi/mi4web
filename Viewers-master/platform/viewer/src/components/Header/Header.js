@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, withRouter, useSearchParams } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
@@ -71,13 +71,17 @@ function Header(props) {
     setOptions(optionsValue);
   }, [setOptions, show, t, user, userManager]);
 
-  const [signIn, setSignIn] = useState(false);
+  const signIn = useRef(false);
 
   if (localStorage.getItem('user') == '') {
-    setSignIn(false);
+    signIn.current = false;
+    console.log('ENTREI NO FALSE');
   } else {
-    setSignIn(true);
+    signIn.current = true;
+    console.log('ENTREI NO TRUE');
   }
+
+  console.log('ESTOU A  --- ' + signIn.current);
 
   return (
     <>
@@ -113,7 +117,7 @@ function Header(props) {
         <div className="header-menu">
           <span className="research-use">{t('INVESTIGATIONAL USE ONLY')}</span>
           <Dropdown title={t('Options')} list={options} align="right" />
-          {!signIn ? (
+          {!signIn.current ? (
             <button
               className="button"
               onClick={e => {
