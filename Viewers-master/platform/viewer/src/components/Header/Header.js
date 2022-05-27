@@ -75,13 +75,9 @@ function Header(props) {
 
   if (localStorage.getItem('user') == '') {
     signIn.current = false;
-    console.log('ENTREI NO FALSE');
   } else {
     signIn.current = true;
-    console.log('ENTREI NO TRUE');
   }
-
-  console.log('ESTOU A  --- ' + signIn.current);
 
   return (
     <>
