@@ -37,25 +37,11 @@ function Header(props) {
   React.useEffect(() => {
     api.get(`/get_user_from_token/${id}`).then(res => {
       setData(res.data);
-      console.log(res.data);
     });
   }, []);
-       useEffect(() => {
-    console.log("localStorage.getItem('user'): " + localStorage.getItem('user'));
-    if (!localStorage.getItem('user')) {
-      setSignIn(false);
-      console.log("entrei no false");
-    } else {
-      setSignIn(true);
-      console.log("entrei no true");
-    }
-  }, []);
-  useEffect(() => {
 
-    localStorage.setItem('user', data.map(d => d.fullname));
-    localStorage.setItem('type_user', data.map(d => d.type_user));
-  }, [data]);
-
+  localStorage.setItem('user', data.map(d => d.fullname));
+  localStorage.setItem('type_user', data.map(d => d.type_user));
 
   useEffect(() => {
     const optionsValue = [
@@ -93,6 +79,7 @@ function Header(props) {
 
   return (
     <>
+      <div className="notification-bar">{t('INVESTIGATIONAL USE ONLY')}</div>
       <div
         className={classNames('entry-header', { 'header-big': useLargeLogo })}
       >
