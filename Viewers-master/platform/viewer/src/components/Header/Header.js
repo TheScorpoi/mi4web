@@ -30,7 +30,7 @@ function Header(props) {
 
   const token = props.location.search;
   const id = token.split('=')[1];
-  console.log("id: " + id);
+  console.log('id: ' + id);
 
   const [data, setData] = React.useState([]);
 
@@ -39,7 +39,6 @@ function Header(props) {
       setData(res.data);
     });
   }, []);
-
 
   console.log(data.map(d => d.fullname));
 
@@ -71,6 +70,14 @@ function Header(props) {
 
     setOptions(optionsValue);
   }, [setOptions, show, t, user, userManager]);
+
+  const [signIn, setSignIn] = useState(false);
+
+  if (localStorage.getItem('user') == '') {
+    setSignIn(false);
+  } else {
+    setSignIn(true);
+  }
 
   return (
     <>
@@ -106,15 +113,27 @@ function Header(props) {
         <div className="header-menu">
           <span className="research-use">{t('INVESTIGATIONAL USE ONLY')}</span>
           <Dropdown title={t('Options')} list={options} align="right" />
-          <button
-            className="button"
-            onClick={e => {
-              e.preventDefault();
-              window.location.href = 'http://localhost:9874/show_login';
-            }}
-          >
-            Login
-          </button>
+          {!signIn ? (
+            <button
+              className="button"
+              onClick={e => {
+                e.preventDefault();
+                window.location.href = 'http://localhost:9874/show_login';
+              }}
+            >
+              Login
+            </button>
+          ) : (
+            <button
+              className="button"
+              onClick={e => {
+                e.preventDefault();
+                window.location.href = 'http://localhost:9874/show_login';
+              }}
+            >
+              Logout
+            </button>
+          )}
         </div>
       </div>
     </>
