@@ -37,13 +37,25 @@ function Header(props) {
   React.useEffect(() => {
     api.get(`/get_user_from_token/${id}`).then(res => {
       setData(res.data);
+      console.log(res.data);
     });
   }, []);
+       useEffect(() => {
+    console.log("localStorage.getItem('user'): " + localStorage.getItem('user'));
+    if (!localStorage.getItem('user')) {
+      setSignIn(false);
+      console.log("entrei no false");
+    } else {
+      setSignIn(true);
+      console.log("entrei no true");
+    }
+  }, []);
+  useEffect(() => {
 
-  console.log(data.map(d => d.fullname));
+    localStorage.setItem('user', data.map(d => d.fullname));
+    localStorage.setItem('type_user', data.map(d => d.type_user));
+  }, [data]);
 
-  localStorage.setItem('user', data.map(d => d.fullname));
-  localStorage.setItem('type_user', data.map(d => d.type_user));
 
   useEffect(() => {
     const optionsValue = [
@@ -73,15 +85,13 @@ function Header(props) {
 
   const [signIn, setSignIn] = useState(false);
 
-  if (localStorage.getItem('user') == '') {
-    setSignIn(false);
-  } else {
-    setSignIn(true);
-  }
+  
+ 
+
+
 
   return (
     <>
-      <div className="notification-bar">{t('INVESTIGATIONAL USE ONLY')}</div>
       <div
         className={classNames('entry-header', { 'header-big': useLargeLogo })}
       >
@@ -128,7 +138,9 @@ function Header(props) {
               className="button"
               onClick={e => {
                 e.preventDefault();
-                window.location.href = 'http://localhost:9874/show_login';
+                window.location.href = 'http://localhost:3000';
+                localStorage.removeItem('user');
+                localStorage.removeItem('type_user');
               }}
             >
               Logout
