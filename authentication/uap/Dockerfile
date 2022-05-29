@@ -1,10 +1,9 @@
-FROM python:3.7-alpine 
-WORKDIR /uap 
-RUN apk update
-RUN apk add make automake gcc g++ subversion python3-dev
-RUN python3 -m pip install --upgrade pip
-COPY requirements.txt /uap
-RUN pip3 install -r requirements.txt 
-COPY . /uap 
-ENTRYPOINT ["python3"] 
-CMD ["python3","uap.py"]
+FROM python:3.8
+
+ADD ./uap uap
+
+COPY ./uap/requirements.txt requirements.txt
+
+RUN pip3 install -r requirements.txt
+
+CMD ["python3", "./uap/uap.py"]
