@@ -43,10 +43,13 @@ class MeasurementTable extends Component {
     const hasOverallWarnings = overallWarnings.warningList.length > 0;
 
     const type_user = localStorage.getItem('type_user');
-    console.log("era uma vez, um linda princesa que vivia nas terras primetidas do sado " + type_user);
-     
-    const have_access = type_user === '[Clinical Imaging Staff]'
-  
+    console.log(
+      'era uma vez, um linda princesa que vivia nas terras primetidas do sado ' +
+        type_user
+    );
+
+    const have_access = type_user === '["Clinical Imaging Staff"]';
+
     return (
       <div className="measurementTable">
         <div className="measurementTableHeader">
@@ -85,7 +88,9 @@ class MeasurementTable extends Component {
         <div className="measurementTableFooter">
           {saveFunction && (
             <button
-              onClick={this.saveFunction}
+              onClick={async () => {
+                await this.saveFunction(have_access);
+              }}
               className="saveBtn"
               data-cy="save-measurements-btn"
             >
@@ -98,29 +103,40 @@ class MeasurementTable extends Component {
     );
   }
 
-  saveFunction = async event => {
+  async saveFunction(have_access) {
     const { saveFunction, onSaveComplete } = this.props;
     if (saveFunction) {
-      try {
-        const result = await saveFunction();
-        if (onSaveComplete) {
-          onSaveComplete({
-            title: 'STOW SR',
-            message: result.message,
-            type: 'success',
-          });
+      if (have_access) {
+        try {
+          const result = await saveFunction(have_access);
+          if (onSaveComplete) {
+            onSaveComplete({
+              title: 'STOW SR',
+              message: result.message,
+              type: 'success',
+            });
+          }
+        } catch (error) {
+          if (onSaveComplete) {
+            onSaveComplete({
+              title: 'STOW SR',
+              message: error.message,
+              type: 'error',
+            });
+          }
         }
-      } catch (error) {
+      } else {
         if (onSaveComplete) {
           onSaveComplete({
-            title: 'STOW SR',
-            message: error.message,
+            title: 'PERMISSION DENIED',
+            message:
+              "You don't have the necessary permissions to update the studies.",
             type: 'error',
           });
         }
       }
     }
-  };
+  }
 
   getMeasurementsGroups = () => {
     return this.props.measurementCollection.map((measureGroup, index) => {
