@@ -2,13 +2,13 @@ version: '3.3'
 services: 
   auth_uap: 
     build:
-      context: .
-      dockerfile: ./uap/Dockerfile
+      context: ./uap
+      dockerfile: ./Dockerfile
     ports: 
       - '9874:9874'
-  auth_server:
-    build:
-      context: .
-      dockerfile: ./app_auth/Dockerfile 
-    ports: 
-      - '5001:5001'
+  # auth_server:
+  #   build:
+  #     context: .
+  #     dockerfile: ./app_auth/Dockerfile 
+  #   ports: 
+  #     - '5001:5001'
