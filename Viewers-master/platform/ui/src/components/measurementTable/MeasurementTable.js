@@ -42,6 +42,11 @@ class MeasurementTable extends Component {
     const { overallWarnings, saveFunction, t } = this.props;
     const hasOverallWarnings = overallWarnings.warningList.length > 0;
 
+    const type_user = localStorage.getItem('type_user');
+    console.log("era uma vez, um linda princesa que vivia nas terras primetidas do sado " + type_user);
+     
+    const have_access = type_user === '[Clinical Imaging Staff]'
+  
     return (
       <div className="measurementTable">
         <div className="measurementTableHeader">

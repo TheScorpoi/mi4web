@@ -28,20 +28,27 @@ function Header(props) {
   const [options, setOptions] = useState([]);
   const hasLink = linkText && linkPath;
 
+
+
   const token = props.location.search;
-  const id = token.split('=')[1];
-  console.log('id: ' + id);
 
-  const [data, setData] = React.useState([]);
+  if (token) {
+    const id = token.split('=')[1];
+    console.log('id: ' + id);
 
-  React.useEffect(() => {
-    api.get(`/get_user_from_token/${id}`).then(res => {
-      setData(res.data);
-    });
-  }, []);
+    const [data, setData] = React.useState([]);
 
-  localStorage.setItem('user', data.map(d => d.fullname));
-  localStorage.setItem('type_user', data.map(d => d.type_user));
+    React.useEffect(() => {
+      api.get(`/get_user_from_token/${id}`).then(res => {
+        setData(res.data);
+        console.log(res.data);
+      });
+    }, []);
+
+    localStorage.setItem('user', JSON.stringify(data.map(d => d.fullname)));
+    localStorage.setItem('type_user', JSON.stringify(data.map(d => d.type_user)));
+  }
+  
 
   useEffect(() => {
     const optionsValue = [
@@ -71,7 +78,7 @@ function Header(props) {
 
   const signIn = useRef(false);
 
-  if (localStorage.getItem('user') == '') {
+  if (localStorage.getItem('user') == null) {
     signIn.current = false;
   } else {
     signIn.current = true;
