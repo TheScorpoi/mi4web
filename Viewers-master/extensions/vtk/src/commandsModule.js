@@ -1,3 +1,4 @@
+import React from 'react';
 import throttle from 'lodash.throttle';
 import {
   vtkInteractorStyleMPRWindowLevel,
@@ -11,6 +12,8 @@ import setMPRLayout from './utils/setMPRLayout.js';
 import setViewportToVTK from './utils/setViewportToVTK.js';
 import Constants from 'vtk.js/Sources/Rendering/Core/VolumeMapper/Constants.js';
 import OHIFVTKViewport from './OHIFVTKViewport';
+import ReactDOM from 'react-dom';
+import DicomPDFViewport from '../../dicom-pdf/src/DicomPDFViewport.js';
 
 const { BlendMode } = Constants;
 
@@ -487,6 +490,12 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
         }
       }
     },
+
+    report: async ({ viewports }) => {
+      //alert('commandsModule, index:' + viewports.activeViewportIndex);
+      //localStorage.setItem('indice', viewports.activeViewportIndex);
+      ReactDOM.render(<DicomPDFViewport />, document.getElementById('root'));
+    },
   };
 
   window.vtkActions = actions;
@@ -578,6 +587,12 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
     },
     mpr2d: {
       commandFn: actions.mpr2d,
+      storeContexts: ['viewports'],
+      options: {},
+      context: 'VIEWER',
+    },
+    report: {
+      commandFn: actions.report,
       storeContexts: ['viewports'],
       options: {},
       context: 'VIEWER',

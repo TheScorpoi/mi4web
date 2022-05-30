@@ -137,6 +137,17 @@ const definitions = [
     commandName: 'mpr2d',
     context: 'ACTIVE_VIEWPORT::CORNERSTONE',
   },
+
+  {
+    id: 'REPORT',
+    label: 'Make Report',
+    icon: 'edit',
+    //
+    type: TOOLBAR_BUTTON_TYPES.SET_TOOL_ACTIVE,
+    commandName: 'report',
+    commandOptions: {},
+    context: 'ACTIVE_VIEWPORT::CORNERSTONE',
+  },
 ];
 
 export default {
