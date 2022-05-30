@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, useSearchParams } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Dropdown, AboutContent, withModal } from '@ohif/ui';
+import { Dropdown, withModal } from '@ohif/ui';
 //
 import { UserPreferences } from './../UserPreferences';
 import OHIFLogo from '../OHIFLogo/OHIFLogo.js';
 import './Header.css';
+import { Login } from '../Login/Login';
+
+import api from '../Admin/Dashboard/pages/ApiConnections/apiManageAccess';
 
 function Header(props) {
   const {
@@ -25,17 +28,26 @@ function Header(props) {
   const [options, setOptions] = useState([]);
   const hasLink = linkText && linkPath;
 
+  const token = props.location.search;
+  const id = token.split('=')[1];
+  console.log("id: " + id);
+
+  const [data, setData] = React.useState([]);
+
+  React.useEffect(() => {
+    api.get(`/get_user_from_token/${id}`).then(res => {
+      setData(res.data);
+    });
+  }, []);
+
+
+  console.log(data.map(d => d.fullname));
+
+  localStorage.setItem('user', data.map(d => d.fullname));
+  localStorage.setItem('type_user', data.map(d => d.type_user));
+
   useEffect(() => {
     const optionsValue = [
-      {
-        title: t('About'),
-        icon: { name: 'info' },
-        onClick: () =>
-          show({
-            content: AboutContent,
-            title: t('OHIF Viewer - About'),
-          }),
-      },
       {
         title: t('Preferences'),
         icon: {
@@ -94,6 +106,15 @@ function Header(props) {
         <div className="header-menu">
           <span className="research-use">{t('INVESTIGATIONAL USE ONLY')}</span>
           <Dropdown title={t('Options')} list={options} align="right" />
+          <button
+            className="button"
+            onClick={e => {
+              e.preventDefault();
+              window.location.href = 'http://localhost:9874/show_login';
+            }}
+          >
+            Login
+          </button>
         </div>
       </div>
     </>
