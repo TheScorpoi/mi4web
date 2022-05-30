@@ -8,7 +8,6 @@ import { Dropdown, withModal } from '@ohif/ui';
 import { UserPreferences } from './../UserPreferences';
 import OHIFLogo from '../OHIFLogo/OHIFLogo.js';
 import './Header.css';
-import { Login } from '../Login/Login';
 
 import api from '../Admin/Dashboard/pages/ApiConnections/apiManageAccess';
 
@@ -84,6 +83,15 @@ function Header(props) {
     signIn.current = true;
   }
 
+  function putNameOnHeader() {
+    //if (signIn.current) {
+      return localStorage.getItem('user').replace("[", "").replace("]", "").replace("\"", "").replace("\"", "");
+    //} else {
+    //  return "marta é";
+    //}
+  }
+
+
   return (
     <>
       <div className="notification-bar">{t('INVESTIGATIONAL USE ONLY')}</div>
@@ -116,8 +124,9 @@ function Header(props) {
         </div>
 
         <div className="header-menu">
-          <span className="research-use">{t('INVESTIGATIONAL USE ONLY')}</span>
+          <span className="research-use">{putNameOnHeader()}</span>
           <Dropdown title={t('Options')} list={options} align="right" />
+          
           {!signIn.current ? (
             <button
               className="button"
