@@ -8,7 +8,8 @@ import { Dropdown, withModal } from '@ohif/ui';
 import { UserPreferences } from './../UserPreferences';
 import OHIFLogo from '../OHIFLogo/OHIFLogo.js';
 import './Header.css';
-
+import PersonIcon from '@material-ui/icons/Person';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import api from '../Admin/Dashboard/pages/ApiConnections/apiManageAccess';
 
 function Header(props) {
@@ -84,52 +85,46 @@ function Header(props) {
   }
 
   function putNameOnHeader() {
-    //if (signIn.current) {
+    if (signIn.current) {
       return localStorage.getItem('user').replace("[", "").replace("]", "").replace("\"", "").replace("\"", "");
-    //} else {
-    //  return "marta é";
-    //}
+    } else {
+      return "";
+    }
   }
+
+
+
+
 
 
   return (
     <>
       <div className="notification-bar">{t('INVESTIGATIONAL USE ONLY')}</div>
-      <div
-        className={classNames('entry-header', { 'header-big': useLargeLogo })}
-      >
+      <div className={classNames('entry-header', { 'header-big': useLargeLogo })} >
         <div className="header-left-box">
-          {location && location.studyLink && (
-            <Link
-              to={location.studyLink}
-              className="header-btn header-viewerLink"
-            >
-              {t('Back to Viewer')}
-            </Link>
-          )}
-
-          {children}
-
-          {hasLink && (
-            <Link
-              className="header-btn header-studyListLinkSection"
-              to={{
-                pathname: linkPath,
-                state: { studyLink: location.pathname },
-              }}
-            >
-              {t(linkText)}
-            </Link>
-          )}
+          <LocalHospitalIcon />
+          <span className="title">MI4WEB</span>
         </div>
 
         <div className="header-menu">
-          <span className="research-use">{putNameOnHeader()}</span>
-          <Dropdown title={t('Options')} list={options} align="right" />
+          <div className="icon-css">
+            <PersonIcon fontSize="small"/>
+          </div>
+          <div className="research-use">
+            <span>{putNameOnHeader()}</span>
+          </div>
+          <div className="dropdown-css">
+            <Dropdown title={t('Options')} list={options} align="right" />
+          </div>
+          
+         
+         
+          
+          
           
           {!signIn.current ? (
             <button
-              className="button"
+              className="button-3"
               onClick={e => {
                 e.preventDefault();
                 window.location.href = 'http://localhost:9874/show_login';
@@ -139,7 +134,7 @@ function Header(props) {
             </button>
           ) : (
             <button
-              className="button"
+              className="button-3"
               onClick={e => {
                 e.preventDefault();
                 window.location.href = 'http://localhost:3000';
