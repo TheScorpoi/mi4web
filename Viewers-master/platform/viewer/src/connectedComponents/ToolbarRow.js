@@ -415,6 +415,12 @@ function _handleBuiltIn(button) {
       title: t('Download High Quality Image'),
     });
   }
+
+  if (options.behavior === 'MAKE_REPORT') {
+    commandsManager.runCommand('showDownloadViewportModal', {
+      title: t('Make report about the pacient'),
+    });
+  }
 }
 
 export default withTranslation(['Common', 'ViewportDownloadForm'])(

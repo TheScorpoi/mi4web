@@ -490,22 +490,6 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
         }
       }
     },
-
-    report: async ({}) => {
-      //alert('commandsModule, index:' + viewports.activeViewportIndex);
-      //localStorage.setItem('indice', viewports.activeViewportIndex);
-      //ReactDOM.render(<DicomPDFViewport />, document.getElementById('root'));
-
-      const message =
-        'This volume is too large to fit in WebGL 1 textures and will display incorrectly. Please use a different browser to view this data';
-
-      UINotificationService.show({
-        title: 'Browser does not support WebGL 2',
-        message,
-        type: 'error',
-        autoClose: false,
-      });
-    },
   };
 
   window.vtkActions = actions;
