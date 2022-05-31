@@ -1,0 +1,14 @@
+{
+    "patientname": "Patient Name",
+    "studyname": "Study Name",
+    "formTitle": "Make a full report filled with annotations about this patient",
+    "annotations": "Medical Annotations",
+    "keepAspectRatio": "Keep aspect ratio",
+    "loadingPreview": "Loading Image Preview...",
+    "minHeightError": "The minimum valid height is 100px.",
+    "minWidthError": "The minimum valid width is 100px.",
+    "emptyPatientError": "The patient name cannot be empty.",
+    "emptyStudyError": "The study name cannot be empty.",
+    "emptyAnnotationsError": "Annotations cannot be empty.",
+    "showAnnotations": "Show Annotations"
+  }

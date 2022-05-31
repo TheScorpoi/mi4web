@@ -3,10 +3,10 @@ import cornerstone from 'cornerstone-core';
 import cornerstoneTools from 'cornerstone-tools';
 import PropTypes from 'prop-types';
 
-import { ViewportDownloadForm } from '@ohif/ui';
 import { utils } from '@ohif/core';
 
 import { getEnabledElement } from './state';
+import ViewportReportForm from '../../../platform/ui/src/components/content/viewportReportForm/ViewportReportForm';
 
 const MINIMUM_SIZE = 100;
 const DEFAULT_SIZE = 512;
@@ -123,7 +123,7 @@ const CornerstoneViewportReportForm = ({ onClose, activeViewportIndex }) => {
   };
 
   return (
-    <ViewportDownloadForm
+    <ViewportReportForm
       onClose={onClose}
       minimumSize={MINIMUM_SIZE}
       maximumSize={MAX_TEXTURE_SIZE}

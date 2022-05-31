@@ -417,7 +417,7 @@ function _handleBuiltIn(button) {
   }
 
   if (options.behavior === 'MAKE_REPORT') {
-    commandsManager.runCommand('showDownloadViewportModal', {
+    commandsManager.runCommand('showReportModal', {
       title: t('Make report about the pacient'),
     });
   }
