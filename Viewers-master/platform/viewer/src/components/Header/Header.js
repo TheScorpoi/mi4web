@@ -92,11 +92,6 @@ function Header(props) {
     }
   }
 
-
-
-
-
-
   return (
     <>
       <div className="notification-bar">{t('INVESTIGATIONAL USE ONLY')}</div>
@@ -108,7 +103,11 @@ function Header(props) {
 
         <div className="header-menu">
           <div className="icon-css">
-            <PersonIcon fontSize="small"/>
+            {!signIn.current ? (
+              <span></span>
+            ) : (
+                <PersonIcon fontSize="small"/>
+            )}
           </div>
           <div className="research-use">
             <span>{putNameOnHeader()}</span>
@@ -116,6 +115,8 @@ function Header(props) {
           <div className="dropdown-css">
             <Dropdown title={t('Options')} list={options} align="right" />
           </div>
+
+          
           
          
          
