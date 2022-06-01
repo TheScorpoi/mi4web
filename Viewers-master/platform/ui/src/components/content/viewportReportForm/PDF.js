@@ -51,10 +51,10 @@ const PDF = props => {
             </div>
 
             <div className="cumprimentos">
-              <h4>Com os cumprimentos do/da colego/a</h4>
+              <h4>Com os cumprimentos do/da colega</h4>
               <br></br>
               <hr style={{ width: '200px' }}></hr>
-              <h4>{props.doutor}</h4>
+              <h4>Dr. {props.doutor}</h4>
             </div>
           </div>
         </div>

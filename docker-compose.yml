@@ -13,9 +13,3 @@ services:
     restart: always
     volumes:
       - ./data/db:/var/lib/mysql
-    networks:
-    - shared
-networks:
-  shared: 
-    external:
-      name: shared

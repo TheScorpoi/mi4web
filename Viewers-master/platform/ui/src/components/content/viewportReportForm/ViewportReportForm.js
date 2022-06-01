@@ -214,6 +214,13 @@ const ViewportReportForm = ({
   const date = `${current.getDate()}/${current.getMonth() +
     1}/${current.getFullYear()} ${current.getHours()}:${current.getMinutes()}`;
 
+  const doutor = localStorage
+    .getItem('user')
+    .replace('[', '')
+    .replace(']', '')
+    .replace('"', '')
+    .replace('"', '');
+
   return (
     <>
       {!state ? (
@@ -293,7 +300,7 @@ const ViewportReportForm = ({
             patientname={patientname}
             processnumber={processnumber}
             annotations={annotations}
-            doutor={'IR BUSCAR AO LOCALSTORAGE'}
+            doutor={doutor}
             date={date}
           />
         </div>
