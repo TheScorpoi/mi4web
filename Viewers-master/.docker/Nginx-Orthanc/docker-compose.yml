@@ -10,6 +10,15 @@ services:
       # Persist data
       - ./volumes/orthanc-db/:/var/lib/orthanc/db/
     ports:
-      - '4242:4242' # DICOM
-      - '8042:8042' # Web
+      - '8082:4242' # DICOM
+      - '8083:8042' # Web
     restart: unless-stopped
+    networks:
+      - all
+
+networks:
+  all:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.1.0.0/16

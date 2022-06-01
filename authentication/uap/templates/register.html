@@ -1,3 +1,9 @@
+<?php
+ob_start();
+session_start();
+include("database.php");
+ini_set('display_errors', 1);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +36,7 @@
             <div class="card-body login-card-body" style="background-color: #2C363F;">
                 <p class="login-box-msg" style="color: white;">Inicie a sua sessão em <b>{{page}}</b></p>
             
-                <form method="post" action="{{ url_for('get_informations')}}">
+                <form method="post" >
                     <div class="input-group mb-3">
                         <input class="form-control" placeholder="Full Name" name="fullname" id="fullname">
                         <div class="input-group-append">
@@ -64,7 +70,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input class="form-control" placeholder="Speciality" name="speciality" id="speciality">
+                        <input class="form-control" placeholder="Hospital" name="hospital" id="hospital">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-book-medical"></span>
@@ -72,7 +78,15 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <select className='selectpicker' style="padding: 8px; color: #6C757D ;width: 100%" name = "Type of User" >
+                        <input class="form-control" placeholder="Speciality" name="speciality" id="speciality">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-ban"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <select className='selectpicker' style="padding: 8px; color: #6C757D ;width: 100%" name = "type" id = "type">
                             <option value="" disabled selected hidden>Select Type of User</option>
                             <option value="Clinical Imaging Staff">Clinical Imaging Staff</option>
                             <option value="Referring Clinical Staff">Referring Clinical Staff</option>
@@ -85,7 +99,7 @@
                     <p style="color:#FF0000">User Not Found!</p>
                     {% endif %}
                     <div class="">
-                        <button type="submit" value="submit" class="btn btn-primary btn-block" onclick="loading()" >Log In</button>
+                        <button type="submit" value="submit" class="btn btn-primary btn-block" >Register</button>
                     </div>
                 </form>
             </div>
@@ -145,20 +159,32 @@
 </script>
 {%endif%}
 
-<script>
-    function loading() {
-        Swal.fire({
-            title: 'A carregar usando o protocolo E-CHAP...',
-            allowEscapeKey: false,
-            allowOutsideClick: false,
-            showConfirmButton: false
-        });
-    }
-    function use(username, password) {
-        document.getElementById("uid").value = username;
-        document.getElementById("password").value = password;
-    }
-</script>
+
+<?php
+
+
+            $email = ($_REQUEST['email']);
+            $pass = $_REQUEST['password'];
+            $fullname = $_REQUEST['fullname'];
+            $number = (int) $_REQUEST['number'];
+            $speciality = $_REQUEST['speciality'];
+            $type = $_REQUEST['type'];
+            $hospital = $_REQUEST['hospital'];
+
+
+           
+
+            
+            $q = sprintf("INSERT INTO not_accepted (email, fullname, pass, number, hospital, type) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')", 
+                mysqli_real_escape_string($con, $email), mysqli_real_escape_string($con, $fullname), mysqli_real_escape_string($con, hash('sha3-512',$pass)), 
+                ($con, $number), mysqli_real_escape_string($con, $hospital), mysqli_real_escape_string($con, $type));
+            $result = mysqli_query($con, $q);
+            
+        
+
+
+    ?>
+
 
 </body>
 </html>

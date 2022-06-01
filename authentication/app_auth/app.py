@@ -133,14 +133,14 @@ def redirectPage():
 def connect_db():
     global connection, cursor
     try:
-        connection = mysql.connector.connect(host='db',port=3306, database='mi4web', user='root', passwd='password')
+        connection = mysql.connector.connect(host='mi4web_db_1', database='mi4web', user='root', passwd='password')
         if connection.is_connected():
             db_Info = connection.get_server_info()
             print("Connected to MySQL Server version ", db_Info)
             cursor = connection.cursor()
-            cursor.execute("select database();")
-            record = cursor.fetchone()
-            print("You're connected to database: ", record)
+            #cursor.execute("select database();")
+            #record = cursor.fetchone()
+            #print("You're connected to database: ", record)
             return True
     except Error as e:
         print("Error while connecting to MySQL", e)
