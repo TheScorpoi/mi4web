@@ -15,15 +15,57 @@ import vtkColorTransferFunction from 'vtk.js/Sources/Rendering/Core/ColorTransfe
 import vtkPiecewiseFunction from 'vtk.js/Sources/Common/DataModel/PiecewiseFunction';
 import presets from './presets.js';
 
+//AQUI ELIMINAR DPS
+import 'vtk.js/Sources/favicon';
+
+import vtkPiecewiseGaussianWidget from 'vtk.js/Sources/Interaction/Widgets/PiecewiseGaussianWidget';
+
+import vtkHttpDataSetReader from 'vtk.js/Sources/IO/Core/HttpDataSetReader';
+
+// Force the loading of HttpDataAccessHelper to support gzip decompression
+import 'vtk.js/Sources/IO/Core/DataAccessHelper/HttpDataAccessHelper';
+
+import vtkColorMaps from 'vtk.js/Sources/Rendering/Core/ColorTransferFunction/ColorMaps';
+import vtkGenericRenderWindow from 'vtk.js/Sources/Rendering/Misc/GenericRenderWindow';
+
 window.cornerstoneWADOImageLoader = cornerstoneWADOImageLoader;
 const url = 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs';
-var studyInstanceUID =
-  '1.3.6.1.4.1.14519.5.2.1.7009.2403.334240657131972136850343327463';
-var ctSeriesInstanceUID =
-  '1.3.6.1.4.1.14519.5.2.1.7009.2403.226151125820845824875394858561';
+var studyInstanceUID;
+var ctSeriesInstanceUID;
 var searchInstanceOptions = {
   studyInstanceUID,
 };
+
+var labelContainer;
+
+let presetIndex = 1;
+let globalDataRange = [0, 255];
+let cfun = vtkColorTransferFunction.newInstance();
+let ofun = vtkPiecewiseFunction.newInstance();
+
+const widget = vtkPiecewiseGaussianWidget.newInstance({
+  numberOfBins: 256,
+  size: [400, 150],
+});
+
+widget.updateStyle({
+  backgroundColor: 'rgba(255, 255, 255, 0.6)',
+  histogramColor: 'rgba(100, 100, 100, 0.5)',
+  strokeColor: 'rgb(0, 0, 0)',
+  activeColor: 'rgb(255, 255, 255)',
+  handleColor: 'rgb(50, 150, 50)',
+  buttonDisableFillColor: 'rgba(255, 255, 255, 0.5)',
+  buttonDisableStrokeColor: 'rgba(0, 0, 0, 0.5)',
+  buttonStrokeColor: 'rgba(0, 0, 0, 1)',
+  buttonFillColor: 'rgba(255, 255, 255, 1)',
+  strokeWidth: 2,
+  activeStrokeWidth: 3,
+  buttonStrokeWidth: 1.5,
+  handleWidth: 3,
+  iconSize: 20, // Can be 0 if you want to remove buttons (dblClick for (+) / rightClick for (-))
+  padding: 10,
+});
+
 
 function createActorMapper(imageData) {
   const mapper = vtkVolumeMapper.newInstance();
@@ -94,7 +136,6 @@ function applyPreset(actor, preset) {
   const { shiftRange } = getShiftRange(colorTransferArray);
   let min = shiftRange[0];
   const width = shiftRange[1] - shiftRange[0];
-  const cfun = vtkColorTransferFunction.newInstance();
   const normColorTransferValuePoints = [];
   for (let i = 0; i < colorTransferArray.length; i += 4) {
     let value = colorTransferArray[i];
@@ -116,7 +157,6 @@ function applyPreset(actor, preset) {
     .splice(1)
     .map(parseFloat);
 
-  const ofun = vtkPiecewiseFunction.newInstance();
   const normPoints = [];
   for (let i = 0; i < scalarOpacityArray.length; i += 2) {
     let value = scalarOpacityArray[i];
@@ -205,20 +245,7 @@ function createStudyImageIds(baseUrl, studySearchOptions) {
 
   const client = new api.DICOMwebClient({ url });
 
-  //var key = 'viewportData' + localStorage['indice'];
-  //var data = JSON.parse(localStorage.getItem(key));
-
-  //alert(data);
-  //alert(data['StudyInstanceUID']);
-  /*
-  alert('FOR');
-  for (var a in localStorage) {
-    alert('key:' + a);
-    alert('value:' + localStorage[a]);
-  }*/
-
   studyInstanceUID = localStorage.getItem('StudyInstanceUID');
-  //alert(studyInstanceUID);
   ctSeriesInstanceUID = localStorage.getItem('SeriesInstanceUID');
   searchInstanceOptions = {
     studyInstanceUID,
@@ -262,6 +289,7 @@ class VTKFusionExample extends Component {
   };
 
   async componentDidMount() {
+    labelContainer = document.getElementById('labelContainer');
     const imageIdPromise = createStudyImageIds(url, searchInstanceOptions);
 
     this.apis = [];
@@ -275,15 +303,90 @@ class VTKFusionExample extends Component {
     const ctImageDataObject = this.loadDataset(ctImageIds, 'ctDisplaySet');
 
     const ctImageData = ctImageDataObject.vtkImageData;
+
+    const dataArray = ctImageData.getPointData().getScalars();
+    widget.setDataArray(dataArray.getData());
+    widget.applyOpacity(ofun);
+    widget.setColorTransferFunction(cfun);
+
     const ctVolVR = createCT3dPipeline(
       ctImageData,
       this.state.ctTransferFunctionPresetId
     );
 
+    cfun.onModified(() => {
+      widget.render();
+      this.rerenderAll();
+    });
     this.setState({
       volumeRenderingVolumes: [ctVolVR],
       percentComplete: 0,
     });
+
+    // ----------------------------------------------------------------------------
+    // Default setting Piecewise function widget
+    // ----------------------------------------------------------------------------
+
+    widget.addGaussian(0.425, 0.5, 0.2, 0.3, 0.2);
+    widget.addGaussian(0.75, 1, 0.3, 0, 0);
+
+    widget.setContainer(document.getElementById('widgetContainer'));
+    widget.bindMouseListeners();
+
+    widget.onAnimation(start => {
+      if (start) {
+        Object.keys(this.apis).forEach(viewportIndex => {
+          const renderWindow = this.apis[
+            viewportIndex
+          ].genericRenderWindow.getRenderWindow();
+
+          renderWindow.getInteractor().requestAnimation(widget);
+        });
+      } else {
+        Object.keys(this.apis).forEach(viewportIndex => {
+          const renderWindow = this.apis[
+            viewportIndex
+          ].genericRenderWindow.getRenderWindow();
+
+          renderWindow.getInteractor().cancelAnimation(widget);
+        });
+      }
+    });
+
+    widget.onOpacityChange(() => {
+      widget.applyOpacity(ofun);
+
+      Object.keys(this.apis).forEach(viewportIndex => {
+        const renderWindow = this.apis[
+          viewportIndex
+        ].genericRenderWindow.getRenderWindow();
+
+        if (!renderWindow.getInteractor().isAnimating()) {
+          renderWindow.render();
+        }
+      });
+    });
+
+    labelContainer.addEventListener('click', event => {
+      if (event.pageX < 200) {
+        this.changePreset(-1);
+      } else {
+        this.changePreset(1);
+      }
+    });
+  }
+
+  changePreset(delta = 1) {
+    presetIndex =
+      (presetIndex + delta + vtkColorMaps.rgbPresetNames.length) %
+      vtkColorMaps.rgbPresetNames.length;
+    cfun.applyColorMap(
+      vtkColorMaps.getPresetByName(vtkColorMaps.rgbPresetNames[presetIndex])
+    );
+    cfun.setMappingRange(...globalDataRange);
+    cfun.updateRange();
+    labelContainer.innerHTML = vtkColorMaps.rgbPresetNames[presetIndex];
+    console.log(presetIndex);
   }
 
   saveApiReference = api => {
@@ -353,6 +456,7 @@ class VTKFusionExample extends Component {
   }
 
   render() {
+    //alert(this.state.volumeRenderingVolumes);
     if (!this.state.volumeRenderingVolumes) {
       return <h4 style={{ color: 'white' }}>Loading...</h4>;
     }
@@ -370,8 +474,8 @@ class VTKFusionExample extends Component {
     const progressString = `Progress: ${percentComplete}%`;
 
     return (
-      <div style={{ color: 'white' }} className="row">
-        <div className="col-xs-12">
+      <div id="content" style={{ color: 'white' }} className="row">
+        <div id="contentCTtransfer" className="col-xs-12">
           <div>
             <label htmlFor="select_CT_xfer_fn">
               CT Transfer Function Preset (for Volume Rendering):{' '}
@@ -385,11 +489,11 @@ class VTKFusionExample extends Component {
             </select>
           </div>
         </div>
-        <div className="col-xs-12">
+        <div id="contentProgressString" className="col-xs-12">
           <h5>{progressString}</h5>
         </div>
         <hr />
-        <div className="col-xs-12 col-sm-6">
+        <div id="content3D" className="col-xs-12 col-sm-6">
           <View3D
             volumes={this.state.volumeRenderingVolumes}
             onCreated={this.saveApiReference}

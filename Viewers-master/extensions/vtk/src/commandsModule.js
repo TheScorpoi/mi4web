@@ -19,7 +19,6 @@ import ReactDOM from 'react-dom';
 import 'vtk.js/Sources/favicon';
 
 // Load the rendering pieces we want to use (for both WebGL and WebGPU)
-
 import vtkColorTransferFunction from 'vtk.js/Sources/Rendering/Core/ColorTransferFunction';
 import vtkFullScreenRenderWindow from 'vtk.js/Sources/Rendering/Misc/FullScreenRenderWindow';
 import vtkHttpDataSetReader from 'vtk.js/Sources/IO/Core/HttpDataSetReader';
@@ -530,11 +529,59 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
         document.getElementsByClassName('vtk-viewport-handler')
       );
       vistaActivada[0].innerHTML = '';
+      // Create Widget container
+      const widgetContainer = document.createElement('div');
+      widgetContainer.id = 'widgetContainer';
+      widgetContainer.style.position = 'absolute';
+      widgetContainer.style.top = 'calc(10px + 1em)';
+      widgetContainer.style.right = '5px';
+      widgetContainer.style.background = 'rgba(255, 255, 255, 0.3)';
+      vistaActivada[0].appendChild(widgetContainer);
 
-      //alert('commandsModule, index:' + viewports.activeViewportIndex);
-      //localStorage.setItem('indice', viewports.activeViewportIndex);
-      ReactDOM.render(<VTKVolumeRenderingExample />, vistaActivada[0]);
-      
+      // Create Label for preset
+      const labelContainer = document.createElement('div');
+      labelContainer.id = 'labelContainer';
+      labelContainer.style.position = 'absolute';
+      labelContainer.style.top = '5px';
+      labelContainer.style.left = '5px';
+      labelContainer.style.width = '100%';
+      labelContainer.style.color = 'white';
+      labelContainer.style.textAlign = 'center';
+      labelContainer.style.userSelect = 'none';
+      labelContainer.style.cursor = 'pointer';
+      labelContainer.textContent = 'ola';
+      vistaActivada[0].appendChild(labelContainer);
+
+      // Create div
+      const content = document.createElement('div');
+      content.style.position = 'absolute';
+      content.style.bottom = 0;
+      content.style.color = 'white';
+      content.className = 'row';
+      content.id = 'content';
+      vistaActivada[0].appendChild(content);
+
+      // Create div for CTtransfer
+      const contentCTtransfer = document.createElement('div');
+      contentCTtransfer.id = 'contentCTtransfer';
+      contentCTtransfer.className = 'col-xs-12';
+      content.appendChild(contentCTtransfer);
+
+      // Create div for CTtransfer
+      const contentProgressString = document.createElement('div');
+      contentProgressString.id = 'contentProgressString';
+      contentProgressString.className = 'col-xs-12';
+      content.appendChild(contentProgressString);
+
+      // Create div for 3D
+      const content3D = document.createElement('div');
+      content3D.id = 'content3D';
+      content3D.className = 'col-xs-12 col-sm-6';
+      content.appendChild(content3D);
+
+      ReactDOM.render(<VTKVolumeRenderingExample />, content);
+
+      /*
       const rootContainer = Array.from(
         document.getElementsByClassName('vtk-viewport-handler')
       )[0];
@@ -662,11 +709,6 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
           // Update Lookup table
           changePreset();
       
-          // Automatic switch to next preset every 5s
-          if (!rootContainer) {
-            intervalID = setInterval(changePreset, 5000);
-          }
-      
           widget.setDataArray(dataArray.getData());
           widget.applyOpacity(piecewiseFunction);
       
@@ -720,6 +762,7 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
       // ----------------------------------------------------------------------------
       
       global.widget = widget;
+      */
     },
   };
 
