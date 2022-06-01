@@ -37,7 +37,7 @@ ini_set('display_errors', 1);
             <div class="card-body login-card-body" style="background-color: #2C363F;">
                 <p class="login-box-msg" style="color: white;">Inicie a sua sessão em <b>{{page}}</b></p>
             
-                <form method="post" action="{{ url_for('get_informations')}}">
+                <form method="post" >
                     <div class="input-group mb-3">
                         <input class="form-control" placeholder="Full Name" name="fullname" id="fullname">
                         <div class="input-group-append">
@@ -100,7 +100,7 @@ ini_set('display_errors', 1);
                     <p style="color:#FF0000">User Not Found!</p>
                     {% endif %}
                     <div class="">
-                        <button type="submit" value="submit" class="btn btn-primary btn-block" onclick="loading()" >Log In</button>
+                        <button type="submit" value="submit" class="btn btn-primary btn-block" >Register</button>
                     </div>
                 </form>
             </div>
@@ -160,22 +160,11 @@ ini_set('display_errors', 1);
 </script>
 {%endif%}
 
-<?php
-            function show_error($msg) {
-                echo "<div class='alert alert-danger alert-dismissible' style='margin-top: 10'>
-                    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
-                    <h5><i class='icon fas fa-ban'></i>".$msg."</h5>
-                </div>";
-            }
-        ?>
+
 <?php
 
-if (!empty($_REQUEST['email'])) {
-    if (empty($_REQUEST["password"])){
-        show_error("A password não pode estar vazia");
-    }
-    else {
-        if (!empty($_REQUEST['email'])) {
+
+    x
             $email = ($_REQUEST['email']);
             $pass = $_REQUEST['password'];
             $fullname = $_REQUEST['fullname'];
@@ -185,47 +174,19 @@ if (!empty($_REQUEST['email'])) {
             $hospital = $_REQUEST['hospital'];
 
 
-            $q_user = "SELECT email FROM not_accepted where email = '".$email."'";
-            $r_user = mysqli_query($con, $q_user);
-            $row_user = $r_user -> fetch_assoc();
+           
 
             
             $q = sprintf("INSERT INTO not_accepted (email, fullname, pass, number, hospital, type) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')", 
-                mysqli_real_escape_string($con, $email), mysqli_real_escape_string($con, $fullname), mysqli_real_escape_string($con, md5($pass)), 
+                mysqli_real_escape_string($con, $email), mysqli_real_escape_string($con, $fullname), mysqli_real_escape_string($con, hash('sha3-512',$pass)), 
                 ($con, $number), mysqli_real_escape_string($con, $hospital), mysqli_real_escape_string($con, $type));
             $result = mysqli_query($con, $q);
-            if ($result) {
-                // conta criada com sucesso
-                echo "<p>Conta registada com sucesso</p>";
-                // registar dados da sessão (basta username) e avançar
-                $_SESSION["email"] = $email;
-            }
             
-            elseif(!empty($row_user["email"])){
-                show_error("Este utilizador já existe");
-            }
-            else {
-                show_error("As passwords são diferentes");
-            }
-        }
-    }
-}
+        
+
 
     ?>
-<script>
-    function loading() {
-        Swal.fire({
-            title: 'A carregar usando o protocolo E-CHAP...',
-            allowEscapeKey: false,
-            allowOutsideClick: false,
-            showConfirmButton: false
-        });
-    }
-    function use(username, password) {
-        document.getElementById("uid").value = username;
-        document.getElementById("password").value = password;
-    }
-</script>
+
 
 </body>
 </html>
