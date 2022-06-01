@@ -418,7 +418,7 @@ function _handleBuiltIn(button) {
 
   if (options.behavior === 'MAKE_REPORT') {
     commandsManager.runCommand('showReportModal', {
-      title: t('Make report about the pacient'),
+      title: t('Make report'),
     });
   }
 }

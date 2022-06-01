@@ -10,7 +10,10 @@ import { useTranslation } from 'react-i18next';
 
 import './ViewportReportForm.styl';
 import { TextInput, Select, Icon } from '@ohif/ui';
-import classnames from 'classnames';
+import Pdf from 'react-to-pdf';
+import PDF from './PDF';
+
+const ref = React.createRef();
 
 const FILE_TYPE_OPTIONS = [
   {
@@ -42,7 +45,7 @@ const ViewportReportForm = ({
   const [t] = useTranslation('ViewportReportForm');
 
   const [patientname, setPatientname] = useState('');
-  const [studyname, setStudyname] = useState('');
+  const [processnumber, setProcessnumber] = useState('');
   const [annotations, setAnnotations] = useState('');
   const [fileType, setFileType] = useState('jpg');
 
@@ -81,7 +84,7 @@ const ViewportReportForm = ({
     width: false,
     height: false,
     patientname: false,
-    studyname: false,
+    processnumber: false,
     annotations: false,
   });
 
@@ -89,20 +92,17 @@ const ViewportReportForm = ({
 
   const refreshViewport = useRef(null);
 
-  const downloadImage = () => {
-    downloadBlob(
-      patientname,
-      fileType,
-      viewportElement,
-      downloadCanvas.ref.current
-    );
+  const [state, setState] = useState(false);
+
+  const changeToPDF = () => {
+    setState(true);
   };
 
   const error_messages = {
     width: t('minWidthError'),
     height: t('minHeightError'),
     patientname: t('emptyPatientError'),
-    studyname: t('emptyStudyError'),
+    processnumber: t('emptyProcessError'),
     annotations: t('emptyAnnotationsError'),
   };
 
@@ -203,84 +203,102 @@ const ViewportReportForm = ({
       width: width < minimumSize,
       height: height < minimumSize,
       patientname: !patientname,
-      studyname: !studyname,
+      processnumber: !processnumber,
       annotations: !annotations,
     };
 
     setError({ ...hasError });
-  }, [dimensions, patientname, minimumSize]);
+  }, [dimensions, patientname, processnumber, annotations, minimumSize]);
+
+  const current = new Date();
+  const date = `${current.getDate()}/${current.getMonth() +
+    1}/${current.getFullYear()} ${current.getHours()}:${current.getMinutes()}`;
 
   return (
-    <div className="ViewportReportForm">
-      <div className="title">
-        Make a full report filled with annotations about this patient
-      </div>
-
-      <div className="file-info-container" data-cy="file-info-container">
-        <div className="col">
-          <div className="file-name">
-            <TextInput
-              type="text"
-              data-cy="patient-name"
-              value={patientname}
-              onChange={event => setPatientname(event.target.value)}
-              label={t('patientname')}
-              id="patient-name"
-            />
-            {renderErrorHandler('patientname')}
+    <>
+      {!state ? (
+        <div className="ViewportReportForm">
+          <div className="title">
+            Make a full report filled with annotations
           </div>
-          <div className="file-name">
-            <TextInput
-              type="text"
-              data-cy="study-name"
-              value={studyname}
-              onChange={event => setStudyname(event.target.value)}
-              label={t('studyname')}
-              id="study-name"
-            />
-            {renderErrorHandler('studyname')}
+
+          <div className="file-info-container" data-cy="file-info-container">
+            <div className="col">
+              <div className="file-name">
+                <TextInput
+                  type="text"
+                  data-cy="patient-name"
+                  value={patientname}
+                  onChange={event => setPatientname(event.target.value)}
+                  label={t('patientname')}
+                  id="patient-name"
+                />
+                {renderErrorHandler('patientname')}
+              </div>
+              <div className="file-name">
+                <TextInput
+                  type="text"
+                  data-cy="process-number"
+                  value={processnumber}
+                  onChange={event => setProcessnumber(event.target.value)}
+                  label={t('processnumber')}
+                  id="process-number"
+                />
+                {renderErrorHandler('processnumber')}
+              </div>
+            </div>
+          </div>
+
+          <div className="file-info-container" data-cy="file-info-container">
+            <div className="col">
+              <div className="annotationsdiv">
+                <p>{t('annotations')}</p>
+                <textarea
+                  id="annotationstext"
+                  rows="4"
+                  cols="50"
+                  onChange={event => setAnnotations(event.target.value)}
+                ></textarea>
+                {renderErrorHandler('annotations')}
+              </div>
+            </div>
+          </div>
+
+          <div className="actions">
+            <div className="action-cancel">
+              <button
+                type="button"
+                data-cy="cancel-btn"
+                className="btn btn-danger"
+                onClick={onClose}
+              >
+                {t('Buttons:Cancel')}
+              </button>
+            </div>
+            <div className="action-save">
+              <button
+                disabled={hasError}
+                onClick={() => changeToPDF()}
+                className="btn btn-primary"
+                data-cy="download-btn"
+              >
+                {t('Buttons:Preview of the PDF')}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className="file-info-container" data-cy="file-info-container">
-        <div className="col">
-          <div className="annotationsdiv">
-            <p>{t('annotations')}</p>
-            <textarea
-              id="annotationstext"
-              rows="4"
-              cols="50"
-              onChange={event => setAnnotations(event.target.value)}
-            ></textarea>
-            {renderErrorHandler('annotations')}
-          </div>
+      ) : (
+        <div>
+          <PDF
+            patientname={patientname}
+            processnumber={processnumber}
+            annotations={annotations}
+            doutor={'IR BUSCAR AO LOCALSTORAGE'}
+            date={date}
+          />
         </div>
-      </div>
-
-      <div className="actions">
-        <div className="action-cancel">
-          <button
-            type="button"
-            data-cy="cancel-btn"
-            className="btn btn-danger"
-            onClick={onClose}
-          >
-            {t('Buttons:Cancel')}
-          </button>
-        </div>
-        <div className="action-save">
-          <button
-            disabled={hasError}
-            onClick={downloadImage}
-            className="btn btn-primary"
-            data-cy="download-btn"
-          >
-            {t('Buttons:Generate PDF')}
-          </button>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
