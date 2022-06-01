@@ -1,9 +1,11 @@
-FROM python:3.8
+FROM python:3.8-slim-buster
 
-ADD ./uap uap
+WORKDIR /uap
 
-COPY ./uap/requirements.txt requirements.txt
+COPY requirements.txt requirements.txt
 
 RUN pip3 install -r requirements.txt
 
-CMD ["python3", "./uap/uap.py"]
+COPY . .
+
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=9874"]
