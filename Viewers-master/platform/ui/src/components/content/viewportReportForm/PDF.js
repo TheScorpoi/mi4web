@@ -7,6 +7,18 @@ const ref = createRef();
 const PDF = props => {
   return (
     <>
+      <Pdf targetRef={ref} filename="medical_report.pdf">
+        {({ toPdf }) => (
+          <button
+            className="button-3"
+            style={{ 'margin-bottom': '20px' }}
+            onClick={toPdf}
+          >
+            Generate Pdf
+          </button>
+        )}
+      </Pdf>
+      <div className="clear"></div>
       <div className="post" ref={ref}>
         <div className="content">
           <div className="logo">
@@ -47,9 +59,6 @@ const PDF = props => {
           </div>
         </div>
       </div>
-      <Pdf targetRef={ref} filename="medical_report.pdf">
-        {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
-      </Pdf>
     </>
   );
 };
