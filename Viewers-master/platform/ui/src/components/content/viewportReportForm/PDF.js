@@ -47,7 +47,7 @@ const PDF = props => {
           </div>
         </div>
       </div>
-      <Pdf targetRef={ref} filename="code-example.pdf">
+      <Pdf targetRef={ref} filename="medical_report.pdf">
         {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
       </Pdf>
     </>
