@@ -11,7 +11,7 @@ export default function initWebWorkers() {
     taskConfiguration: {
       decodeTask: {
         initializeCodecsOnStartup: false,
-        usePDFJS: false,
+        usePDFJS: true,
         strict: false,
       },
     },

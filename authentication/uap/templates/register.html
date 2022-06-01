@@ -3,7 +3,6 @@ ob_start();
 session_start();
 include("database.php");
 ini_set('display_errors', 1);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +36,7 @@ ini_set('display_errors', 1);
             <div class="card-body login-card-body" style="background-color: #2C363F;">
                 <p class="login-box-msg" style="color: white;">Inicie a sua sessão em <b>{{page}}</b></p>
             
-                <form method="post" action="{{ url_for('get_informations')}}">
+                <form method="post" >
                     <div class="input-group mb-3">
                         <input class="form-control" placeholder="Full Name" name="fullname" id="fullname">
                         <div class="input-group-append">
@@ -100,7 +99,7 @@ ini_set('display_errors', 1);
                     <p style="color:#FF0000">User Not Found!</p>
                     {% endif %}
                     <div class="">
-                        <button type="submit" value="submit" class="btn btn-primary btn-block" onclick="loading()" >Log In</button>
+                        <button type="submit" value="submit" class="btn btn-primary btn-block" >Register</button>
                     </div>
                 </form>
             </div>
@@ -160,22 +159,10 @@ ini_set('display_errors', 1);
 </script>
 {%endif%}
 
-<?php
-            function show_error($msg) {
-                echo "<div class='alert alert-danger alert-dismissible' style='margin-top: 10'>
-                    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
-                    <h5><i class='icon fas fa-ban'></i>".$msg."</h5>
-                </div>";
-            }
-        ?>
+
 <?php
 
-if (!empty($_REQUEST['email'])) {
-    if (empty($_REQUEST["password"])){
-        show_error("A password não pode estar vazia");
-    }
-    else {
-        if (!empty($_REQUEST['email'])) {
+
             $email = ($_REQUEST['email']);
             $pass = $_REQUEST['password'];
             $fullname = $_REQUEST['fullname'];
