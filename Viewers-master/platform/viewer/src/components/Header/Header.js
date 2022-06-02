@@ -104,12 +104,14 @@ function Header(props) {
         className={classNames('entry-header', { 'header-big': useLargeLogo })}
       >
         <div className="header-left-box">
-          <img
-            src="https://scontent.fopo3-2.fna.fbcdn.net/v/t1.15752-9/280497727_1701267070227013_525841318525436038_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_eui2=AeEJ5t1TS175LZo84jgIFkBxR586J0CxnztHnzonQLGfOxIWxsXHvllVztdMefarmeqj_6I5PV_vpbCyHYspfFn8&_nc_ohc=AVWZqGlyyMcAX9TYFJl&_nc_ht=scontent.fopo3-2.fna&oh=03_AVJRfQGIZio0ZZHXOu6fU5iRRee2bBKTUbUd3CQoT3ebqA&oe=62BCCE10"
-            alt="MI4WEB"
-            width={'250px'}
-            height={'125px'}
-          />
+          <a href="/">
+            <img
+              src="https://scontent.fopo3-2.fna.fbcdn.net/v/t1.15752-9/280497727_1701267070227013_525841318525436038_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_eui2=AeEJ5t1TS175LZo84jgIFkBxR586J0CxnztHnzonQLGfOxIWxsXHvllVztdMefarmeqj_6I5PV_vpbCyHYspfFn8&_nc_ohc=AVWZqGlyyMcAX9TYFJl&_nc_ht=scontent.fopo3-2.fna&oh=03_AVJRfQGIZio0ZZHXOu6fU5iRRee2bBKTUbUd3CQoT3ebqA&oe=62BCCE10"
+              alt="MI4WEB"
+              width={'250px'}
+              height={'125px'}
+            />
+          </a>
         </div>
 
         <div className="header-menu" style={{ 'margin-top': '4%' }}>
