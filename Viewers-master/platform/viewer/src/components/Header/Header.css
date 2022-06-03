@@ -160,13 +160,6 @@
     width: 40%;
   }
 
-  /* Toggle Notification Bar */
-  .notification-bar {
-    display: block;
-  }
-  .header-menu .research-use {
-    display: none;
-  }
 }
 
 .button {

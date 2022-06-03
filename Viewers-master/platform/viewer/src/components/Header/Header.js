@@ -28,8 +28,6 @@ function Header(props) {
   const [options, setOptions] = useState([]);
   const hasLink = linkText && linkPath;
 
-
-
   const token = props.location.search;
 
   if (token) {
@@ -46,9 +44,11 @@ function Header(props) {
     }, []);
 
     localStorage.setItem('user', JSON.stringify(data.map(d => d.fullname)));
-    localStorage.setItem('type_user', JSON.stringify(data.map(d => d.type_user)));
+    localStorage.setItem(
+      'type_user',
+      JSON.stringify(data.map(d => d.type_user))
+    );
   }
-  
 
   useEffect(() => {
     const optionsValue = [
@@ -86,28 +86,37 @@ function Header(props) {
 
   function putNameOnHeader() {
     if (signIn.current) {
-      return localStorage.getItem('user').replace("[", "").replace("]", "").replace("\"", "").replace("\"", "");
+      return localStorage
+        .getItem('user')
+        .replace('[', '')
+        .replace(']', '')
+        .replace('"', '')
+        .replace('"', '');
     } else {
-      return "";
+      return '';
     }
   }
 
   return (
     <>
-      <div className="notification-bar">{t('INVESTIGATIONAL USE ONLY')}</div>
-      <div className={classNames('entry-header', { 'header-big': useLargeLogo })} >
+      <div className="notification-bar">{putNameOnHeader()}</div>
+      <div
+        className={classNames('entry-header', { 'header-big': useLargeLogo })}
+      >
         <div className="header-left-box">
-          <LocalHospitalIcon />
-          <span className="title">MI4WEB</span>
+          <a href="/">
+            <img
+              src="https://scontent.fopo3-2.fna.fbcdn.net/v/t1.15752-9/280497727_1701267070227013_525841318525436038_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_eui2=AeEJ5t1TS175LZo84jgIFkBxR586J0CxnztHnzonQLGfOxIWxsXHvllVztdMefarmeqj_6I5PV_vpbCyHYspfFn8&_nc_ohc=AVWZqGlyyMcAX9TYFJl&_nc_ht=scontent.fopo3-2.fna&oh=03_AVJRfQGIZio0ZZHXOu6fU5iRRee2bBKTUbUd3CQoT3ebqA&oe=62BCCE10"
+              alt="MI4WEB"
+              width={'250px'}
+              height={'125px'}
+            />
+          </a>
         </div>
 
-        <div className="header-menu">
+        <div className="header-menu" style={{ 'margin-top': '4%' }}>
           <div className="icon-css">
-            {!signIn.current ? (
-              <span></span>
-            ) : (
-                <PersonIcon fontSize="small"/>
-            )}
+            {!signIn.current ? <span></span> : <PersonIcon fontSize="small" />}
           </div>
           <div className="research-use">
             <span>{putNameOnHeader()}</span>
@@ -116,13 +125,6 @@ function Header(props) {
             <Dropdown title={t('Options')} list={options} align="right" />
           </div>
 
-          
-          
-         
-         
-          
-          
-          
           {!signIn.current ? (
             <button
               className="button-3"
