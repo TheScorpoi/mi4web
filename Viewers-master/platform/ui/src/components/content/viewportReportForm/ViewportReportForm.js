@@ -214,12 +214,18 @@ const ViewportReportForm = ({
   const date = `${current.getDate()}/${current.getMonth() +
     1}/${current.getFullYear()} ${current.getHours()}:${current.getMinutes()}`;
 
-  const doutor = localStorage
-    .getItem('user')
-    .replace('[', '')
-    .replace(']', '')
-    .replace('"', '')
-    .replace('"', '');
+  const [doutor, setDoutor] = useState('');
+
+  if (localStorage.getItem('user') !== null) {
+    setDoutor(
+      localStorage
+        .getItem('user')
+        .replace('[', '')
+        .replace(']', '')
+        .replace('"', '')
+        .replace('"', '')
+    );
+  }
 
   return (
     <>
