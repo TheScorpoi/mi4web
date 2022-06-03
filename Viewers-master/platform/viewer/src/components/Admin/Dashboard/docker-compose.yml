@@ -7,9 +7,3 @@ services:
     ports: 
       - '3005:3005'
     restart: unless-stopped
-    networks:
-    - shared
-networks:
-  shared: 
-    external:
-      name: shared
