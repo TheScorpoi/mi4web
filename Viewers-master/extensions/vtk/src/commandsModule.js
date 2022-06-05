@@ -73,6 +73,12 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
     content0.className = 'row';
     vistaActivada[0].appendChild(content0);
 
+    // Create div
+    const content = document.createElement('div');
+    content.style.color = 'white';
+    content.id = 'content';
+    content0.appendChild(content);
+
     // Create Widget container
     const widgetContainer = document.createElement('div');
     widgetContainer.id = 'widgetContainer';
@@ -94,12 +100,6 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
     labelContainer.style.userSelect = 'none';
     labelContainer.style.cursor = 'pointer';
     content0.appendChild(labelContainer);
-
-    // Create div
-    const content = document.createElement('div');
-    content.style.color = 'white';
-    content.id = 'content';
-    content0.appendChild(content);
 
     ReactDOM.render(<VTKVolumeRenderingExample />, content);
   }

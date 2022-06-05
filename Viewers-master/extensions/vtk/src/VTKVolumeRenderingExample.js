@@ -444,7 +444,9 @@ class VTKFusionExample extends Component {
 
   render() {
     if (!this.state.volumeRenderingVolumes) {
-      return <h4 style={{ color: 'white' }}>Loading...</h4>;
+      return (
+        <h4 style={{ color: 'white', 'margin-left': '5%' }}>Loading...</h4>
+      );
     }
 
     const { percentComplete } = this.state;
