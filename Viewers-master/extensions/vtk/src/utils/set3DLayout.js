@@ -1,7 +1,7 @@
 /*
 import setLayoutAndViewportData from './setLayoutAndViewportData.js';
 
-export default function setMPRLayout(
+export default function set3DLayout(
   displaySet,
   viewportPropsArray,
   numRows = 1,
@@ -48,31 +48,9 @@ export default function setMPRLayout(
     });
     alert("Depois do foreach");
 
-    client.retrieveStudyMetadata(studySearchOptions).then(instances => {
-      const imageIds = instances.map(metaData => {
-        const imageId =
-          `wadors:` +
-          baseUrl +
-          '/studies/' +
-          studyInstanceUID +
-          '/series/' +
-          metaData[SERIES_INSTANCE_UID].Value[0] +
-          '/instances/' +
-          metaData[SOP_INSTANCE_UID].Value[0] +
-          '/frames/1';
-  
-        cornerstoneWADOImageLoader.wadors.metaDataManager.add(
-          imageId,
-          metaData
-        );
-  
-        return imageId;
-      });
-  
-      resolve(imageIds);
-    }, reject);
-
-
+    console.log('set3DLayout')
+    console.log(viewports);
+    console.log(viewportSpecificData);
     setLayoutAndViewportData(
       {
         numRows,
@@ -84,21 +62,4 @@ export default function setMPRLayout(
     alert("Depois do setLayoutAndViewportData");
   });
 }
-
-
-
-const SOP_INSTANCE_UID = '00080018';
-const SERIES_INSTANCE_UID = '0020000E';
-
-const client = new api.DICOMwebClient({ url });
-
-studyInstanceUID = localStorage.getItem('StudyInstanceUID');
-//alert(studyInstanceUID);
-ctSeriesInstanceUID = localStorage.getItem('SeriesInstanceUID');
-searchInstanceOptions = {
-  studyInstanceUID,
-};
-studySearchOptions = {
-  studyInstanceUID,
-};
 */

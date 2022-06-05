@@ -14,30 +14,16 @@ import './initCornerstone.js';
 import vtkColorTransferFunction from 'vtk.js/Sources/Rendering/Core/ColorTransferFunction';
 import vtkPiecewiseFunction from 'vtk.js/Sources/Common/DataModel/PiecewiseFunction';
 import presets from './presets.js';
-
-//AQUI ELIMINAR DPS
-import 'vtk.js/Sources/favicon';
-
 import vtkPiecewiseGaussianWidget from 'vtk.js/Sources/Interaction/Widgets/PiecewiseGaussianWidget';
-
-import vtkHttpDataSetReader from 'vtk.js/Sources/IO/Core/HttpDataSetReader';
-
-// Force the loading of HttpDataAccessHelper to support gzip decompression
-import 'vtk.js/Sources/IO/Core/DataAccessHelper/HttpDataAccessHelper';
-
 import vtkColorMaps from 'vtk.js/Sources/Rendering/Core/ColorTransferFunction/ColorMaps';
-import vtkGenericRenderWindow from 'vtk.js/Sources/Rendering/Misc/GenericRenderWindow';
 
 window.cornerstoneWADOImageLoader = cornerstoneWADOImageLoader;
 const url = 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs';
 var studyInstanceUID;
 var ctSeriesInstanceUID;
-var searchInstanceOptions = {
-  studyInstanceUID,
-};
-
+var searchInstanceOptions;
 var labelContainer;
-
+var selectTransferFunction;
 let presetIndex = 1;
 let globalDataRange = [0, 255];
 let cfun = vtkColorTransferFunction.newInstance();
@@ -65,7 +51,6 @@ widget.updateStyle({
   iconSize: 20, // Can be 0 if you want to remove buttons (dblClick for (+) / rightClick for (-))
   padding: 10,
 });
-
 
 function createActorMapper(imageData) {
   const mapper = vtkVolumeMapper.newInstance();
@@ -290,6 +275,7 @@ class VTKFusionExample extends Component {
 
   async componentDidMount() {
     labelContainer = document.getElementById('labelContainer');
+    selectTransferFunction = document.getElementById('selectTransferFunction');
     const imageIdPromise = createStudyImageIds(url, searchInstanceOptions);
 
     this.apis = [];
@@ -305,6 +291,11 @@ class VTKFusionExample extends Component {
     const ctImageData = ctImageDataObject.vtkImageData;
 
     const dataArray = ctImageData.getPointData().getScalars();
+    const dataRange = dataArray.getRange();
+    globalDataRange[0] = dataRange[0];
+    globalDataRange[1] = dataRange[1];
+    this.changePreset();
+
     widget.setDataArray(dataArray.getData());
     widget.applyOpacity(ofun);
     widget.setColorTransferFunction(cfun);
@@ -318,14 +309,11 @@ class VTKFusionExample extends Component {
       widget.render();
       this.rerenderAll();
     });
+
     this.setState({
       volumeRenderingVolumes: [ctVolVR],
       percentComplete: 0,
     });
-
-    // ----------------------------------------------------------------------------
-    // Default setting Piecewise function widget
-    // ----------------------------------------------------------------------------
 
     widget.addGaussian(0.425, 0.5, 0.2, 0.3, 0.2);
     widget.addGaussian(0.75, 1, 0.3, 0, 0);
@@ -386,7 +374,6 @@ class VTKFusionExample extends Component {
     cfun.setMappingRange(...globalDataRange);
     cfun.updateRange();
     labelContainer.innerHTML = vtkColorMaps.rgbPresetNames[presetIndex];
-    console.log(presetIndex);
   }
 
   saveApiReference = api => {
@@ -394,7 +381,7 @@ class VTKFusionExample extends Component {
   };
 
   handleChangeCTTransferFunction = event => {
-    const ctTransferFunctionPresetId = event.target.value;
+    const ctTransferFunctionPresetId = selectTransferFunction.value;
     const preset = presets.find(
       preset => preset.id === ctTransferFunctionPresetId
     );
@@ -456,39 +443,21 @@ class VTKFusionExample extends Component {
   }
 
   render() {
-    //alert(this.state.volumeRenderingVolumes);
     if (!this.state.volumeRenderingVolumes) {
       return <h4 style={{ color: 'white' }}>Loading...</h4>;
     }
-
-    const ctTransferFunctionPresetOptions = presets.map(preset => {
-      return (
-        <option key={preset.id} value={preset.id}>
-          {preset.name}
-        </option>
-      );
-    });
 
     const { percentComplete } = this.state;
 
     const progressString = `Progress: ${percentComplete}%`;
 
+    selectTransferFunction.addEventListener(
+      'change',
+      this.handleChangeCTTransferFunction
+    );
+
     return (
-      <div id="content" style={{ color: 'white' }} className="row">
-        <div id="contentCTtransfer" className="col-xs-12">
-          <div>
-            <label htmlFor="select_CT_xfer_fn">
-              CT Transfer Function Preset (for Volume Rendering):{' '}
-            </label>
-            <select
-              id="select_CT_xfer_fn"
-              value={this.state.ctTransferFunctionPresetId}
-              onChange={this.handleChangeCTTransferFunction}
-            >
-              {ctTransferFunctionPresetOptions}
-            </select>
-          </div>
-        </div>
+      <div style={{ position: 'absolute' }}>
         <div id="contentProgressString" className="col-xs-12">
           <h5>{progressString}</h5>
         </div>

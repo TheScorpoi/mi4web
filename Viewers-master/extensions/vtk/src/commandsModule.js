@@ -14,23 +14,8 @@ import Constants from 'vtk.js/Sources/Rendering/Core/VolumeMapper/Constants.js';
 import OHIFVTKViewport from './OHIFVTKViewport';
 import VTKVolumeRenderingExample from './VTKVolumeRenderingExample.js';
 import ReactDOM from 'react-dom';
+import presets from './presets';
 
-//AQUI ELIMINAR DPS
-import 'vtk.js/Sources/favicon';
-
-// Load the rendering pieces we want to use (for both WebGL and WebGPU)
-import vtkColorTransferFunction from 'vtk.js/Sources/Rendering/Core/ColorTransferFunction';
-import vtkFullScreenRenderWindow from 'vtk.js/Sources/Rendering/Misc/FullScreenRenderWindow';
-import vtkHttpDataSetReader from 'vtk.js/Sources/IO/Core/HttpDataSetReader';
-import vtkPiecewiseFunction from 'vtk.js/Sources/Common/DataModel/PiecewiseFunction';
-import vtkPiecewiseGaussianWidget from 'vtk.js/Sources/Interaction/Widgets/PiecewiseGaussianWidget';
-import vtkVolume from 'vtk.js/Sources/Rendering/Core/Volume';
-import vtkVolumeMapper from 'vtk.js/Sources/Rendering/Core/VolumeMapper';
-
-// Force the loading of HttpDataAccessHelper to support gzip decompression
-import 'vtk.js/Sources/IO/Core/DataAccessHelper/HttpDataAccessHelper';
-
-import vtkColorMaps from 'vtk.js/Sources/Rendering/Core/ColorTransferFunction/ColorMaps';
 
 const { BlendMode } = Constants;
 
@@ -76,6 +61,120 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
     }
 
     return api;
+  }
+
+  function feature3D() {
+    const vistaActivada = Array.from(
+      document.getElementsByClassName('vtk-viewport-handler')
+    );
+    vistaActivada[0].innerHTML = '';
+
+    //Create div
+    const content0 = document.createElement('div');
+    content0.className = 'row';
+    vistaActivada[0].appendChild(content0);
+
+    // Create Widget container
+    const widgetContainer = document.createElement('div');
+    widgetContainer.id = 'widgetContainer';
+    widgetContainer.style.position = 'absolute';
+    widgetContainer.style.top = 'calc(10px + 1em)';
+    widgetContainer.style.right = '5px';
+    widgetContainer.style.background = 'rgba(255, 255, 255, 0.3)';
+    content0.appendChild(widgetContainer);
+
+    // Create Label for preset
+    const labelContainer = document.createElement('div');
+    labelContainer.id = 'labelContainer';
+    labelContainer.style.position = 'absolute';
+    labelContainer.style.top = '5px';
+    labelContainer.style.left = '5px';
+    labelContainer.style.width = '100%';
+    labelContainer.style.color = 'white';
+    labelContainer.style.textAlign = 'center';
+    labelContainer.style.userSelect = 'none';
+    labelContainer.style.cursor = 'pointer';
+    content0.appendChild(labelContainer);
+
+    // Create div
+    const content = document.createElement('div');
+    content.style.color = 'white';
+    content.id = 'content';
+    content0.appendChild(content);
+
+    ReactDOM.render(<VTKVolumeRenderingExample />, content);
+  }
+
+  function buttons(activate) {
+    let msgExit;
+    let state;
+    if (activate) {
+      msgExit = 'Exit 2D MPR';
+      state = 'visible';
+    } else {
+      msgExit = 'Exit 3D';
+      state = 'hidden';
+    }
+
+    const toolBar = document.getElementsByClassName('ToolbarRow');
+
+    const buttonTransferFunction = document.createElement('div');
+    buttonTransferFunction.className = 'toolbar-button slab-thickness';
+
+    const controller = document.createElement('div');
+    controller.className = 'controller';
+
+    const elementp = document.createElement('p');
+    elementp.innerHTML =
+      '<p style="font-size: 10px; padding-top: 10px;">Transfer Function</p>';
+    controller.appendChild(elementp);
+
+    const selectList = document.createElement('select');
+    selectList.id = 'selectTransferFunction';
+    selectList.className = 'select-ohif';
+    presets.forEach(element => {
+      var option = document.createElement('option');
+      option.value = element['id'];
+      option.text = element['name'];
+      selectList.appendChild(option);
+    });
+    controller.appendChild(selectList);
+
+    buttonTransferFunction.appendChild(controller);
+
+    for (let index = 2; index < toolBar[0].childElementCount - 1; index++) {
+      let element = toolBar[0].children[index];
+
+      if (!activate && index == 3) {
+        element.innerHTML = '';
+        /*
+        element.children[1].innerText = 'Cut';
+        element.children[0].innerHTML =
+          '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-scissors" viewBox="0 0 16 16"> <path d="M3.5 3.5c-.614-.884-.074-1.962.858-2.5L8 7.226 11.642 1c.932.538 1.472 1.616.858 2.5L8.81 8.61l1.556 2.661a2.5 2.5 0 1 1-.794.637L8 9.73l-1.572 2.177a2.5 2.5 0 1 1-.794-.637L7.19 8.61 3.5 3.5zm2.5 10a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0zm7 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z"/> </svg>';
+        */
+      } else if (!activate && index == 2) {
+        element.innerHTML = '';
+      } else if (!activate && index == 4) {
+        element.addEventListener('click', feature3D);
+      } else if (activate && index == 5) {
+        element.removeEventListener('click', feature3D);
+      } else {
+        element.style.visibility = state;
+      }
+    }
+
+    if (!activate) {
+      toolBar[0].insertBefore(buttonTransferFunction, toolBar[0].children[3]);
+    } else {
+      toolBar[0].removeChild(toolBar[0].children[3]);
+    }
+
+    toolBar[0].children[1].children[1].innerText = msgExit;
+    toolBar[0].children[1].addEventListener('click', event => {
+      buttons(true);
+    });
+
+    //console.clear();
   }
 
   function _setView(api, sliceNormal, viewUp) {
@@ -524,245 +623,7 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
       } catch (error) {
         throw new Error(error);
       }
-
-      const vistaActivada = Array.from(
-        document.getElementsByClassName('vtk-viewport-handler')
-      );
-      vistaActivada[0].innerHTML = '';
-      // Create Widget container
-      const widgetContainer = document.createElement('div');
-      widgetContainer.id = 'widgetContainer';
-      widgetContainer.style.position = 'absolute';
-      widgetContainer.style.top = 'calc(10px + 1em)';
-      widgetContainer.style.right = '5px';
-      widgetContainer.style.background = 'rgba(255, 255, 255, 0.3)';
-      vistaActivada[0].appendChild(widgetContainer);
-
-      // Create Label for preset
-      const labelContainer = document.createElement('div');
-      labelContainer.id = 'labelContainer';
-      labelContainer.style.position = 'absolute';
-      labelContainer.style.top = '5px';
-      labelContainer.style.left = '5px';
-      labelContainer.style.width = '100%';
-      labelContainer.style.color = 'white';
-      labelContainer.style.textAlign = 'center';
-      labelContainer.style.userSelect = 'none';
-      labelContainer.style.cursor = 'pointer';
-      labelContainer.textContent = 'ola';
-      vistaActivada[0].appendChild(labelContainer);
-
-      // Create div
-      const content = document.createElement('div');
-      content.style.position = 'absolute';
-      content.style.bottom = 0;
-      content.style.color = 'white';
-      content.className = 'row';
-      content.id = 'content';
-      vistaActivada[0].appendChild(content);
-
-      // Create div for CTtransfer
-      const contentCTtransfer = document.createElement('div');
-      contentCTtransfer.id = 'contentCTtransfer';
-      contentCTtransfer.className = 'col-xs-12';
-      content.appendChild(contentCTtransfer);
-
-      // Create div for CTtransfer
-      const contentProgressString = document.createElement('div');
-      contentProgressString.id = 'contentProgressString';
-      contentProgressString.className = 'col-xs-12';
-      content.appendChild(contentProgressString);
-
-      // Create div for 3D
-      const content3D = document.createElement('div');
-      content3D.id = 'content3D';
-      content3D.className = 'col-xs-12 col-sm-6';
-      content.appendChild(content3D);
-
-      ReactDOM.render(<VTKVolumeRenderingExample />, content);
-
-      /*
-      const rootContainer = Array.from(
-        document.getElementsByClassName('vtk-viewport-handler')
-      )[0];
-      const containerStyle = rootContainer ? { height: '100%' } : null;
-      const urlToLoad = rootContainer
-        ? rootContainer.dataset.url ||
-          'https://kitware.github.io/vtk-js/data/volume/LIDC2.vti'
-        : `https://kitware.github.io/vtk-js/data/volume/LIDC2.vti`;
-
-      const fullScreenRenderer = vtkFullScreenRenderWindow.newInstance({
-        background: [0, 0, 0],
-        rootContainer,
-        containerStyle,
-      });
-      const renderer = fullScreenRenderer.getRenderer();
-      const renderWindow = fullScreenRenderer.getRenderWindow();
-
-      renderWindow.getInteractor().setDesiredUpdateRate(15.0);
-
-      // ----------------------------------------------------------------------------
-      // Example code
-      // ----------------------------------------------------------------------------
-
-      const body = rootContainer || document.querySelector('body');
-
-      // Create Widget container
-      const widgetContainer = document.createElement('div');
-      widgetContainer.style.position = 'absolute';
-      widgetContainer.style.top = 'calc(10px + 1em)';
-      widgetContainer.style.left = '5px';
-      widgetContainer.style.background = 'rgba(255, 255, 255, 0.3)';
-      body.appendChild(widgetContainer);
-
-      // Create Label for preset
-      const labelContainer = document.createElement('div');
-      labelContainer.style.position = 'absolute';
-      labelContainer.style.top = '5px';
-      labelContainer.style.left = '5px';
-      labelContainer.style.width = '100%';
-      labelContainer.style.color = 'white';
-      labelContainer.style.textAlign = 'center';
-      labelContainer.style.userSelect = 'none';
-      labelContainer.style.cursor = 'pointer';
-      body.appendChild(labelContainer);
-
-      let presetIndex = 1;
-      const globalDataRange = [0, 255];
-      const lookupTable = vtkColorTransferFunction.newInstance();
-
-      function changePreset(delta = 1) {
-        presetIndex =
-          (presetIndex + delta + vtkColorMaps.rgbPresetNames.length) %
-          vtkColorMaps.rgbPresetNames.length;
-        lookupTable.applyColorMap(
-          vtkColorMaps.getPresetByName(vtkColorMaps.rgbPresetNames[presetIndex])
-        );
-        lookupTable.setMappingRange(...globalDataRange);
-        lookupTable.updateRange();
-        labelContainer.innerHTML = vtkColorMaps.rgbPresetNames[presetIndex];
-      }
-
-      let intervalID = null;
-      function stopInterval() {
-        if (intervalID !== null) {
-          clearInterval(intervalID);
-          intervalID = null;
-        }
-      }
-
-      labelContainer.addEventListener('click', event => {
-        if (event.pageX < 200) {
-          stopInterval();
-          changePreset(-1);
-        } else {
-          stopInterval();
-          changePreset(1);
-        }
-      });
-
- 
-      // ----------------------------------------------------------------------------
-      // Example code
-      // ----------------------------------------------------------------------------
-
-      const widget = vtkPiecewiseGaussianWidget.newInstance({
-        numberOfBins: 256,
-        size: [400, 150],
-      });
-      widget.updateStyle({
-        backgroundColor: 'rgba(255, 255, 255, 0.6)',
-        histogramColor: 'rgba(100, 100, 100, 0.5)',
-        strokeColor: 'rgb(0, 0, 0)',
-        activeColor: 'rgb(255, 255, 255)',
-        handleColor: 'rgb(50, 150, 50)',
-        buttonDisableFillColor: 'rgba(255, 255, 255, 0.5)',
-        buttonDisableStrokeColor: 'rgba(0, 0, 0, 0.5)',
-        buttonStrokeColor: 'rgba(0, 0, 0, 1)',
-        buttonFillColor: 'rgba(255, 255, 255, 1)',
-        strokeWidth: 2,
-        activeStrokeWidth: 3,
-        buttonStrokeWidth: 1.5,
-        handleWidth: 3,
-        iconSize: 20, // Can be 0 if you want to remove buttons (dblClick for (+) / rightClick for (-))
-        padding: 10,
-      });
-
-      fullScreenRenderer.setResizeCallback(({ width, height }) => {
-        widget.setSize(Math.min(450, width - 10), 150);
-      });
-
-      const piecewiseFunction = vtkPiecewiseFunction.newInstance();
-
-      const actor = vtkVolume.newInstance();
-      const mapper = vtkVolumeMapper.newInstance({ sampleDistance: 1.1 });
-      const reader = vtkHttpDataSetReader.newInstance({ fetchGzip: true });
-
-      reader.setUrl(urlToLoad).then(() => {
-        reader.loadData().then(() => {
-          const imageData = reader.getOutputData();
-          const dataArray = imageData.getPointData().getScalars();
-          const dataRange = dataArray.getRange();
-          globalDataRange[0] = dataRange[0];
-          globalDataRange[1] = dataRange[1];
-      
-          // Update Lookup table
-          changePreset();
-      
-          widget.setDataArray(dataArray.getData());
-          widget.applyOpacity(piecewiseFunction);
-      
-          widget.setColorTransferFunction(lookupTable);
-          lookupTable.onModified(() => {
-            widget.render();
-            renderWindow.render();
-          });
-      
-          renderer.addVolume(actor);
-          renderer.resetCamera();
-          renderer.getActiveCamera().elevation(70);
-          renderWindow.render();
-        });
-      });
-      
-      actor.setMapper(mapper);
-      mapper.setInputConnection(reader.getOutputPort());
-      
-      actor.getProperty().setRGBTransferFunction(0, lookupTable);
-      actor.getProperty().setScalarOpacity(0, piecewiseFunction);
-      actor.getProperty().setInterpolationTypeToFastLinear();
-      
-      // ----------------------------------------------------------------------------
-      // Default setting Piecewise function widget
-      // ----------------------------------------------------------------------------
-      
-      widget.addGaussian(0.425, 0.5, 0.2, 0.3, 0.2);
-      widget.addGaussian(0.75, 1, 0.3, 0, 0);
-      
-      widget.setContainer(widgetContainer);
-      widget.bindMouseListeners();
-      
-      widget.onAnimation((start) => {
-        if (start) {
-          renderWindow.getInteractor().requestAnimation(widget);
-        } else {
-          renderWindow.getInteractor().cancelAnimation(widget);
-        }
-      });
-      
-      widget.onOpacityChange(() => {
-        widget.applyOpacity(piecewiseFunction);
-        if (!renderWindow.getInteractor().isAnimating()) {
-          renderWindow.render();
-        }
-      });
-      
-      // ----------------------------------------------------------------------------
-      // Expose variable to global namespace
-      // ----------------------------------------------------------------------------
-      
-      global.widget = widget;
-      */
+      feature3D();
     },
   };
 
@@ -876,31 +737,5 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
     defaultContext: 'ACTIVE_VIEWPORT::VTK',
   };
 };
-
-function buttons(activate) {
-  let msgExit;
-  let state;
-  if (activate) {
-    msgExit = 'Exit 2D MPR';
-    state = 'visible';
-  } else {
-    msgExit = 'Exit 3D';
-    state = 'hidden';
-  }
-
-  const toolBar = Array.from(document.getElementsByClassName('ToolbarRow'));
-
-  for (let index = 2; index < 7; index++) {
-    let element = toolBar[0].children[index];
-    element.style.visibility = state;
-  }
-
-  toolBar[0].children[1].children[1].innerText = msgExit;
-  toolBar[0].children[1].addEventListener('click', event => {
-    buttons(true);
-  });
-
-  console.clear();
-}
 
 export default commandsModule;

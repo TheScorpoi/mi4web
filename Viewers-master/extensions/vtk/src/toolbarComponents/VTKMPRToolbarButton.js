@@ -36,9 +36,6 @@ const _isDisplaySetReconstructable = (viewportSpecificData = {}, activeViewportI
   localStorage.setItem('StudyInstanceUID', displaySet['StudyInstanceUID']);
   localStorage.setItem('SeriesInstanceUID', displaySet['SeriesInstanceUID']);
 
-  //alert(displaySet['StudyInstanceUID']);
-  //alert(displaySet['SeriesInstanceUID']);
-
   return displaySet.isReconstructable;
 };
 
