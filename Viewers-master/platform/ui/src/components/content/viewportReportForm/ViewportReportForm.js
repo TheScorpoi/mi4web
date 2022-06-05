@@ -56,12 +56,6 @@ const ViewportReportForm = ({
 
   const [showAnnotations, setShowAnnotations] = useState(true);
 
-  const [keepAspect, setKeepAspect] = useState(true);
-  const [aspectMultiplier, setAspectMultiplier] = useState({
-    width: 1,
-    height: 1,
-  });
-
   const [viewportElement, setViewportElement] = useState();
   const [viewportElementDimensions, setViewportElementDimensions] = useState({
     width: defaultSize,
@@ -70,12 +64,6 @@ const ViewportReportForm = ({
 
   const [downloadCanvas, setDownloadCanvas] = useState({
     ref: createRef(),
-    width: defaultSize,
-    height: defaultSize,
-  });
-
-  const [viewportPreview, setViewportPreview] = useState({
-    src: null,
     width: defaultSize,
     height: defaultSize,
   });
@@ -145,13 +133,6 @@ const ViewportReportForm = ({
       downloadCanvas.ref.current,
       fileType
     );
-
-    setViewportPreview(state => ({
-      ...state,
-      src: dataUrl,
-      width: validSize(viewportElementWidth),
-      height: validSize(viewportElementHeight),
-    }));
   }, [
     activeViewport,
     viewportElement,
@@ -214,12 +195,34 @@ const ViewportReportForm = ({
   const date = `${current.getDate()}/${current.getMonth() +
     1}/${current.getFullYear()} ${current.getHours()}:${current.getMinutes()}`;
 
-  const doutor = localStorage
-    .getItem('user')
-    .replace('[', '')
-    .replace(']', '')
-    .replace('"', '')
-    .replace('"', '');
+  const [doutor, setDoutor] = useState('');
+  const [type_user, setTypeuser] = useState('');
+  useEffect(() => {
+    if (localStorage.getItem('user') !== null) {
+      setDoutor(
+        localStorage
+          .getItem('user')
+          .replace('[', '')
+          .replace(']', '')
+          .replace('"', '')
+          .replace('"', '')
+      );
+    }
+
+    if (localStorage.getItem('type_user') !== null) {
+      setTypeuser(
+        localStorage
+          .getItem('type_user')
+          .replace('[', '')
+          .replace(']', '')
+          .replace('"', '')
+          .replace('"', '')
+      );
+    }
+  }, [doutor, type_user]);
+
+  console.log(doutor);
+  console.log(type_user);
 
   return (
     <>
@@ -229,47 +232,119 @@ const ViewportReportForm = ({
             Make a full report filled with annotations
           </div>
 
-          <div className="file-info-container" data-cy="file-info-container">
-            <div className="col">
-              <div className="file-name">
-                <TextInput
-                  type="text"
-                  data-cy="patient-name"
-                  value={patientname}
-                  onChange={event => setPatientname(event.target.value)}
-                  label={t('patientname')}
-                  id="patient-name"
-                />
-                {renderErrorHandler('patientname')}
+          {type_user === 'Clinical Imaging Staff' ? (
+            <>
+              <div
+                className="file-info-container"
+                data-cy="file-info-container"
+              >
+                <div className="col">
+                  <div className="file-name">
+                    <TextInput
+                      type="text"
+                      data-cy="patient-name"
+                      value={patientname}
+                      onChange={event => setPatientname(event.target.value)}
+                      label={t('patientname')}
+                      id="patient-name"
+                    />
+                    {renderErrorHandler('patientname')}
+                  </div>
+                  <div className="file-name">
+                    <TextInput
+                      type="text"
+                      data-cy="process-number"
+                      value={processnumber}
+                      onChange={event => setProcessnumber(event.target.value)}
+                      label={t('processnumber')}
+                      id="process-number"
+                    />
+                    {renderErrorHandler('processnumber')}
+                  </div>
+                </div>
               </div>
-              <div className="file-name">
-                <TextInput
-                  type="text"
-                  data-cy="process-number"
-                  value={processnumber}
-                  onChange={event => setProcessnumber(event.target.value)}
-                  label={t('processnumber')}
-                  id="process-number"
-                />
-                {renderErrorHandler('processnumber')}
-              </div>
-            </div>
-          </div>
 
-          <div className="file-info-container" data-cy="file-info-container">
-            <div className="col">
-              <div className="annotationsdiv">
-                <p>{t('annotations')}</p>
-                <textarea
-                  id="annotationstext"
-                  rows="4"
-                  cols="50"
-                  onChange={event => setAnnotations(event.target.value)}
-                ></textarea>
-                {renderErrorHandler('annotations')}
+              <div
+                className="file-info-container"
+                data-cy="file-info-container"
+              >
+                <div className="col">
+                  <div className="annotationsdiv">
+                    <p>{t('annotations')}</p>
+                    <textarea
+                      id="annotationstext"
+                      rows="4"
+                      cols="50"
+                      onChange={event => setAnnotations(event.target.value)}
+                    ></textarea>
+                    {renderErrorHandler('annotations')}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </>
+          ) : (
+            <>
+              <p
+                style={{
+                  color: 'red',
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+              >
+                You don't have the necessary permissions to make a report!
+              </p>
+              <div
+                className="file-info-container"
+                data-cy="file-info-container"
+              >
+                <div className="col">
+                  <div className="file-name">
+                    <TextInput
+                      disabled={true}
+                      type="text"
+                      data-cy="patient-name"
+                      value={patientname}
+                      onChange={event => setPatientname(event.target.value)}
+                      label={t('patientname')}
+                      id="patient-name"
+                    />
+                  </div>
+                  <div className="file-name">
+                    <TextInput
+                      disabled={true}
+                      type="text"
+                      data-cy="process-number"
+                      value={processnumber}
+                      onChange={event => setProcessnumber(event.target.value)}
+                      label={t('processnumber')}
+                      id="process-number"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className="file-info-container"
+                data-cy="file-info-container"
+              >
+                <div className="col">
+                  <div
+                    className="annotationsdiv"
+                    style={{ 'textarea:hover': 'not-allowed' }}
+                  >
+                    <p>{t('annotations')}</p>
+                    <textarea
+                      disabled={true}
+                      id="annotationstext"
+                      rows="4"
+                      cols="50"
+                      onChange={event => setAnnotations(event.target.value)}
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
 
           <div className="actions">
             <div className="action-cancel">

@@ -172,19 +172,47 @@ ini_set('display_errors', 1);
             $hospital = $_REQUEST['hospital'];
 
 
-           
+            $q_user = "SELECT email FROM not_accepted where email = '".$email."'";
+            $r_user = mysqli_query($con, $q_user);
+            $row_user = $r_user -> fetch_assoc();
 
             
             $q = sprintf("INSERT INTO not_accepted (email, fullname, pass, number, hospital, type) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')", 
-                mysqli_real_escape_string($con, $email), mysqli_real_escape_string($con, $fullname), mysqli_real_escape_string($con, hash('sha3-512',$pass)), 
+                mysqli_real_escape_string($con, $email), mysqli_real_escape_string($con, $fullname), mysqli_real_escape_string($con, md5($pass)), 
                 ($con, $number), mysqli_real_escape_string($con, $hospital), mysqli_real_escape_string($con, $type));
             $result = mysqli_query($con, $q);
+            if ($result) {
+                // conta criada com sucesso
+                echo "<p>Conta registada com sucesso</p>";
+                // registar dados da sessão (basta username) e avançar
+                $_SESSION["email"] = $email;
+            }
             
-        
-
+            elseif(!empty($row_user["email"])){
+                show_error("Este utilizador já existe");
+            }
+            else {
+                show_error("As passwords são diferentes");
+            }
+        }
+    }
+}
 
     ?>
-
+<script>
+    function loading() {
+        Swal.fire({
+            title: 'A carregar usando o protocolo E-CHAP...',
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            showConfirmButton: false
+        });
+    }
+    function use(username, password) {
+        document.getElementById("uid").value = username;
+        document.getElementById("password").value = password;
+    }
+</script>
 
 </body>
 </html>
