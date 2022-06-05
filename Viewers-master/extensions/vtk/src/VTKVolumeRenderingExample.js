@@ -456,6 +456,12 @@ class VTKFusionExample extends Component {
       this.handleChangeCTTransferFunction
     );
 
+    const vistaActivada = Array.from(
+      document.getElementsByClassName('vtk-viewport-handler')
+    );
+
+    let heightVisaActivada = (vistaActivada[0].clientHeight - 82).toString() + 'px';
+
     return (
       <div
         style={{
@@ -472,8 +478,8 @@ class VTKFusionExample extends Component {
         <div
           id="content3D"
           style={{
-            width: '1000px',
-            height: '750px',
+            width: '100%',
+            height: heightVisaActivada,
           }}
         >
           <View3D
