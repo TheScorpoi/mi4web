@@ -457,12 +457,25 @@ class VTKFusionExample extends Component {
     );
 
     return (
-      <div style={{ position: 'absolute' }}>
+      <div
+        style={{
+          'margin-top': '50px',
+          margin: 'auto 0',
+          'margin-left': '5%',
+          width: '65%',
+        }}
+      >
         <div id="contentProgressString" className="col-xs-12">
           <h5>{progressString}</h5>
         </div>
         <hr />
-        <div id="content3D" className="col-xs-12 col-sm-6">
+        <div
+          id="content3D"
+          style={{
+            width: '1000px',
+            height: '750px',
+          }}
+        >
           <View3D
             volumes={this.state.volumeRenderingVolumes}
             onCreated={this.saveApiReference}

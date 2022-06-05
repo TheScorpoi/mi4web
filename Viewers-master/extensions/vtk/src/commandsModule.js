@@ -16,7 +16,6 @@ import VTKVolumeRenderingExample from './VTKVolumeRenderingExample.js';
 import ReactDOM from 'react-dom';
 import presets from './presets';
 
-
 const { BlendMode } = Constants;
 
 const commandsModule = ({ commandsManager, servicesManager }) => {
@@ -78,7 +77,7 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
     const widgetContainer = document.createElement('div');
     widgetContainer.id = 'widgetContainer';
     widgetContainer.style.position = 'absolute';
-    widgetContainer.style.top = 'calc(10px + 1em)';
+    widgetContainer.style.top = 'calc(10px + 2em)';
     widgetContainer.style.right = '5px';
     widgetContainer.style.background = 'rgba(255, 255, 255, 0.3)';
     content0.appendChild(widgetContainer);
@@ -87,8 +86,8 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
     const labelContainer = document.createElement('div');
     labelContainer.id = 'labelContainer';
     labelContainer.style.position = 'absolute';
-    labelContainer.style.top = '5px';
-    labelContainer.style.left = '5px';
+    labelContainer.style.top = '10px';
+    labelContainer.style.left = '500px';
     labelContainer.style.width = '100%';
     labelContainer.style.color = 'white';
     labelContainer.style.textAlign = 'center';
@@ -126,7 +125,7 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
 
     const elementp = document.createElement('p');
     elementp.innerHTML =
-      '<p style="font-size: 10px; padding-top: 10px;">Transfer Function</p>';
+      '<p style="font-size: 10px; padding-top: 10px; position: absolute; top:0; left:165px; width: 100px">Transfer Function</p>';
     controller.appendChild(elementp);
 
     const selectList = document.createElement('select');
