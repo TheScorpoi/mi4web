@@ -125,7 +125,7 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
 
     const elementp = document.createElement('p');
     elementp.innerHTML =
-      '<p style="font-size: 10px; padding-top: 10px; position: absolute; top:0; left:165px; width: 100px">Transfer Function</p>';
+      '<p style="font-size: 10px; padding-top: 10px; position: absolute; top:0; left:175px; width: 100px">Transfer Function</p>';
     controller.appendChild(elementp);
 
     const selectList = document.createElement('select');
