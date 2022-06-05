@@ -42,21 +42,12 @@ import routes from "routes";
 import footerRoutes from "footer.routes";
 
 // Images
-import bgImage from "assets/images/BG.png";
+import bgImage from "assets/images/BGpreto.png";
 
 function Presentation() {
   return (
     <>
-      <DefaultNavbar
-        routes={routes}
-        action={{
-          type: "external",
-          route: "https://github.com/TheScorpoi/mi4web",
-          label: "Visit our MEDICAL IMAGE viewer",
-          color: "info",
-        }}
-        sticky
-      />
+      <DefaultNavbar routes={routes} sticky />
       <MKBox
         minHeight="60vh"
         width="100%"

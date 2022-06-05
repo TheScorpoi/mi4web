@@ -177,7 +177,7 @@ function Information() {
                   <DefaultInfoCard
                     icon="image_search"
                     title="IMAGE MANIPULATION"
-                    description="Core 2D image display functionalities."
+                    description="Multiplanar image display functionalities"
                   />
                 </Grid>
               </Grid>

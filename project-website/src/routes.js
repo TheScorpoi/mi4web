@@ -51,6 +51,18 @@ const routes = [
     icon: <GitHubIcon />,
     href: "https://github.com/TheScorpoi/mi4web",
   },
+  {
+    name: "Acess our VIEWER",
+    icon: <GitHubIcon />,
+    href: "http://mednat.ieeta.pt:8754",
+    collapse: [
+      {
+        name: "Visit our medical image viewer",
+        description: "You can only access it through UA VPN or using UA Network",
+        href: "http://mednat.ieeta.pt:8754",
+      },
+    ],
+  },
 ];
 
 export default routes;
