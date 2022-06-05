@@ -474,8 +474,8 @@ class VTKFusionExample extends Component {
         <div
           id="content3D"
           style={{
-            width: '1000px',
-            height: '750px',
+            width: '100%',
+            height: '700px',
           }}
         >
           <View3D
