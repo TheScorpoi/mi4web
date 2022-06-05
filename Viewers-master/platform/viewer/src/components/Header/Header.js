@@ -106,10 +106,10 @@ function Header(props) {
         <div className="header-left-box">
           <a href="/">
             <img
-              src="https://scontent.fopo3-2.fna.fbcdn.net/v/t1.15752-9/280497727_1701267070227013_525841318525436038_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_eui2=AeEJ5t1TS175LZo84jgIFkBxR586J0CxnztHnzonQLGfOxIWxsXHvllVztdMefarmeqj_6I5PV_vpbCyHYspfFn8&_nc_ohc=AVWZqGlyyMcAX9TYFJl&_nc_ht=scontent.fopo3-2.fna&oh=03_AVJRfQGIZio0ZZHXOu6fU5iRRee2bBKTUbUd3CQoT3ebqA&oe=62BCCE10"
+              src="https://scontent.xx.fbcdn.net/v/t1.15752-9/285323151_734512571117616_2759111543071222783_n.png?_nc_cat=109&ccb=1-7&_nc_sid=aee45a&_nc_ohc=RlTg9FtPwQEAX_XPdCP&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVKHnScEZ7dKrUhBrF22UfiJyHhZNB62T1yoG3XrIb35MA&oe=62C12CDF"
               alt="MI4WEB"
-              width={'250px'}
-              height={'125px'}
+              width={'150px'}
+              height={'39px'}
             />
           </a>
         </div>

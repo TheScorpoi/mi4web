@@ -1,10 +1,11 @@
 /* Viewer Route */
 .entry-header {
-  padding: 10px 15px;
+  padding: 0px 15px;
   height: var(--top-bar-height);
 }
 
 .header-left-box {
+  padding-top: 65px;;
   color: #ffffff;
   font-size: 30px;
   font-weight: 800;
@@ -29,6 +30,7 @@
   height: auto;
   display: inline-block;
   width: 100%;
+  padding-top: 0px;
 }
 
 .entry-header.header-big .header-brand {
