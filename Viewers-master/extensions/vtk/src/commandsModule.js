@@ -101,6 +101,11 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
     labelContainer.style.cursor = 'pointer';
     content0.appendChild(labelContainer);
 
+    const divClipPlane = document.createElement('div');
+    divClipPlane.innerHTML =
+      '<div style="position: absolute; left: 25px; top: 25px; background-color: white; border-radius: 5px; list-style: none; padding: 5px 10px; margin: 0px; display: block; border: 1px solid black; max-width: calc(100% - 70px); max-height: calc(100% - 60px); overflow: auto;"><table> <tbody><tr> <td><b>Clip Plane 1</b></td> </tr><tr> <td> Position <input class="plane1Position" type="range" min="-201.60000000000002" max="201.60000000000002" step="1" value="50.400000000000006"> </td> <td> Rotation <input class="plane1Rotation" type="range" min="0" max="180" step="1" value="0"> </td> </tr>  <tr> <td><b>Clip Plane 2</b></td> </tr><tr> <td> Position <input class="plane2Position" type="range" min="-201.60000000000002" max="201.60000000000002" step="1" value="100.80000000000001"> </td> <td> Rotation <input class="plane2Rotation" type="range" min="0" max="180" step="1" value="0"> </td> </tr>  </tbody></table> </div>';
+    content0.appendChild(divClipPlane);
+
     ReactDOM.render(<VTKVolumeRenderingExample />, content);
   }
 
@@ -164,6 +169,17 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
 
     if (!activate) {
       toolBar[0].insertBefore(buttonTransferFunction, toolBar[0].children[3]);
+      const studies = document.getElementsByClassName('study-browser')[0]
+        .children[0];
+
+      for (let index = 0; index < studies.childElementCount; index++) {
+        studies.children[index].children[0].addEventListener('click', event => {
+          buttons(true);
+        });
+        document.addEventListener('drop', event => {
+          buttons(true);
+        });
+      }
     } else {
       toolBar[0].removeChild(toolBar[0].children[3]);
     }
