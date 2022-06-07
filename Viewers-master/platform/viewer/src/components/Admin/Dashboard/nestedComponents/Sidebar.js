@@ -3,7 +3,7 @@ import './Sidebar.css';
 
 import { useHistory } from 'react-router-dom';
 
-import Versions from '@material-ui/icons/DashboardOutlined';
+
 import PeopleRoundedIcon from '@material-ui/icons/PeopleRounded';
 import TreeRounded from '@material-ui/icons/AccountTreeRounded';
 import DashboardOut from '@material-ui/icons/BarChartRounded';
@@ -26,9 +26,6 @@ function Sidebar() {
     history.push('/nodes');
   };
 
-  const swversions = () => {
-    history.push('/swversions');
-  };
 
   const extInstall = () => {
     history.push('/extInstallation');
@@ -46,12 +43,6 @@ function Sidebar() {
         <span className="lefti">Manage Acess </span>
         <span className="righti">
           <PeopleRoundedIcon />
-        </span>
-      </a>
-      <a className="menu-item" onClick={swversions}>
-        <span className="lefti">SW Versions </span>
-        <span className="righti">
-          <Versions />
         </span>
       </a>
       <a className="menu-item" onClick={nodes}>
