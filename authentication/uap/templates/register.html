@@ -1,4 +1,5 @@
 <?php
+require_once();
 ob_start();
 session_start();
 include("database.php");
@@ -125,7 +126,6 @@ ini_set('display_errors', 1);
                     {% for credential in bd %}
                         <tr>
                             <td>{{ credential["username"] }}</td>
-                            <td><button class="btn btn-sm btn-primary" onclick="use('{{ credential['username'] }}', '{{ credential['password'] }}')">Usar</button></td>
                         </tr>
                     {% endfor %}
                    
@@ -162,42 +162,20 @@ ini_set('display_errors', 1);
 
 <?php
 
-
-            $email = ($_REQUEST['email']);
-            $pass = $_REQUEST['password'];
-            $fullname = $_REQUEST['fullname'];
-            $number = (int) $_REQUEST['number'];
-            $speciality = $_REQUEST['speciality'];
-            $type = $_REQUEST['type'];
-            $hospital = $_REQUEST['hospital'];
-
-
-            $q_user = "SELECT email FROM not_accepted where email = '".$email."'";
-            $r_user = mysqli_query($con, $q_user);
-            $row_user = $r_user -> fetch_assoc();
-
-            
-            $q = sprintf("INSERT INTO not_accepted (email, fullname, pass, number, hospital, type) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')", 
-                mysqli_real_escape_string($con, $email), mysqli_real_escape_string($con, $fullname), mysqli_real_escape_string($con, md5($pass)), 
-                ($con, $number), mysqli_real_escape_string($con, $hospital), mysqli_real_escape_string($con, $type));
-            $result = mysqli_query($con, $q);
-            if ($result) {
-                // conta criada com sucesso
-                echo "<p>Conta registada com sucesso</p>";
-                // registar dados da sessão (basta username) e avançar
-                $_SESSION["email"] = $email;
-            }
-            
-            elseif(!empty($row_user["email"])){
-                show_error("Este utilizador já existe");
-            }
-            else {
-                show_error("As passwords são diferentes");
-            }
-        }
-    }
-}
-
+        if (isset($POST["registerBTN"]))
+        $email = ($_REQUEST['email']);
+        $pass = $_REQUEST['password'];
+        $fullname = $_REQUEST['fullname'];
+        $number = (int) $_REQUEST['number'];
+        $speciality = $_REQUEST['speciality'];
+        $type = $_REQUEST['type'];
+        $hospital = $_REQUEST['hospital'];
+        
+        $q = sprintf("INSERT INTO not_accepted (email, fullname, pass, number, hospital, type) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')", 
+            mysqli_real_escape_string($con, $email), mysqli_real_escape_string($con, $fullname), mysqli_real_escape_string($con, md5($pass)), 
+            ($con, $number), mysqli_real_escape_string($con, $hospital), mysqli_real_escape_string($con, $type));
+        $result = mysqli_query($con, $q);
+        
     ?>
 <script>
     function loading() {
