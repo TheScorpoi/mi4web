@@ -415,6 +415,12 @@ function _handleBuiltIn(button) {
       title: t('Download High Quality Image'),
     });
   }
+
+  if (options.behavior === 'MAKE_REPORT') {
+    commandsManager.runCommand('showReportModal', {
+      title: t('Make report (Clinical Imaging Staff)'),
+    });
+  }
 }
 
 export default withTranslation(['Common', 'ViewportDownloadForm'])(

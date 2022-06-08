@@ -1,0 +1,14 @@
+version: '3.3' 
+services: 
+  auth_uap: 
+    build:
+      context: ./uap
+      dockerfile: ./Dockerfile
+    ports: 
+      - '9874:9874'
+  auth_server:
+    build:
+      context: ./app_auth
+      dockerfile: ./Dockerfile 
+    ports: 
+      - '5001:5000'

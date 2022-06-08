@@ -725,6 +725,12 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
       options: {},
       context: 'VIEWER',
     },
+    report: {
+      commandFn: actions.report,
+      storeContexts: ['viewports'],
+      options: {},
+      context: 'VIEWER',
+    },
     getVtkApiForViewportIndex: {
       commandFn: actions.getVtkApis,
       context: 'VIEWER',
