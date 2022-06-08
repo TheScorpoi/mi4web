@@ -11,7 +11,7 @@ const PDF = props => {
         {({ toPdf }) => (
           <button
             className="button-3"
-            style={{ 'margin-bottom': '20px' }}
+            style={{ marginBottom: '20px' }}
             onClick={toPdf}
           >
             Generate Pdf
@@ -33,13 +33,13 @@ const PDF = props => {
             <div className="infopatient">
               <h3>
                 Utente :{' '}
-                <span style={{ 'font-weight': 'lighter' }}>
+                <span style={{ fontWeight: 'lighter' }}>
                   {props.patientname}
                 </span>
               </h3>
               <h3>
                 Nº Processo :{' '}
-                <span style={{ 'font-weight': 'lighter' }}>
+                <span style={{ fontWeight: 'lighter' }}>
                   {props.processnumber}
                 </span>
               </h3>
