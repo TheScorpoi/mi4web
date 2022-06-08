@@ -3,7 +3,7 @@
 $DBUSER = 'root';
 $DBPASS = 'password';
 
-$con=mysqli_connect('db',$DBUSER,$DBPASS,'mi4web');
+$con=mysqli_connect('localhost',$DBUSER,$DBPASS,'mi4web');
 
 $q = "SELECT * FROM not_accepted";
 

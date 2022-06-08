@@ -40,7 +40,7 @@ salt = ""
 logged_in = False
 
 
-server_hello = 'http://localhost:5001/send_hello'
+server_hello = 'http://auth_server:5000/send_hello'
 server_challenge = ''
 server_done = ''
 
