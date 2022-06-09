@@ -1,5 +1,6 @@
 import architeture from "Documents/architeture.png";
 import deploy from "Documents/deploy_diagram.png";
+import infomoodel from "Documents/information_model.png";
 import calendar1 from "Documents/calendar1.png";
 import calendar2 from "Documents/calendar2.png";
 
@@ -14,6 +15,13 @@ export default [
   {
     title: "Deployment Diagram",
     image: deploy,
+    image2: "",
+    lildescription:
+      "In a short version, the deployment architecture is basically a server with DICOM images, that store the images, and are able to make and receive queries with help of DICOMWeb API. A viewer, which permits the user to see the visualisation of the DICOM images, and make operations on it. In order to have this deployment, we have 2 virtual machines, on IEETA, the access is only possible in UA network, or using the UA VPN.",
+  },
+  {
+    title: "Information Model",
+    image: infomoodel,
     image2: "",
     lildescription:
       "In a short version, the deployment architecture is basically a server with DICOM images, that store the images, and are able to make and receive queries with help of DICOMWeb API. A viewer, which permits the user to see the visualisation of the DICOM images, and make operations on it. In order to have this deployment, we have 2 virtual machines, on IEETA, the access is only possible in UA network, or using the UA VPN.",

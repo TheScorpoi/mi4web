@@ -52,7 +52,11 @@ function ImageBlock() {
               </a>
             </>
           ) : (
-            <img alt={title} src={image} />
+            <>
+              <a href={image} target="_blank" rel="noreferrer noopener">
+                <img alt={title} src={image} />
+              </a>
+            </>
           )}
         </Grid>
       </Grid>
