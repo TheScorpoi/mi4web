@@ -14,8 +14,8 @@ services:
     volumes:
       - ./data/db:/var/lib/mysql
     networks:
-    - shared
+    - authentication_all
+
 networks:
-  shared: 
-    external:
-      name: shared
+ authentication_all: 
+  external: true

@@ -5,10 +5,31 @@ services:
       context: ./uap
       dockerfile: ./Dockerfile
     ports: 
-      - '9874:9874'
+      - '8085:9874'
+    networks:
+      - all
   auth_server:
     build:
       context: ./app_auth
       dockerfile: ./Dockerfile 
     ports: 
-      - '5001:5000'
+      - '8086:5001'
+    networks:
+      - all
+  mysql-api: 
+    build: 
+      context: ./api
+      dockerfile: Dockerfile 
+    ports: 
+      - '3005:3005'
+    restart: unless-stopped
+    networks:
+      - all
+
+networks:
+ all:
+  ipam:
+   driver: default
+   config:
+    - subnet: 10.4.0.0/16
+
