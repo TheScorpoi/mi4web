@@ -24,7 +24,7 @@ export default [
     image: infomoodel,
     image2: "",
     lildescription:
-      "In a short version, the deployment architecture is basically a server with DICOM images, that store the images, and are able to make and receive queries with help of DICOMWeb API. A viewer, which permits the user to see the visualisation of the DICOM images, and make operations on it. In order to have this deployment, we have 2 virtual machines, on IEETA, the access is only possible in UA network, or using the UA VPN.",
+      "Firstly, we created the table user, which has two descendents, the table not_accepted, which are the users that are yet to be accepted by the administrator, and the table staff, which are the users that were already verified and accepted by the administrator. There is also the table admin, which defines the administrator of our application, having the responsability of checking and accepting users, and manage everything. Lastly, we also have the table chart_info, which provides the information about the number of studies carried out per day.",
   },
   {
     title: "Calendar",
