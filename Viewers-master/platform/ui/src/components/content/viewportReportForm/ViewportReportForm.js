@@ -9,22 +9,8 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import './ViewportReportForm.styl';
-import { TextInput, Select, Icon } from '@ohif/ui';
-import Pdf from 'react-to-pdf';
+import { TextInput } from '@ohif/ui';
 import PDF from './PDF';
-
-const ref = React.createRef();
-
-const FILE_TYPE_OPTIONS = [
-  {
-    key: 'jpg',
-    value: 'jpg',
-  },
-  {
-    key: 'png',
-    value: 'png',
-  },
-];
 
 const REFRESH_VIEWPORT_TIMEOUT = 1000;
 
@@ -36,11 +22,9 @@ const ViewportReportForm = ({
   disableViewport,
   toggleAnnotations,
   loadImage,
-  downloadBlob,
   defaultSize,
   minimumSize,
   maximumSize,
-  canvasClass,
 }) => {
   const [t] = useTranslation('ViewportReportForm');
 
@@ -262,11 +246,6 @@ const ViewportReportForm = ({
                   </div>
                 </div>
               </div>
-              <h1>How to store image path in MySQL database using Node js - Tutsmake.com</h1>
-              <form action="http://localhost:3003/upload" enctype="multipart/form-data" method="post">
-                <input type="file" name="image" accept='pdf/*' />
-                <input type="submit" value="Upload"/>
-              </form> 
 
               <div
                 className="file-info-container"
@@ -373,15 +352,13 @@ const ViewportReportForm = ({
           </div>
         </div>
       ) : (
-        <div>
-          <PDF
-            patientname={patientname}
-            processnumber={processnumber}
-            annotations={annotations}
-            doutor={doutor}
-            date={date}
-          />
-        </div>
+        <PDF
+          patientname={patientname}
+          processnumber={processnumber}
+          annotations={annotations}
+          doutor={doutor}
+          date={date}
+        />
       )}
     </>
   );

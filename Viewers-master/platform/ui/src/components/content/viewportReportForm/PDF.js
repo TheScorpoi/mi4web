@@ -1,25 +1,26 @@
-import React, { createRef } from 'react';
+import React, {
+  createRef,
+  useCallback,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react';
 import Pdf from 'react-to-pdf';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import './PDF.css';
 import api from './api_save_file';
-import axios from "axios";
+import axios from 'axios';
+import UploadImg from './UploadImg';
 
 const ref = createRef();
 
-const [state, setState] = useState(false);
+// const onFileUpload = file => {
+//   const formData = new FormData();
+//   formData.append('myFile', document.querySelector('#post'));
 
-const changeToUploadPdf = () => {
-  setState(true);
-};
-
-const onFileUpload = (file) => {
-  const formData = new FormData();
-  formData.append("myFile", document.querySelector('#post'));
-
-  axios.post("http://localhost:3003/upload", formData); //I need to change this line
-};
+//   axios.post('http://localhost:3003/upload', formData); //I need to change this line
+// };
 
 const PDF = props => {
   return (
@@ -31,18 +32,12 @@ const PDF = props => {
             style={{ marginBottom: '20px' }}
             onClick={toPdf}
           >
-            Generate Pdf
+            Generate PDF
           </button>
-          
         )}
       </Pdf>
-      <button
-            className="button-3"
-            style={{ marginBottom: '20px' }}
-      >
-            see Pdf
-          </button>
       <div className="clear"></div>
+      <UploadImg />
       <div className="post" ref={ref}>
         <div className="content">
           <div className="logo">
