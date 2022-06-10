@@ -176,12 +176,19 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
         studies.children[index].children[0].addEventListener('click', event => {
           buttons(true);
         });
-        document.addEventListener('drop', event => {
+        /*
+        document
+        studies.children[index].children[0].addEventListener('drop', event => {
+          alert('ola');
           buttons(true);
         });
+        */
       }
     } else {
-      toolBar[0].removeChild(toolBar[0].children[3]);
+      if (toolBar[0].contains(toolBar[0].children[3])) {
+        alert('remover');
+        toolBar[0].removeChild(toolBar[0].children[3]);
+      }
     }
 
     toolBar[0].children[1].children[1].innerText = msgExit;
