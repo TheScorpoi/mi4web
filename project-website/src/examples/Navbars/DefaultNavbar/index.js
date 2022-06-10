@@ -561,7 +561,6 @@ DefaultNavbar.defaultProps = {
   relative: false,
   center: false,
 };
-
 // Typechecking props for the DefaultNavbar
 DefaultNavbar.propTypes = {
   brand: PropTypes.string,

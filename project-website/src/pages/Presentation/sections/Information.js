@@ -119,15 +119,7 @@ function Information() {
                   }
                   description=""
                 />
-                <RotatingCardBack
-                  image={bgBack}
-                  icon="touch_app"
-                  title="OUR GOALS"
-                  action={{
-                    type: "internal",
-                    route: "/sections/page-sections/page-headers",
-                  }}
-                />
+                <RotatingCardBack image={bgBack} icon="touch_app" title="OUR GOALS" />
               </RotatingCard>
             </Grid>
             <Grid item xs={12} lg={7} sx={{ ml: "auto" }}>
