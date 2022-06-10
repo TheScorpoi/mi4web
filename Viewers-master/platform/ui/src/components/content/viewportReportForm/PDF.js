@@ -1,8 +1,40 @@
 import React, { createRef } from 'react';
 import Pdf from 'react-to-pdf';
 import './PDF.css';
+import api from './api';
+import axios from "axios";
+
 
 const ref = createRef();
+
+function save_pdf(filename) {
+  api.post(`/save_pdf/${filename}`).then(res => {
+    console.log(res);
+  }
+  );
+}
+
+function see_pdf() {
+  axios(`http://localhost:3005/get_pdf `, {
+        method: "GET",
+        responseType: "blob"
+        //Force to receive data in a Blob Format
+      })
+        .then(response => {
+          //Create a Blob from the PDF Stream
+          const file = new Blob([response.data], {
+            type: "application/pdf"
+          });
+          //Build a URL from the file
+          const fileURL = URL.createObjectURL(file);
+          //Open the URL on new Window
+          window.open(fileURL);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+  
+}
 
 const PDF = props => {
   return (
@@ -12,12 +44,21 @@ const PDF = props => {
           <button
             className="button-3"
             style={{ marginBottom: '20px' }}
-            onClick={toPdf}
+            onMouseOver={toPdf}
+            onClick={() => save_pdf('medical_report.pdf')}
           >
             Generate Pdf
           </button>
+          
         )}
       </Pdf>
+      <button
+            className="button-3"
+            style={{ marginBottom: '20px' }}
+            onClick={see_pdf}
+      >
+            see Pdf
+          </button>
       <div className="clear"></div>
       <div className="post" ref={ref}>
         <div className="content">
@@ -32,26 +73,26 @@ const PDF = props => {
             <div className="date">{props.date}</div>
             <div className="infopatient">
               <h3>
-                Utente :{' '}
+                Patient :{' '}
                 <span style={{ fontWeight: 'lighter' }}>
                   {props.patientname}
                 </span>
               </h3>
               <h3>
-                Nº Processo :{' '}
+                Study number :{' '}
                 <span style={{ fontWeight: 'lighter' }}>
-                  {props.processnumber}
+                  {localStorage.getItem('StudyInstanceUID')}
                 </span>
               </h3>
             </div>
 
             <div className="annotations">
-              <h2>Anotações</h2>
+              <h2>Anotations</h2>
               <p>{props.annotations}</p>
             </div>
 
             <div className="cumprimentos">
-              <h4>Com os cumprimentos do/da colega</h4>
+              <h4>With the best wishes:</h4>
               <br></br>
               <hr style={{ width: '200px' }}></hr>
               <h4>Dr. {props.doutor}</h4>

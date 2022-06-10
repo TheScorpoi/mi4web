@@ -108,6 +108,25 @@ app.get('/chart_dash', (req, res) => {
   });
 });
 
+app.post('/save_pdf/:pdf_file', (req, res) => {
+  let sql_query = 'INSERT INTO store_pdf SET ?';
+  let post = { pdf_file: req.params.pdf_file };
+  db.query(sql_query, post, (error, results) => {
+    if (error) throw error;
+    res.send(results);
+  });
+});
+
+
+app.get('/get_pdf', (req, res) => {
+  let sql_query = 'SELECT * FROM store_pdf';
+  db.query(sql_query, (error, results) => {
+    if (error) throw error;
+    res.send(results);
+  });
+});
+
+
 app.get('/testar_insert', (req, res) => {
   let post = {
     email: 'santos@incesto.pt',

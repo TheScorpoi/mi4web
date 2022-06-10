@@ -184,12 +184,11 @@ const ViewportReportForm = ({
       width: width < minimumSize,
       height: height < minimumSize,
       patientname: !patientname,
-      processnumber: !processnumber,
       annotations: !annotations,
     };
 
     setError({ ...hasError });
-  }, [dimensions, patientname, processnumber, annotations, minimumSize]);
+  }, [dimensions, patientname, annotations, minimumSize]);
 
   const current = new Date();
   const date = `${current.getDate()}/${current.getMonth() +
@@ -254,12 +253,12 @@ const ViewportReportForm = ({
                     <TextInput
                       type="text"
                       data-cy="process-number"
-                      value={processnumber}
+                      value={localStorage.getItem('StudyInstanceUID')}
                       onChange={event => setProcessnumber(event.target.value)}
                       label={t('processnumber')}
                       id="process-number"
+                      disabled={true}
                     />
-                    {renderErrorHandler('processnumber')}
                   </div>
                 </div>
               </div>
