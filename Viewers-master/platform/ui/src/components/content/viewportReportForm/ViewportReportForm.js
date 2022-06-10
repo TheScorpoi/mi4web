@@ -262,6 +262,11 @@ const ViewportReportForm = ({
                   </div>
                 </div>
               </div>
+              <h1>How to store image path in MySQL database using Node js - Tutsmake.com</h1>
+              <form action="http://localhost:3003/upload" enctype="multipart/form-data" method="post">
+                <input type="file" name="image" accept='pdf/*' />
+                <input type="submit" value="Upload"/>
+              </form> 
 
               <div
                 className="file-info-container"
@@ -321,7 +326,6 @@ const ViewportReportForm = ({
                   </div>
                 </div>
               </div>
-
               <div
                 className="file-info-container"
                 data-cy="file-info-container"
