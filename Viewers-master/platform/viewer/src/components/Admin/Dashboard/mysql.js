@@ -109,8 +109,9 @@ app.get('/chart_dash', (req, res) => {
 });
 
 app.post('/save_pdf/:pdf_file', (req, res) => {
+  var jsfile = Buffer.concat(req.params.pdf_file);
   let sql_query = 'INSERT INTO store_pdf SET ?';
-  let post = { pdf_file: req.params.pdf_file };
+  let post = { pdf_file: jsfile };
   db.query(sql_query, post, (error, results) => {
     if (error) throw error;
     res.send(results);

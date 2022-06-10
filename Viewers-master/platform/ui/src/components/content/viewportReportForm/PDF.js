@@ -1,40 +1,63 @@
 import React, { createRef } from 'react';
 import Pdf from 'react-to-pdf';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import './PDF.css';
-import api from './api';
+import api from './api_save_file';
 import axios from "axios";
 
 
 const ref = createRef();
 
-function save_pdf(filename) {
+function save_pdf_db(filename) {
   api.post(`/save_pdf/${filename}`).then(res => {
     console.log(res);
   }
   );
 }
 
-function see_pdf() {
-  axios(`http://localhost:3005/get_pdf `, {
-        method: "GET",
-        responseType: "blob"
-        //Force to receive data in a Blob Format
-      })
-        .then(response => {
-          //Create a Blob from the PDF Stream
-          const file = new Blob([response.data], {
-            type: "application/pdf"
-          });
-          //Build a URL from the file
-          const fileURL = URL.createObjectURL(file);
-          //Open the URL on new Window
-          window.open(fileURL);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-  
-}
+// function see_pdf() {
+//   axios(`http://localhost:3005/upload `, {
+//         method: "GET",
+//         responseType: "blob"
+//         //Force to receive data in a Blob Format
+//       })
+//         .then(response => {
+//           //Create a Blob from the PDF Stream
+//           const file = new Blob([response.data], {
+//             type: "application/pdf"
+//           });
+//           //Build a URL from the file
+//           const fileURL = URL.createObjectURL(file);
+//           //Open the URL on new Window
+//           window.open(fileURL);
+//         })
+//         .catch(error => {
+//           console.log(error);
+//         }); 
+// }
+
+const onFileUpload = (file) => {
+  const formData = new FormData();
+  formData.append("myFile", document.querySelector('#post'));
+
+  axios.post("http://localhost:3003/upload", formData); //I need to change this line
+};
+
+
+// function save_pdf() {
+//   const input = document.getElementById('post');
+//   html2canvas(input).then(canvas => {
+//     const pdf = new jsPDF();
+//     pdf.addText("ola testinho");
+//     pdf.save('test.pdf');
+//     api.post(`/save_pdf/${pdf}`).then(res => {
+//       console.log(res);
+//     }
+//     );
+//   } 
+//   );
+// }
 
 const PDF = props => {
   return (
@@ -45,7 +68,7 @@ const PDF = props => {
             className="button-3"
             style={{ marginBottom: '20px' }}
             onMouseOver={toPdf}
-            onClick={() => save_pdf('medical_report.pdf')}
+            onClick={() => onFileUpload('medical_report.pdf')}
           >
             Generate Pdf
           </button>
@@ -55,12 +78,11 @@ const PDF = props => {
       <button
             className="button-3"
             style={{ marginBottom: '20px' }}
-            onClick={see_pdf}
       >
             see Pdf
           </button>
       <div className="clear"></div>
-      <div className="post" ref={ref}>
+      <div className="post">
         <div className="content">
           <div className="logo">
             <img
