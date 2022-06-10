@@ -2,7 +2,9 @@ import React from 'react';
 import './UploadImg.css';
 import api from './api_save_file';
 
+
 function UploadImg() {
+  let url = "http://localhost:3003/upload/" + localStorage.getItem('StudyInstanceUID');  
   return (
     <>
       <div className="diva">
@@ -15,7 +17,7 @@ function UploadImg() {
           style={{ display: 'none' }}
         ></iframe>
         <form
-          action="http://localhost:3003/upload"
+          action={url}
           enctype="multipart/form-data"
           method="post"
           target="dummyframe"
