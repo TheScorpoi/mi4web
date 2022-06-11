@@ -28,6 +28,7 @@ let presetIndex = 1;
 let globalDataRange = [0, 255];
 let cfun = vtkColorTransferFunction.newInstance();
 let ofun = vtkPiecewiseFunction.newInstance();
+let mapper = vtkVolumeMapper.newInstance();
 
 const widget = vtkPiecewiseGaussianWidget.newInstance({
   numberOfBins: 256,
@@ -53,16 +54,12 @@ widget.updateStyle({
 });
 
 function createActorMapper(imageData) {
-  const mapper = vtkVolumeMapper.newInstance();
   mapper.setInputData(imageData);
 
   const actor = vtkVolume.newInstance();
   actor.setMapper(mapper);
 
-  return {
-    actor,
-    mapper,
-  };
+  return actor;
 }
 
 function getShiftRange(colorTransferArray) {
@@ -191,7 +188,7 @@ function applyPreset(actor, preset) {
 }
 
 function createCT3dPipeline(imageData, ctTransferFunctionPresetId) {
-  const { actor, mapper } = createActorMapper(imageData);
+  const actor = createActorMapper(imageData);
 
   const sampleDistance =
     1.2 *
@@ -362,6 +359,7 @@ class VTKFusionExample extends Component {
         this.changePreset(1);
       }
     });
+
   }
 
   changePreset(delta = 1) {
@@ -462,7 +460,8 @@ class VTKFusionExample extends Component {
       document.getElementsByClassName('vtk-viewport-handler')
     );
 
-    let heightVisaActivada = (vistaActivada[0].clientHeight - 82).toString() + 'px';
+    let heightVisaActivada =
+      (vistaActivada[0].clientHeight - 82).toString() + 'px';
 
     return (
       <div

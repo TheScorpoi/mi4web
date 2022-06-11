@@ -17,6 +17,7 @@ import ReactDOM from 'react-dom';
 import presets from './presets';
 
 const { BlendMode } = Constants;
+let active;
 
 const commandsModule = ({ commandsManager, servicesManager }) => {
   const { UINotificationService, LoggerService } = servicesManager.services;
@@ -104,76 +105,81 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
     ReactDOM.render(<VTKVolumeRenderingExample />, content);
   }
 
-  function buttons(activate) {
-    let msgExit;
-    let state;
-    if (activate) {
-      msgExit = 'Exit 2D MPR';
-      state = 'visible';
-    } else {
-      msgExit = 'Exit 3D';
-      state = 'hidden';
-    }
-
-    const toolBar = document.getElementsByClassName('ToolbarRow');
-
-    const buttonTransferFunction = document.createElement('div');
-    buttonTransferFunction.className = 'toolbar-button slab-thickness';
-
-    const controller = document.createElement('div');
-    controller.className = 'controller';
-
-    const elementp = document.createElement('p');
-    elementp.innerHTML =
-      '<p style="font-size: 10px; padding-top: 10px; position: absolute; top:0; left:175px; width: 100px">Transfer Function</p>';
-    controller.appendChild(elementp);
-
-    const selectList = document.createElement('select');
-    selectList.id = 'selectTransferFunction';
-    selectList.className = 'select-ohif';
-    presets.forEach(element => {
-      var option = document.createElement('option');
-      option.value = element['id'];
-      option.text = element['name'];
-      selectList.appendChild(option);
-    });
-    controller.appendChild(selectList);
-
-    buttonTransferFunction.appendChild(controller);
-
-    for (let index = 2; index < toolBar[0].childElementCount - 1; index++) {
-      let element = toolBar[0].children[index];
-
-      if (!activate && index == 3) {
-        element.innerHTML = '';
-        /*
-        element.children[1].innerText = 'Cut';
-        element.children[0].innerHTML =
-          '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-scissors" viewBox="0 0 16 16"> <path d="M3.5 3.5c-.614-.884-.074-1.962.858-2.5L8 7.226 11.642 1c.932.538 1.472 1.616.858 2.5L8.81 8.61l1.556 2.661a2.5 2.5 0 1 1-.794.637L8 9.73l-1.572 2.177a2.5 2.5 0 1 1-.794-.637L7.19 8.61 3.5 3.5zm2.5 10a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0zm7 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z"/> </svg>';
-        */
-      } else if (!activate && index == 2) {
-        element.innerHTML = '';
-      } else if (!activate && index == 4) {
-        element.addEventListener('click', feature3D);
-      } else if (activate && index == 5) {
-        element.removeEventListener('click', feature3D);
+  function buttons(activate, hideTransferFunctions) {
+    if (active) {
+      let msgExit;
+      let state;
+      if (activate) {
+        msgExit = 'Exit 2D MPR';
+        state = 'visible';
       } else {
-        element.style.visibility = state;
+        msgExit = 'Exit 3D';
+        state = 'hidden';
       }
+
+      const toolBar = document.getElementsByClassName('ToolbarRow');
+
+      const controller = document.createElement('div');
+      controller.style.width = '200px';
+      controller.className = 'controller';
+
+      const elementp = document.createElement('p');
+      elementp.innerHTML =
+        '<p style="font-size: 10px; padding-top: 10px; position: absolute; top:0; left:210px; width: 100px">Transfer Function</p>';
+      controller.appendChild(elementp);
+
+      const selectList = document.createElement('select');
+      selectList.id = 'selectTransferFunction';
+      selectList.style.width = '190px';
+      selectList.className = 'select-ohif';
+      presets.forEach(element => {
+        var option = document.createElement('option');
+        option.value = element['id'];
+        option.text = element['name'];
+        selectList.appendChild(option);
+      });
+      controller.appendChild(selectList);
+
+      for (let index = 2; index < toolBar[0].childElementCount - 1; index++) {
+        let element = toolBar[0].children[index];
+        if (index == 2 && activate && hideTransferFunctions) {
+          element.innerHTML = '';
+        } else if (index == 2 && !activate) {
+          element.style.visibility = 'visible';
+          element.innerHTML = '';
+          element.className = 'toolbar-button slab-thickness';
+          element.appendChild(controller);
+        } else if (!activate && index == 3) {
+          element.style.visibility = 'visible';
+          element.addEventListener('click', feature3D);
+        } else if (activate && index == 3) {
+          element.style.visibility = state;
+          element.removeEventListener('click', feature3D);
+        } else {
+          element.style.visibility = state;
+        }
+      }
+
+      toolBar[0].children[1].children[1].innerText = msgExit;
+      toolBar[0].children[1].addEventListener('click', event => {
+        active = true;
+        buttons(true, false);
+      });
+      const studies = document.getElementsByClassName('study-browser')[0]
+        .children[0];
+
+      for (let index = 0; index < studies.childElementCount; index++) {
+        studies.children[index].children[0].addEventListener('click', event => {
+          active = true;
+          buttons(true, false);
+        });
+        document.addEventListener('drop', event => {
+          active = true;
+          buttons(true, false);
+        });
+      }
+      active = false;
     }
-
-    if (!activate) {
-      toolBar[0].insertBefore(buttonTransferFunction, toolBar[0].children[3]);
-    } else {
-      toolBar[0].removeChild(toolBar[0].children[3]);
-    }
-
-    toolBar[0].children[1].children[1].innerText = msgExit;
-    toolBar[0].children[1].addEventListener('click', event => {
-      buttons(true);
-    });
-
-    //console.clear();
   }
 
   function _setView(api, sliceNormal, viewUp) {
@@ -538,6 +544,8 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
 
       try {
         apis = await setMPRLayout(displaySet, viewportProps, 1, 3);
+        active = true;
+        buttons(true, true);
       } catch (error) {
         throw new Error(error);
       }
@@ -618,7 +626,8 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
       ];
       try {
         await setMPRLayout(displaySet, viewportProps, 1, 1);
-        buttons(false);
+        active = true;
+        buttons(false, false);
       } catch (error) {
         throw new Error(error);
       }
