@@ -71,8 +71,8 @@ app.post('/upload/:study_id', upload.single('image'), (req, res) => {
 
 app.get('/get_report/:studyId', (req, res) => {
     var sql_query = "SELECT pdf_file FROM store_pdf WHERE study_id = ?";
-    let studyId = req.params.filename;
-    db.query(sql_query, filename,  (error, results) => {
+    let studyId = req.params.studyId;
+    db.query(sql_query, studyId,  (error, results) => {
         if (error) throw error;
         res.send(results);
     }

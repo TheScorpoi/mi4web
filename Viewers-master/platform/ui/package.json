@@ -65,7 +65,9 @@
     "react-overlays": "^0.8.0",
     "react-to-pdf": "^0.0.14",
     "react-transition-group": "2.0.0",
-    "react-with-direction": "1.3.0"
+    "react-with-direction": "1.3.0",
+    "@material-ui/data-grid": "^4.0.0-alpha.37"
+
   },
   "devDependencies": {
     "@mdx-js/tag": "^0.20.3",
