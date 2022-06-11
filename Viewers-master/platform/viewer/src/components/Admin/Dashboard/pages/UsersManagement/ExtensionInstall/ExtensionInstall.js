@@ -34,7 +34,7 @@ function ExtensionInstall() {
             </div>
           </div>
           <div className="dashIconsExt">
-          <PowerOffIcon fontSize="large" style={{ color: '#D2042D' }}/>
+            <PowerIcon fontSize="large" style={{ color: '#228B22' }}/>
             
           </div>
         </div>
@@ -46,7 +46,7 @@ function ExtensionInstall() {
             </div>
           </div>
           <div className="dashIconsExt">
-          <PowerOffIcon fontSize="large" style={{ color: '#D2042D' }}/>
+            <PowerIcon fontSize="large" style={{ color: '#228B22' }}/>
             
           </div>
         </div>
@@ -83,7 +83,7 @@ function ExtensionInstall() {
             </div>
           </div>
           <div className="dashIconsExt">
-          <PowerOffIcon fontSize="large" style={{ color: '#D2042D' }}/>
+            <PowerIcon fontSize="large" style={{ color: '#228B22' }}/>
             
           </div>
         </div>
@@ -95,7 +95,7 @@ function ExtensionInstall() {
             </div>
           </div>
           <div className="dashIconsExt">
-          <PowerOffIcon fontSize="large" style={{ color: '#D2042D' }} />
+            <PowerOffIcon fontSize="large" style={{ color: '#D2042D' }} />
             
           </div>
         </div>
