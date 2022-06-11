@@ -3,9 +3,9 @@ import './UploadImg.css';
 import './PDF.css';
 import api from './api_save_file';
 
-
 function UploadImg() {
-  let url = "http://localhost:3003/upload/" + localStorage.getItem('StudyInstanceUID');  
+  let url =
+    'http://localhost:3003/upload/' + localStorage.getItem('StudyInstanceUID');
   return (
     <>
       <div className="diva">
@@ -24,7 +24,7 @@ function UploadImg() {
           method="post"
           target="dummyframe"
         >
-          <label class="custom-file-upload">
+          <label className="custom-file-upload">
             <input type="file" name="image" accept="pdf/*" />
           </label>
           <input className="button-3" type="submit" value="Upload" />

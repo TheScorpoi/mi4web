@@ -4,3 +4,7 @@
     margin-left: 10%;
     margin-top: 7%;
 }
+
+.MuiDataGrid-footerContainer, .MuiDataGrid-columnHeader, .MuiDataGrid-cell {
+    background-color: #6C6F72;
+}
