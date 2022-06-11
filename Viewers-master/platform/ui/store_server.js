@@ -54,21 +54,29 @@ app.get('/', (req, res) => {
   res.send("I'm Alive ");
 });
 
-app.post('/upload', upload.single('image'), (req, res) => {
+app.post('/upload/:study_id', upload.single('image'), (req, res) => {
   if (!req.file) {
     console.log('No file received');
     return res.send({
       success: false,
     });
   } else {
-    console.log(req.file.filename);
-    var imgsrc = 'http://localhost:3000/uploads/' + req.file.filename;
-    var insertData = 'INSERT INTO store_pdf (pdf_file) VALUES (?)';
-    db.query(insertData, [imgsrc], (error, results) => {
-      if (error) throw error;
-      res.send(results);
+    let post = [req.file.filename, req.params.study_id];
+    var insertData = 'INSERT INTO store_pdf (pdf_file, study_id) VALUES (?)';
+    db.query(insertData, [post], (error, results) => {
+        if (error) throw error;
     });
   }
+});
+
+app.get('/get_report/:studyId', (req, res) => {
+    var sql_query = "SELECT pdf_file FROM store_pdf WHERE study_id = ?";
+    let studyId = req.params.filename;
+    db.query(sql_query, filename,  (error, results) => {
+        if (error) throw error;
+        res.send(results);
+    }
+    );
 });
 
 app.listen(3003, () => {
