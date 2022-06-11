@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import './SignUp.css';
 import api from './api';
 import { useState } from 'react';
-const crypto = require('crypto');
+var crypto = require('crypto');
+const { SHA3 } = require('sha3');
+//import CryptoJS from 'crypto';
 
 function SignUp({ hide }) {
   const [name, setName] = useState('');
@@ -14,11 +16,10 @@ function SignUp({ hide }) {
   const [type_user, setTypeUser] = useState('');
   console.log('name', name);
   console.log('email', email);
-  console.log('password', crypto.createHash('sha256', password).digest('hex'));
   console.log('hospital', hospital);
   console.log('speciality', professional_id);
   console.log('type_user', type_user);
-  
+  const hash = new SHA3(512);
 
   
     
@@ -27,16 +28,17 @@ function SignUp({ hide }) {
 
     console.log('name', name);
     console.log('email', email);
-    console.log('password', password);
+    //console.log('password', password);
     console.log('hospital', hospital);
     console.log('speciality', professional_id);
     console.log('type_user', type_user);
+    const encrypted_password = hash.update(password).digest("hex");
+    console.log("password", encrypted_password);
+  
 
-    const hash = crypto.createHash('sha256', password);
-    console.log('hash', hash);
-    //api.post(`/register_request/${name}/${email}/${password}/${hospital}/${professional_id}/${type_user}`).then(res => {
-    //    console.log("request made to api")
-    //  });
+    api.post(`/register_request/${name}/${email}/${encrypted_password}/${hospital}/${professional_id}/${type_user}`).then(res => {
+       console.log("request made to api")
+     });
    return console.log('name', name);
   }
 
