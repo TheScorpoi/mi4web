@@ -2,19 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './SignUp.css';
 import api from './api';
-import {useState} from 'react';
+import { useState } from 'react';
+const crypto = require('crypto');
+
 function SignUp({ hide }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [hospital, setHospital] = useState('');
-  const [speciality, setSpeciality] = useState('');
+  const [professional_id, setProfessional_id] = useState('');
   const [type_user, setTypeUser] = useState('');
   console.log('name', name);
   console.log('email', email);
-  console.log('password', password);
+  console.log('password', crypto.createHash('sha256', password).digest('hex'));
   console.log('hospital', hospital);
-  console.log('speciality', speciality);
+  console.log('speciality', professional_id);
   console.log('type_user', type_user);
   
 
@@ -27,12 +29,14 @@ function SignUp({ hide }) {
     console.log('email', email);
     console.log('password', password);
     console.log('hospital', hospital);
-    console.log('speciality', speciality);
+    console.log('speciality', professional_id);
     console.log('type_user', type_user);
-    React.useEffect(() => {
-      api.post(`/register_request/${name}/${email}/${password}/${hospital}/${speciality}/${type_user}`).then(res => {
-  });
-   },[]);
+
+    const hash = crypto.createHash('sha256', password);
+    console.log('hash', hash);
+    //api.post(`/register_request/${name}/${email}/${password}/${hospital}/${professional_id}/${type_user}`).then(res => {
+    //    console.log("request made to api")
+    //  });
    return console.log('name', name);
   }
 
@@ -103,16 +107,16 @@ function SignUp({ hide }) {
         <br />
         <br />
         <div className="mb-3">
-          <label >Speciality</label>
+          <label >Professional ID</label>
           <br />
           <br />
           <input
-            value={speciality}
-            id = "speciality"
-            type="speciality"
+            value={professional_id}
+            id = "professional_id"
+            type="professional_id"
             className="form-control"
-            placeholder="Enter speciality"
-            onChange={event => setSpeciality(event.target.value)}
+            placeholder="Enter Professional ID"
+            onChange={event => setProfessional_id(event.target.value)}
           />
         </div>
         <br />

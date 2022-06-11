@@ -137,14 +137,14 @@ app.get('/testar_insert_with_params/:email/:fullname/:password', (req, res) => {
   });
 });
 
-app.post('/register_request/:name/:email/:password/:hospital/:speciality/:type', (req, res) => {
+app.post('/register_request/:name/:email/:password/:hospital/:professional_id/:type', (req, res) => {
   let post = {
-    name: req.params.name,
     email: req.params.email,
+    fullname: req.params.name,
     password: req.params.password,
+    professional_id: req.params.professional_id,
     hospital: req.params.hospital,
-    speciality: req.params.speciality,
-    type: req.params.type,
+    type_user: req.params.type,
 
   };
   let sql_query = 'INSERT INTO `not_accepted` SET ?';
