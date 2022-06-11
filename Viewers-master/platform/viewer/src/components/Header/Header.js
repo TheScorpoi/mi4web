@@ -11,6 +11,8 @@ import './Header.css';
 import PersonIcon from '@material-ui/icons/Person';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import api from '../Admin/Dashboard/pages/ApiConnections/apiManageAccess';
+import { SignUp } from '../Login/SignUp';
+
 
 function Header(props) {
   const {
@@ -135,6 +137,7 @@ function Header(props) {
             >
               Login
             </button>
+            
           ) : (
             <button
               className="button-3"
@@ -147,7 +150,20 @@ function Header(props) {
             >
               Logout
             </button>
-          )}
+          )
+          }
+           <button
+            className="button-3"
+            onClick={() =>
+              show({
+                content: SignUp,
+                title: t('Regist account'),
+              })
+            }
+          >
+            SignUp
+          </button>
+          
         </div>
       </div>
     </>
