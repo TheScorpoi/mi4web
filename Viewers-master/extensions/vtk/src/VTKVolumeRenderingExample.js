@@ -18,7 +18,8 @@ import vtkPiecewiseGaussianWidget from 'vtk.js/Sources/Interaction/Widgets/Piece
 import vtkColorMaps from 'vtk.js/Sources/Rendering/Core/ColorTransferFunction/ColorMaps';
 
 window.cornerstoneWADOImageLoader = cornerstoneWADOImageLoader;
-const url = 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs';
+const url = 'http://mednat.ieeta.pt:8765';
+//const url = 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs';
 var studyInstanceUID;
 var ctSeriesInstanceUID;
 var searchInstanceOptions;
@@ -229,6 +230,9 @@ function createStudyImageIds(baseUrl, studySearchOptions) {
 
   studyInstanceUID = localStorage.getItem('StudyInstanceUID');
   ctSeriesInstanceUID = localStorage.getItem('SeriesInstanceUID');
+  console.log('CONSOLA, IDs');
+  console.log(studyInstanceUID);
+  console.log(ctSeriesInstanceUID);
   searchInstanceOptions = {
     studyInstanceUID,
   };
@@ -236,8 +240,30 @@ function createStudyImageIds(baseUrl, studySearchOptions) {
     studyInstanceUID,
   };
 
+  client.searchForStudies().then(studies => {
+    console.log(studies);
+
+    for (let index = 0; index < studies.length; index++) {
+      let study = studies[index];
+      console.log(study);
+      console.log({ studyInstanceUID: study });
+      client.retrieveStudyMetadata({ studyInstanceUID: study }).then(
+        studyMetadata => {
+          console.log(studyMetadata);
+        },
+        error => {
+          throw new Error(error);
+        }
+      );
+    }
+  });
+
+  return null;
+
+  /*
   return new Promise((resolve, reject) => {
     client.retrieveStudyMetadata(studySearchOptions).then(instances => {
+      console.log(instances);
       const imageIds = instances.map(metaData => {
         const imageId =
           `wadors:` +
@@ -250,17 +276,21 @@ function createStudyImageIds(baseUrl, studySearchOptions) {
           metaData[SOP_INSTANCE_UID].Value[0] +
           '/frames/1';
 
+          console.log('IAMGEIDE');
+          console.log(imageId);
+          console.log(metaData);
+
         cornerstoneWADOImageLoader.wadors.metaDataManager.add(
           imageId,
           metaData
         );
-
         return imageId;
       });
 
       resolve(imageIds);
     }, reject);
   });
+  */
 }
 
 class VTKFusionExample extends Component {
