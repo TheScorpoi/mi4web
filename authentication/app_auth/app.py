@@ -62,8 +62,6 @@ def response_to_chanllenge():
     Caso seja Falso, ele apenas envia o challenge e um bit aleatório.
     Quando chega ao fim (fez tantas vezes quanto o tamanho da mensagem), envia uma mensagem de sucesso se for o caso, ou de insucesso se não for."""
     
-    print("ENTREI OH CORNOOOOOO")
-    
     global connection, cursor, dict_info
     token_tmp = request.form.get('token_tmp')
     
@@ -118,10 +116,10 @@ def response_to_chanllenge():
             
             # MANDAR URL DO LOGIN DONE
             server_url = request.url_root[0:-1] + url_for('redirectPage') #  [0:-1] para retirar a barra (/)
-            dict = {'finnish': True, 'token_tmp': token_tmp, 'done_url': "http://mednat.ieeta.pt:8754"} # finish corresponde ao success
+            dict = {'finnish': True, 'token_tmp': token, 'done_url': "http://mednat.ieeta.pt:8754"} # finish corresponde ao success
         else:
             server_url = request.url_root[0:-1] + url_for('redirectPage') #  [0:-1] para retirar a barra (/)
-            dict = {'finnish': False, 'token_tmp': token_tmp, 'done_url': "http://mednat.ieeta.pt:8754"} # finish corresponde ao success
+            dict = {'finnish': False, 'token_tmp': token, 'done_url': "http://mednat.ieeta.pt:8754"} # finish corresponde ao success
             dict_info.pop(token_tmp)
         return dict
 

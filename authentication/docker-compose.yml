@@ -21,7 +21,7 @@ services:
       context: ./api
       dockerfile: Dockerfile 
     ports: 
-      - '3005:3005'
+      - '8087:3005'
     restart: unless-stopped
     networks:
       - all

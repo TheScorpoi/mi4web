@@ -6,6 +6,6 @@ COPY package*.json ./
 RUN npm install
 
 # To run on production
-# RUN npm ci --only=production
+RUN npm ci --only=production
 
 CMD ["node", "mysql.js"]

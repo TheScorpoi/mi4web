@@ -36,6 +36,7 @@ app.get('/staff', (req, res) => {
   db.query(sql_query, (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("/staff");
   });
 });
 
@@ -45,6 +46,7 @@ app.get("/request_account", (req, res) => {
   db.query(sql_query, (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("/request_account");
   });
 });
 // delete staff user on current users admin table
@@ -53,6 +55,7 @@ app.get('/staff_delete/:id', (req, res) => {
   db.query(sql_query, req.params.id, (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("/staff_delete/:id");
   });
 });
 
@@ -62,6 +65,7 @@ app.get('/request_accept/:id', (req, res) => {
   db.query(sql_query, req.params.id, (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("/request_accept/:id");
   });
 });
 
@@ -71,6 +75,7 @@ app.get('/request_accepte_update/:id', (req, res) => {
   db.query(sql_query, req.params.id, (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("/request_accepte_update/:id");
   });
 });
 
@@ -80,6 +85,7 @@ app.get('/request_delete/:id', (req, res) => {
   db.query(sql_query, req.params.id, (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("/request_delete/:id");
   });
 });
 
@@ -91,6 +97,7 @@ app.get("/get_user_from_token/:id", (req, res) => {
   db.query(sql_query, req.params.id , (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("get_user_from_token");
   });
 });
 
@@ -99,6 +106,7 @@ app.get("/chart_dash", (req, res) => {
   db.query(sql_query, (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("chart_dash");
   });
 });
 
