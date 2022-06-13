@@ -9,13 +9,10 @@ import PropTypes from 'prop-types';
 
 import './ViewportSeeReportForm.styl';
 import { useTranslation } from 'react-i18next';
-import { TextInput } from '@ohif/ui';
 import { DataGrid } from '@material-ui/data-grid';
 import './ViewportSeeReportFrom.css';
-import Popup from 'reactjs-popup';
-import fileDownload from 'js-file-download';
 import api from './api';
-import axios from 'axios';
+
 const REFRESH_VIEWPORT_TIMEOUT = 1000;
 
 const ViewportSeeReportForm = ({
@@ -222,15 +219,36 @@ const ViewportSeeReportForm = ({
     loadTheFuckingData();
   }, []);
 
-  const handleDownload = (url, filename) => {
-    axios
-      .get(url, {
-        responseType: 'blob',
-      })
-      .then(res => {
-        fileDownload(res.data, filename);
-      });
-  };
+  // const columns = [
+  //   { field: 'id', headerName: 'ID', width: 50 },
+  //   {
+  //     field: 'pdf_file',
+  //     headerName: 'Report',
+  //     sortable: false,
+  //     width: 250,
+  //   },
+  //   {
+  //     field: 'action',
+  //     headerName: 'Action',
+  //     width: 300,
+  //     renderCell: params => {
+  //       return (
+  //         <div className="actions">
+  //           <button
+  //             className="declineBtn"
+  //             onClick={() => {
+  //               handleDownload('./../../../../public/uploads/');
+  //               close();
+  //             }}
+  //           >
+  //             {' '}
+  //             Download{' '}
+  //           </button>
+  //         </div>
+  //       );
+  //     },
+  //   },
+  // ];
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 50 },
@@ -245,21 +263,12 @@ const ViewportSeeReportForm = ({
       headerName: 'Action',
       width: 300,
       renderCell: params => {
+        const urli = `./../../../../public/uploads/${params.row.pdf_file}`;
         return (
           <div className="actions">
-            <button
-              className="declineBtn"
-              onClick={() => {
-                handleDownload(
-                  './../../../../public/uploads/' + params.row.pdf_file,
-                  params.row.pdf_file
-                );
-                close();
-              }}
-            >
-              {' '}
-              Download{' '}
-            </button>
+            <a href={require(urli)} download="myFile">
+              Download
+            </a>
           </div>
         );
       },
@@ -268,6 +277,7 @@ const ViewportSeeReportForm = ({
 
   return (
     <>
+      <Image source={require('./assets/img/arch.png')} />;
       <div className="userList" style={{ height: 500 }}>
         <DataGrid
           rows={data}
