@@ -85,17 +85,14 @@ function Header(props) {
     if (logged == '["José  Trancoso"]') {
       window.location.href = '/dashboard';
     }
-    console.log('LOGGED --- ' + logged);
     if (logged == '[]') {
       signIn.current = false;
     } else {
-      console.log('OU SEJA ELE ENTRA AQUI ?');
       signIn.current = true;
     }
   }
 
   function putNameOnHeader() {
-    console.log('AAAA --- ' + signIn.current);
     if (signIn.current) {
       return localStorage
         .getItem('user')

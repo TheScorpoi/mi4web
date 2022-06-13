@@ -64,19 +64,19 @@ app.post('/upload/:study_id', upload.single('image'), (req, res) => {
     let post = [req.file.filename, req.params.study_id];
     var insertData = 'INSERT INTO store_pdf (pdf_file, study_id) VALUES (?)';
     db.query(insertData, [post], (error, results) => {
-        if (error) throw error;
+      if (error) throw error;
+      res.send(results);
     });
   }
 });
 
 app.get('/get_report/:studyId', (req, res) => {
-    var sql_query = "SELECT pdf_file FROM store_pdf WHERE study_id = ?";
-    let studyId = req.params.studyId;
-    db.query(sql_query, studyId,  (error, results) => {
-        if (error) throw error;
-        res.send(results);
-    }
-    );
+  var sql_query = 'SELECT pdf_file FROM store_pdf WHERE study_id = ?';
+  let studyId = req.params.studyId;
+  db.query(sql_query, studyId, (error, results) => {
+    if (error) throw error;
+    res.send(results);
+  });
 });
 
 app.listen(3003, () => {
