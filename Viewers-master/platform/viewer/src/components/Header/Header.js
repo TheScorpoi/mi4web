@@ -79,24 +79,23 @@ function Header(props) {
 
   const logged = localStorage.getItem('user');
 
-  useEffect(() => {
-    if (logged == null) {
+  if (logged == null) {
+    signIn.current = false;
+  } else {
+    if (logged == '["José  Trancoso"]') {
+      window.location.href = '/dashboard';
+    }
+    console.log('LOGGED --- ' + logged);
+    if (logged == '[]') {
       signIn.current = false;
     } else {
-      if (logged == '["José  Trancoso"]') {
-        window.location.href = '/dashboard';
-      }
-      if (logged == '[]') {
-        signIn.current = false;
-      } else {
-        signIn.current = true;
-      }
-
+      console.log('OU SEJA ELE ENTRA AQUI ?');
       signIn.current = true;
     }
-  }, [logged]);
+  }
 
   function putNameOnHeader() {
+    console.log('AAAA --- ' + signIn.current);
     if (signIn.current) {
       return localStorage
         .getItem('user')
