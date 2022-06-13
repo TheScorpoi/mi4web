@@ -18,8 +18,8 @@ import vtkPiecewiseGaussianWidget from 'vtk.js/Sources/Interaction/Widgets/Piece
 import vtkColorMaps from 'vtk.js/Sources/Rendering/Core/ColorTransferFunction/ColorMaps';
 
 window.cornerstoneWADOImageLoader = cornerstoneWADOImageLoader;
-const url = 'http://mednat.ieeta.pt:8765';
-//const url = 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs';
+//const url = 'http://mednat.ieeta.pt:8765';
+const url = 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs';
 var studyInstanceUID;
 var ctSeriesInstanceUID;
 var searchInstanceOptions;
@@ -239,6 +239,7 @@ function createStudyImageIds(baseUrl, studySearchOptions) {
   studySearchOptions = {
     studyInstanceUID,
   };
+  /*
 
   client.searchForStudies().then(studies => {
     console.log(studies);
@@ -259,8 +260,8 @@ function createStudyImageIds(baseUrl, studySearchOptions) {
   });
 
   return null;
+  */
 
-  /*
   return new Promise((resolve, reject) => {
     client.retrieveStudyMetadata(studySearchOptions).then(instances => {
       console.log(instances);
@@ -290,7 +291,6 @@ function createStudyImageIds(baseUrl, studySearchOptions) {
       resolve(imageIds);
     }, reject);
   });
-  */
 }
 
 class VTKFusionExample extends Component {
@@ -308,9 +308,13 @@ class VTKFusionExample extends Component {
     this.apis = [];
 
     const imageIds = await imageIdPromise;
+    console.log('OLA');
+    console.log(imageIds);
+    console.log(imageIds[0]);
     let ctImageIds = imageIds.filter(imageId =>
       imageId.includes(ctSeriesInstanceUID)
     );
+    console.log(ctImageIds);
     //ctImageIds = ctImageIds.slice(0, ctImageIds.length / 2);
 
     const ctImageDataObject = this.loadDataset(ctImageIds, 'ctDisplaySet');
