@@ -1,6 +1,6 @@
 import './StudyList.styl';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import classNames from 'classnames';
 import TableSearchFilter from './TableSearchFilter.js';
 import PropTypes from 'prop-types';
@@ -26,6 +26,16 @@ const getContentFromUseMediaValue = (
  * @returns
  */
 function StudyList(props) {
+
+  const signIn = useRef(false);
+
+  if (localStorage.getItem('user') == null) {
+    signIn.current = false;
+  } else {
+    signIn.current = true;
+  }
+
+
   const {
     isLoading,
     hasError,
@@ -38,6 +48,8 @@ function StudyList(props) {
     studyListDateFilterNumDays,
     displaySize,
   } = props;
+
+  
   const { t, ready: translationsAreReady } = useTranslation('StudyList');
 
   const largeTableMeta = [
@@ -175,20 +187,40 @@ function StudyList(props) {
             </td>
           </tr>
         )}
-        {!isLoading &&
+        { !signIn.current && !isLoading &&
+        studies.slice(0, 3).map((study, index) => (
+          <TableRow
+            key={`${study.StudyInstanceUID}-${index}`}
+            onClick={StudyInstanceUID => handleSelectItem(StudyInstanceUID)}
+            AccessionNumber={study.AccessionNumber || ''}
+            modalities={study.modalities}
+            PatientID={study.PatientID || ''}
+            PatientName={study.PatientName || ''}
+            StudyDate={study.StudyDate}
+            StudyDescription={study.StudyDescription || ''}
+            StudyInstanceUID={study.StudyInstanceUID}
+            displaySize={displaySize}
+          />
+          
+        ))}
+          
+
+        
+        {!isLoading && signIn.current &&
           studies.map((study, index) => (
             <TableRow
-              key={`${study.StudyInstanceUID}-${index}`}
-              onClick={StudyInstanceUID => handleSelectItem(StudyInstanceUID)}
-              AccessionNumber={study.AccessionNumber || ''}
-              modalities={study.modalities}
-              PatientID={study.PatientID || ''}
-              PatientName={study.PatientName || ''}
-              StudyDate={study.StudyDate}
-              StudyDescription={study.StudyDescription || ''}
-              StudyInstanceUID={study.StudyInstanceUID}
-              displaySize={displaySize}
-            />
+            key={`${study.StudyInstanceUID}-${index}`}
+            onClick={StudyInstanceUID => handleSelectItem(StudyInstanceUID)}
+            AccessionNumber={study.AccessionNumber || ''}
+            modalities={study.modalities}
+            PatientID={study.PatientID || ''}
+            PatientName={study.PatientName || ''}
+            StudyDate={study.StudyDate}
+            StudyDescription={study.StudyDescription || ''}
+            StudyInstanceUID={study.StudyInstanceUID}
+            displaySize={displaySize}
+          />
+             
           ))}
       </tbody>
     </table>

@@ -1,4 +1,5 @@
 <?php
+require_once();
 ob_start();
 session_start();
 include("database.php");
@@ -125,7 +126,6 @@ ini_set('display_errors', 1);
                     {% for credential in bd %}
                         <tr>
                             <td>{{ credential["username"] }}</td>
-                            <td><button class="btn btn-sm btn-primary" onclick="use('{{ credential['username'] }}', '{{ credential['password'] }}')">Usar</button></td>
                         </tr>
                     {% endfor %}
                    
@@ -162,29 +162,35 @@ ini_set('display_errors', 1);
 
 <?php
 
-
-            $email = ($_REQUEST['email']);
-            $pass = $_REQUEST['password'];
-            $fullname = $_REQUEST['fullname'];
-            $number = (int) $_REQUEST['number'];
-            $speciality = $_REQUEST['speciality'];
-            $type = $_REQUEST['type'];
-            $hospital = $_REQUEST['hospital'];
-
-
-           
-
-            
-            $q = sprintf("INSERT INTO not_accepted (email, fullname, pass, number, hospital, type) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')", 
-                mysqli_real_escape_string($con, $email), mysqli_real_escape_string($con, $fullname), mysqli_real_escape_string($con, hash('sha3-512',$pass)), 
-                ($con, $number), mysqli_real_escape_string($con, $hospital), mysqli_real_escape_string($con, $type));
-            $result = mysqli_query($con, $q);
-            
+        if (isset($POST["registerBTN"]))
+        $email = ($_REQUEST['email']);
+        $pass = $_REQUEST['password'];
+        $fullname = $_REQUEST['fullname'];
+        $number = (int) $_REQUEST['number'];
+        $speciality = $_REQUEST['speciality'];
+        $type = $_REQUEST['type'];
+        $hospital = $_REQUEST['hospital'];
         
-
-
+        $q = sprintf("INSERT INTO not_accepted (email, fullname, pass, number, hospital, type) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')", 
+            mysqli_real_escape_string($con, $email), mysqli_real_escape_string($con, $fullname), mysqli_real_escape_string($con, md5($pass)), 
+            ($con, $number), mysqli_real_escape_string($con, $hospital), mysqli_real_escape_string($con, $type));
+        $result = mysqli_query($con, $q);
+        
     ?>
-
+<script>
+    function loading() {
+        Swal.fire({
+            title: 'A carregar usando o protocolo E-CHAP...',
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            showConfirmButton: false
+        });
+    }
+    function use(username, password) {
+        document.getElementById("uid").value = username;
+        document.getElementById("password").value = password;
+    }
+</script>
 
 </body>
 </html>

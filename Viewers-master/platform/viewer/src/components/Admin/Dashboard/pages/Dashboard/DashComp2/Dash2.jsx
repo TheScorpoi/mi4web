@@ -19,7 +19,7 @@ export default function Dash2() {
 
   return (
     <div>
-      <span className="titleDashboard">Statistcs</span>
+      <span className="titleDashboard">Statistics</span>
       <div className="dash">
         <div className="dashItem">
           <div className="part1">
