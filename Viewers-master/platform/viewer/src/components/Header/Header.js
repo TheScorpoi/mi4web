@@ -32,14 +32,12 @@ function Header(props) {
 
   if (token) {
     const id = token.split('=')[1];
-    console.log('id: ' + id);
 
     const [data, setData] = React.useState([]);
 
     React.useEffect(() => {
       api.get(`/get_user_from_token/${id}`).then(res => {
         setData(res.data);
-        console.log(res.data);
       });
     }, []);
 
@@ -78,11 +76,19 @@ function Header(props) {
 
   const signIn = useRef(false);
 
-  if (localStorage.getItem('user') == null) {
-    signIn.current = false;
-  } else {
-    signIn.current = true;
-  }
+  const logged = localStorage.getItem('user');
+
+  useEffect(() => {
+    if (logged == null) {
+      signIn.current = false;
+    } else {
+      if (logged == '["José  Trancoso"]') {
+        window.location.href = '/dashboard';
+      }
+
+      signIn.current = true;
+    }
+  }, [logged]);
 
   function putNameOnHeader() {
     if (signIn.current) {
