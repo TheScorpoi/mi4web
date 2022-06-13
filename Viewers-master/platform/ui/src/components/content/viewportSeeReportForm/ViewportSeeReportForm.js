@@ -13,8 +13,6 @@ import { DataGrid } from '@material-ui/data-grid';
 import './ViewportSeeReportFrom.css';
 import api from './api';
 
-import aminhaimagem from './../../../../public/uploads/image-1654882386731.pdf';
-
 const REFRESH_VIEWPORT_TIMEOUT = 1000;
 
 const ViewportSeeReportForm = ({
@@ -269,7 +267,16 @@ const ViewportSeeReportForm = ({
         let filezito = require(`./../../../../public/uploads/${params.row.pdf_file}`);
         return (
           <div className="actions">
-            <a href={filezito['default']} download={params.row.pdf_file}>
+            <a
+              href={filezito['default']}
+              download={params.row.pdf_file}
+              style={{
+                'background-color': '#CCCCCC',
+                padding: '10px 30px',
+                'border-radius': '15px',
+                color: 'black',
+              }}
+            >
               Download
             </a>
           </div>
