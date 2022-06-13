@@ -228,7 +228,8 @@ function createStudyImageIds(baseUrl, studySearchOptions) {
 
   const client = new api.DICOMwebClient({ url });
 
-  studyInstanceUID = localStorage.getItem('StudyInstanceUID');
+  //studyInstanceUID = localStorage.getItem('StudyInstanceUID');
+  studyInstanceUID = '1.3.6.1.4.1.14519.5.2.1.113283142818507428913223457507116949429';
   ctSeriesInstanceUID = localStorage.getItem('SeriesInstanceUID');
   console.log('CONSOLA, IDs');
   console.log(studyInstanceUID);
@@ -264,6 +265,7 @@ function createStudyImageIds(baseUrl, studySearchOptions) {
 
   return new Promise((resolve, reject) => {
     client.retrieveStudyMetadata(studySearchOptions).then(instances => {
+      console.log('instances');
       console.log(instances);
       const imageIds = instances.map(metaData => {
         const imageId =
@@ -277,9 +279,9 @@ function createStudyImageIds(baseUrl, studySearchOptions) {
           metaData[SOP_INSTANCE_UID].Value[0] +
           '/frames/1';
 
-          console.log('IAMGEIDE');
-          console.log(imageId);
-          console.log(metaData);
+          //console.log('IAMGE ID');
+          //console.log(imageId);
+          //console.log(metaData);
 
         cornerstoneWADOImageLoader.wadors.metaDataManager.add(
           imageId,
@@ -308,13 +310,13 @@ class VTKFusionExample extends Component {
     this.apis = [];
 
     const imageIds = await imageIdPromise;
-    console.log('OLA');
-    console.log(imageIds);
-    console.log(imageIds[0]);
+    //console.log('image Ids');
+    //console.log(imageIds);
+    //console.log(imageIds[0]);
     let ctImageIds = imageIds.filter(imageId =>
       imageId.includes(ctSeriesInstanceUID)
     );
-    console.log(ctImageIds);
+    //console.log(ctImageIds);
     //ctImageIds = ctImageIds.slice(0, ctImageIds.length / 2);
 
     const ctImageDataObject = this.loadDataset(ctImageIds, 'ctDisplaySet');
@@ -445,7 +447,8 @@ class VTKFusionExample extends Component {
     //imageDataCache.clear();
     //localStorage.clear();
     const imageDataObject = getImageData(imageIds, displaySetInstanceUid);
-
+    //console.log('imageDataObject');
+    //console.log(imageDataObject);
     loadImageData(imageDataObject);
 
     const numberOfFrames = imageIds.length;
