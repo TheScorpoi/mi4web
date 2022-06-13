@@ -8,7 +8,6 @@ import InitialDashboard from './pages/UsersManagement/InitialDashboard/InitialDa
 import UsersAccounts from './pages/UsersManagement/UserAccounts/UsersAccounts2';
 import Nodes from './pages/UsersManagement/DicomNodes/Nodes';
 import ExtensionInstall from './pages/UsersManagement/ExtensionInstall/ExtensionInstall';
-import SwVersions from './pages/UsersManagement/SwVersions/SwVersions';
 function Dashboard() {
   return (
     <Router>
@@ -35,11 +34,6 @@ function Dashboard() {
             <Route path="/nodes">
               <div className="middle">
                 <Nodes />
-              </div>
-            </Route>
-            <Route path="/swversions">
-              <div className="middle">
-                <SwVersions />
               </div>
             </Route>
             <Route path="/extInstallation">

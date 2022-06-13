@@ -5,7 +5,9 @@ import PersonOutlineRoundedIcon from '@material-ui/icons/PersonOutlineRounded';
 
 const handleLogout = () => {
   localStorage.removeItem('token');
-  window.location.href = '/';
+  window.location.href = 'http://localhost:3000';
+  localStorage.removeItem('user');
+  localStorage.removeItem('type_user');
 };
 
 function Topbar() {

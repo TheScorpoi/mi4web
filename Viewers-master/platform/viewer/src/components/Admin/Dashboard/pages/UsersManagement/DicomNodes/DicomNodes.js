@@ -52,7 +52,7 @@ export default class DicomNodes extends React.Component {
           id: 'three',
           label: 'Viewer-1',
           ae_title: 'AETITULO 1',
-          description: 'Temos aqui o Viewer-1 mais bonito q o viewer 2',
+          description: 'Viewer-1 10/06/2022',
           usage_type: 'Retrieve',
         },
         style: { color: 'SkyBlue', 'font-size': '10px' },

@@ -12,8 +12,9 @@ import setMPRLayout from './utils/setMPRLayout.js';
 import setViewportToVTK from './utils/setViewportToVTK.js';
 import Constants from 'vtk.js/Sources/Rendering/Core/VolumeMapper/Constants.js';
 import OHIFVTKViewport from './OHIFVTKViewport';
+import VTKVolumeRenderingExample from './VTKVolumeRenderingExample.js';
 import ReactDOM from 'react-dom';
-import DicomPDFViewport from '../../dicom-pdf/src/DicomPDFViewport.js';
+import presets from './presets';
 
 const { BlendMode } = Constants;
 
@@ -59,6 +60,120 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
     }
 
     return api;
+  }
+
+  function feature3D() {
+    const vistaActivada = Array.from(
+      document.getElementsByClassName('vtk-viewport-handler')
+    );
+    vistaActivada[0].innerHTML = '';
+
+    //Create div
+    const content0 = document.createElement('div');
+    content0.className = 'row';
+    vistaActivada[0].appendChild(content0);
+
+    // Create div
+    const content = document.createElement('div');
+    content.style.color = 'white';
+    content.id = 'content';
+    content0.appendChild(content);
+
+    // Create Widget container
+    const widgetContainer = document.createElement('div');
+    widgetContainer.id = 'widgetContainer';
+    widgetContainer.style.position = 'absolute';
+    widgetContainer.style.top = 'calc(10px + 2em)';
+    widgetContainer.style.right = '5px';
+    widgetContainer.style.background = 'rgba(255, 255, 255, 0.3)';
+    content0.appendChild(widgetContainer);
+
+    // Create Label for preset
+    const labelContainer = document.createElement('div');
+    labelContainer.id = 'labelContainer';
+    labelContainer.style.position = 'absolute';
+    labelContainer.style.top = '10px';
+    labelContainer.style.left = '500px';
+    labelContainer.style.width = '100%';
+    labelContainer.style.color = 'white';
+    labelContainer.style.textAlign = 'center';
+    labelContainer.style.userSelect = 'none';
+    labelContainer.style.cursor = 'pointer';
+    content0.appendChild(labelContainer);
+
+    ReactDOM.render(<VTKVolumeRenderingExample />, content);
+  }
+
+  function buttons(activate) {
+    let msgExit;
+    let state;
+    if (activate) {
+      msgExit = 'Exit 2D MPR';
+      state = 'visible';
+    } else {
+      msgExit = 'Exit 3D';
+      state = 'hidden';
+    }
+
+    const toolBar = document.getElementsByClassName('ToolbarRow');
+
+    const buttonTransferFunction = document.createElement('div');
+    buttonTransferFunction.className = 'toolbar-button slab-thickness';
+
+    const controller = document.createElement('div');
+    controller.className = 'controller';
+
+    const elementp = document.createElement('p');
+    elementp.innerHTML =
+      '<p style="font-size: 10px; padding-top: 10px; position: absolute; top:0; left:175px; width: 100px">Transfer Function</p>';
+    controller.appendChild(elementp);
+
+    const selectList = document.createElement('select');
+    selectList.id = 'selectTransferFunction';
+    selectList.className = 'select-ohif';
+    presets.forEach(element => {
+      var option = document.createElement('option');
+      option.value = element['id'];
+      option.text = element['name'];
+      selectList.appendChild(option);
+    });
+    controller.appendChild(selectList);
+
+    buttonTransferFunction.appendChild(controller);
+
+    for (let index = 2; index < toolBar[0].childElementCount - 1; index++) {
+      let element = toolBar[0].children[index];
+
+      if (!activate && index == 3) {
+        element.innerHTML = '';
+        /*
+        element.children[1].innerText = 'Cut';
+        element.children[0].innerHTML =
+          '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-scissors" viewBox="0 0 16 16"> <path d="M3.5 3.5c-.614-.884-.074-1.962.858-2.5L8 7.226 11.642 1c.932.538 1.472 1.616.858 2.5L8.81 8.61l1.556 2.661a2.5 2.5 0 1 1-.794.637L8 9.73l-1.572 2.177a2.5 2.5 0 1 1-.794-.637L7.19 8.61 3.5 3.5zm2.5 10a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0zm7 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z"/> </svg>';
+        */
+      } else if (!activate && index == 2) {
+        element.innerHTML = '';
+      } else if (!activate && index == 4) {
+        element.addEventListener('click', feature3D);
+      } else if (activate && index == 5) {
+        element.removeEventListener('click', feature3D);
+      } else {
+        element.style.visibility = state;
+      }
+    }
+
+    if (!activate) {
+      toolBar[0].insertBefore(buttonTransferFunction, toolBar[0].children[3]);
+    } else {
+      toolBar[0].removeChild(toolBar[0].children[3]);
+    }
+
+    toolBar[0].children[1].children[1].innerText = msgExit;
+    toolBar[0].children[1].addEventListener('click', event => {
+      buttons(true);
+    });
+
+    //console.clear();
   }
 
   function _setView(api, sliceNormal, viewUp) {
@@ -490,6 +605,25 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
         }
       }
     },
+    command3D: async ({ viewports }) => {
+      const displaySet =
+        viewports.viewportSpecificData[viewports.activeViewportIndex];
+      const viewportProps = [
+        {
+          orientation: {
+            sliceNormal: [0, 0, 1],
+            viewUp: [0, -1, 0],
+          },
+        },
+      ];
+      try {
+        await setMPRLayout(displaySet, viewportProps, 1, 1);
+        buttons(false);
+      } catch (error) {
+        throw new Error(error);
+      }
+      feature3D();
+    },
   };
 
   window.vtkActions = actions;
@@ -581,6 +715,12 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
     },
     mpr2d: {
       commandFn: actions.mpr2d,
+      storeContexts: ['viewports'],
+      options: {},
+      context: 'VIEWER',
+    },
+    command3D: {
+      commandFn: actions.command3D,
       storeContexts: ['viewports'],
       options: {},
       context: 'VIEWER',

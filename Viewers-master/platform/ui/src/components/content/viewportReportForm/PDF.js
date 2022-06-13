@@ -1,8 +1,26 @@
-import React, { createRef } from 'react';
+import React, {
+  createRef,
+  useCallback,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react';
 import Pdf from 'react-to-pdf';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import './PDF.css';
+import api from './api_save_file';
+import axios from 'axios';
+import UploadImg from './UploadImg';
 
 const ref = createRef();
+
+// const onFileUpload = file => {
+//   const formData = new FormData();
+//   formData.append('myFile', document.querySelector('#post'));
+
+//   axios.post('http://localhost:3003/upload', formData); //I need to change this line
+// };
 
 const PDF = props => {
   return (
@@ -14,11 +32,12 @@ const PDF = props => {
             style={{ marginBottom: '20px' }}
             onClick={toPdf}
           >
-            Generate Pdf
+            Generate PDF
           </button>
         )}
       </Pdf>
       <div className="clear"></div>
+      <UploadImg />
       <div className="post" ref={ref}>
         <div className="content">
           <div className="logo">
@@ -32,26 +51,26 @@ const PDF = props => {
             <div className="date">{props.date}</div>
             <div className="infopatient">
               <h3>
-                Utente :{' '}
+                Patient :{' '}
                 <span style={{ fontWeight: 'lighter' }}>
                   {props.patientname}
                 </span>
               </h3>
               <h3>
-                Nº Processo :{' '}
+                Study number :{' '}
                 <span style={{ fontWeight: 'lighter' }}>
-                  {props.processnumber}
+                  {localStorage.getItem('StudyInstanceUID')}
                 </span>
               </h3>
             </div>
 
             <div className="annotations">
-              <h2>Anotações</h2>
+              <h2>Anotations</h2>
               <p>{props.annotations}</p>
             </div>
 
             <div className="cumprimentos">
-              <h4>Com os cumprimentos do/da colega</h4>
+              <h4>With the best wishes:</h4>
               <br></br>
               <hr style={{ width: '200px' }}></hr>
               <h4>Dr. {props.doutor}</h4>
