@@ -11,6 +11,7 @@ import './Header.css';
 import PersonIcon from '@material-ui/icons/Person';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import api from '../Admin/Dashboard/pages/ApiConnections/apiManageAccess';
+import { SignUp } from '../Login/SignUp';
 
 function Header(props) {
   const {
@@ -85,6 +86,11 @@ function Header(props) {
       if (logged == '["José  Trancoso"]') {
         window.location.href = '/dashboard';
       }
+      if (logged == '[]') {
+        signIn.current = false;
+      } else {
+        signIn.current = true;
+      }
 
       signIn.current = true;
     }
@@ -132,15 +138,28 @@ function Header(props) {
           </div>
 
           {!signIn.current ? (
-            <button
-              className="button-3"
-              onClick={e => {
-                e.preventDefault();
-                window.location.href = 'http://localhost:9874/show_login';
-              }}
-            >
-              Login
-            </button>
+            <>
+              <button
+                className="button-3"
+                onClick={e => {
+                  e.preventDefault();
+                  window.location.href = 'http://localhost:9874/show_login';
+                }}
+              >
+                Login
+              </button>
+              <button
+                className="button-3"
+                onClick={() =>
+                  show({
+                    content: SignUp,
+                    title: t('Regist account'),
+                  })
+                }
+              >
+                SignUp
+              </button>
+            </>
           ) : (
             <button
               className="button-3"

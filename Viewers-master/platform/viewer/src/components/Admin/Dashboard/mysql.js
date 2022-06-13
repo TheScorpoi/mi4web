@@ -88,7 +88,7 @@ app.get('/request_delete/:id', (req, res) => {
   });
 });
 
-// just realise that i have 2 endpoints that do the same thing... oh well, i not gonna change it
+// just realise that i have 2 endpoints that do the same thing... oh well, i'm not gonna change it
 
 // get user from token
 app.get('/get_user_from_token/:id', (req, res) => {
@@ -154,6 +154,24 @@ app.get('/testar_insert_with_params/:email/:fullname/:password', (req, res) => {
     if (error) throw error;
     res.send(results);
     //console.log(results);
+  });
+});
+
+app.post('/register_request/:name/:email/:password/:hospital/:professional_id/:type', (req, res) => {
+  let post = {
+    email: req.params.email,
+    fullname: req.params.name,
+    password: req.params.password,
+    professional_id: req.params.professional_id,
+    hospital: req.params.hospital,
+    type_user: req.params.type,
+
+  };
+  let sql_query = 'INSERT INTO `not_accepted` SET ?';
+  db.query(sql_query, post, (error, results) => {
+    if (error) throw error;
+    res.send(results);
+    return results;
   });
 });
 
