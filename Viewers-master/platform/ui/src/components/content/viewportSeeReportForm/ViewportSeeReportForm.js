@@ -13,6 +13,8 @@ import { DataGrid } from '@material-ui/data-grid';
 import './ViewportSeeReportFrom.css';
 import api from './api';
 
+import aminhaimagem from './../../../../public/uploads/image-1654882386731.pdf';
+
 const REFRESH_VIEWPORT_TIMEOUT = 1000;
 
 const ViewportSeeReportForm = ({
@@ -119,17 +121,17 @@ const ViewportSeeReportForm = ({
       fileType
     );
   }, [
+    loadImage,
     activeViewport,
     viewportElement,
-    showAnnotations,
-    loadImage,
+    dimensions.width,
+    dimensions.height,
     toggleAnnotations,
+    showAnnotations,
+    validSize,
     updateViewportPreview,
-    fileType,
     downloadCanvas.ref,
-    minimumSize,
-    maximumSize,
-    viewportElementDimensions,
+    fileType,
   ]);
 
   useEffect(() => {
@@ -161,6 +163,7 @@ const ViewportSeeReportForm = ({
     downloadCanvas.ref,
     minimumSize,
     maximumSize,
+    loadAndUpdateViewports,
   ]);
 
   useEffect(() => {
@@ -217,7 +220,7 @@ const ViewportSeeReportForm = ({
 
   React.useEffect(() => {
     loadTheFuckingData();
-  }, []);
+  }, [loadTheFuckingData]);
 
   // const columns = [
   //   { field: 'id', headerName: 'ID', width: 50 },
@@ -263,10 +266,10 @@ const ViewportSeeReportForm = ({
       headerName: 'Action',
       width: 300,
       renderCell: params => {
-        const urli = `./../../../../public/uploads/${params.row.pdf_file}`;
+        let filezito = require(`./../../../../public/uploads/${params.row.pdf_file}`);
         return (
           <div className="actions">
-            <a href={require(urli)} download="myFile">
+            <a href={filezito['default']} download={params.row.pdf_file}>
               Download
             </a>
           </div>
@@ -277,7 +280,6 @@ const ViewportSeeReportForm = ({
 
   return (
     <>
-      <Image source={require('./assets/img/arch.png')} />;
       <div className="userList" style={{ height: 500 }}>
         <DataGrid
           rows={data}
