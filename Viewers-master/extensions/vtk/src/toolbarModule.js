@@ -1,12 +1,41 @@
 import SlabThicknessToolbarComponent from './toolbarComponents/SlabThicknessToolbarComponent';
+import TransferFunctionToolbarComponent from './toolbarComponents/TransferFunctionToolbarComponent';
 import VTKMPRToolbarButton from './toolbarComponents/VTKMPRToolbarButton';
+import presets from './presets';
 
 const TOOLBAR_BUTTON_TYPES = {
   COMMAND: 'command',
   SET_TOOL_ACTIVE: 'setToolActive',
 };
 
+var buttonsTransferFunction = [];
+presets.forEach(element => {
+  buttonsTransferFunction.push({
+    id: 'setTransferFunction'.concat(element['name']),
+    label: element['name'],
+    type: TOOLBAR_BUTTON_TYPES.SET_TOOL_ACTIVE,
+    commandOptions: {},
+  });
+});
+
 const definitions = [
+  {
+    id: 'ctTransferFunctionPreset',
+    label: 'CT Transfer Function Preset',
+    icon: 'soft-tissue',
+    CustomComponent: TransferFunctionToolbarComponent,
+    commandName: 'setTransferFunction',
+    operationButtons: buttonsTransferFunction,
+  },
+  {
+    id: 'Reset',
+    label: 'Reset',
+    icon: 'reset',
+    //
+    type: TOOLBAR_BUTTON_TYPES.COMMAND,
+    commandName: 'resetMPRView',
+    commandOptions: {},
+  },
   {
     id: 'Crosshairs',
     label: 'Crosshairs',
@@ -23,15 +52,6 @@ const definitions = [
     //
     type: TOOLBAR_BUTTON_TYPES.SET_TOOL_ACTIVE,
     commandName: 'enableLevelTool',
-    commandOptions: {},
-  },
-  {
-    id: 'Reset',
-    label: 'Reset',
-    icon: 'reset',
-    //
-    type: TOOLBAR_BUTTON_TYPES.COMMAND,
-    commandName: 'resetMPRView',
     commandOptions: {},
   },
   /*
@@ -135,6 +155,16 @@ const definitions = [
     CustomComponent: VTKMPRToolbarButton,
     type: TOOLBAR_BUTTON_TYPES.COMMAND,
     commandName: 'mpr2d',
+    context: 'ACTIVE_VIEWPORT::CORNERSTONE',
+  },
+  {
+    id: '3D',
+    label: '3D',
+    icon: '3d-rotate',
+    //
+    CustomComponent: VTKMPRToolbarButton,
+    type: TOOLBAR_BUTTON_TYPES.COMMAND,
+    commandName: 'command3D',
     context: 'ACTIVE_VIEWPORT::CORNERSTONE',
   },
 ];
