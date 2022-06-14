@@ -14,7 +14,7 @@
     "url": "git+https://github.com/creativetimofficial/ct-material-kit-react.git"
   },
   "engines": {
-    "node": "14 || 15 || 16 || 17",
+    "node": "14 || 15 || 16 || 17 || 18",
     "npm": ">=6"
   },
   "dependencies": {
