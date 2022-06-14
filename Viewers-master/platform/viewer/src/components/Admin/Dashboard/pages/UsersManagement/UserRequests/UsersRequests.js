@@ -90,7 +90,7 @@ function UsersRequests() {
                     &times;
                   </button>
                   <div className="header"> Confirmation - Accept</div>
-                  <div className="content">
+                  <div className="header" style={{ color: "white" , align: "center", borderBottomWidth: 0 }}>
                     {' '}
                     Are you sure you want to accept this user?
                   </div>
@@ -128,7 +128,8 @@ function UsersRequests() {
                     &times;
                   </button>
                   <div className="header"> Confirmation - Decline </div>
-                  <div className="content">
+                  <div className="header" style={{ color: "white" , align: "center", borderBottomWidth: 0 }}>
+
                     {' '}
                     Are you sure you want to decline this user?
                   </div>
