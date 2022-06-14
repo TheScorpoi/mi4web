@@ -25,6 +25,15 @@ services:
     restart: unless-stopped
     networks:
       - all
+  store-files-api: 
+    build: 
+      context: ./api_2
+      dockerfile: Dockerfile 
+    ports: 
+      - '8088:3003'
+    restart: unless-stopped
+    networks:
+      - all
 
 networks:
  all:

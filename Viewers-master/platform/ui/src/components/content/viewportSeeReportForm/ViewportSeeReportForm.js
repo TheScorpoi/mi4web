@@ -264,7 +264,7 @@ const ViewportSeeReportForm = ({
       headerName: 'Action',
       width: 300,
       renderCell: params => {
-        let filezito = require(`./../../../../public/uploads/${params.row.pdf_file}`);
+        let filezito = require(`./../../../assets/${params.row.pdf_file}`);
         return (
           <div className="actions">
             <a

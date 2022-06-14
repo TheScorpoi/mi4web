@@ -5,7 +5,7 @@ import api from './api_save_file';
 
 function UploadImg() {
   let url =
-    'http://localhost:3003/upload/' + localStorage.getItem('StudyInstanceUID');
+    'http://mednat.ieeta.pt:8758/upload/' + localStorage.getItem('StudyInstanceUID');
 
   const [state, setState] = useState('inicial');
 
