@@ -139,7 +139,8 @@ function Header(props) {
                 className="button-3"
                 onClick={e => {
                   e.preventDefault();
-                  window.location.href = 'http://mednat.ieeta.pt:8755/show_login';
+                  window.location.href =
+                    'http://mednat.ieeta.pt:8755/show_login';
                 }}
               >
                 Login
@@ -168,20 +169,7 @@ function Header(props) {
             >
               Logout
             </button>
-          )
-          }
-           <button
-            className="button-3"
-            onClick={() =>
-              show({
-                content: SignUp,
-                title: t('Regist account'),
-              })
-            }
-          >
-            SignUp
-          </button>
-          
+          )}
         </div>
       </div>
     </>
