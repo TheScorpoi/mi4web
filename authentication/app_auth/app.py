@@ -106,7 +106,7 @@ def response_to_chanllenge():
         if valores_errados == False:
             letters = string.ascii_lowercase
             token=''
-            for i in range(10):
+            for i in range(30):
                 token+=choice(letters)
 
             query = "Update user SET token='" + token +"' where email='"+user+"';"

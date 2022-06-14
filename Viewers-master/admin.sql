@@ -4,7 +4,7 @@ CREATE TABLE user (
     email		    VARCHAR(256)		NOT NULL,
 	fullname		VARCHAR(256)		NOT NULL,
 	password	    VARCHAR(256)        NOT NULL,
-    token         CHAR(10)            ,
+    token         CHAR(30)            ,
 	PRIMARY KEY(email)
 );
 
