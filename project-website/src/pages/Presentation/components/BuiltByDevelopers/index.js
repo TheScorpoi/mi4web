@@ -18,6 +18,8 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 
+import { Link } from "react-router-dom";
+
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
@@ -52,10 +54,8 @@ function BuiltByDevelopers() {
             Here you can find all the documentation for the components
           </MKTypography>
           <MKTypography
-            component="a"
-            href="https://drive.google.com/drive/folders/1-hUIkkTqyByItie7QjvyHMO3qNoHl9sL?usp=sharing"
-            target="_blank"
-            rel="noreferrer"
+            component={Link}
+            to="/documentation"
             variant="body2"
             color="white"
             fontWeight="regular"

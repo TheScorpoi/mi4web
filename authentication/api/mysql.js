@@ -5,13 +5,10 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
@@ -35,21 +32,21 @@ db.connect(function(error) {
 
 // get all staff data (withou delicated data)
 app.get('/staff', (req, res) => {
-  let sql_query =
-    'SELECT u.email, u.fullname, s.professional_id, s.hospital, s.type_user FROM staff as s JOIN user as u ON s.email = u.email';
+  let sql_query = 'SELECT u.email, u.fullname, s.professional_id, s.hospital, s.type_user FROM staff as s JOIN user as u ON s.email = u.email';
   db.query(sql_query, (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("/staff");
   });
 });
 
 //get all request accounts from not accepted table (without delicated data)
-app.get('/request_account', (req, res) => {
-  let sql_query =
-    'SELECT email, fullname, professional_id, hospital, type_user FROM `not_accepted`';
+app.get("/request_account", (req, res) => {
+  let sql_query = 'SELECT email, fullname, professional_id, hospital, type_user FROM `not_accepted`';
   db.query(sql_query, (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("/request_account");
   });
 });
 // delete staff user on current users admin table
@@ -58,6 +55,7 @@ app.get('/staff_delete/:id', (req, res) => {
   db.query(sql_query, req.params.id, (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("/staff_delete/:id");
   });
 });
 
@@ -67,6 +65,7 @@ app.get('/request_accept/:id', (req, res) => {
   db.query(sql_query, req.params.id, (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("/request_accept/:id");
   });
 });
 
@@ -76,6 +75,7 @@ app.get('/request_accepte_update/:id', (req, res) => {
   db.query(sql_query, req.params.id, (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("/request_accepte_update/:id");
   });
 });
 
@@ -85,48 +85,30 @@ app.get('/request_delete/:id', (req, res) => {
   db.query(sql_query, req.params.id, (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("/request_delete/:id");
   });
 });
 
-// just realise that i have 2 endpoints that do the same thing... oh well, i'm not gonna change it
+// just realise that i have 2 endpoints that do the same thing... oh well, i not gonna change it
 
 // get user from token
-app.get('/get_user_from_token/:id', (req, res) => {
-  let sql_query =
-    'SELECT u.fullname, s.type_user FROM staff AS s JOIN user as u ON u.email = s.email WHERE u.token = ?';
-  db.query(sql_query, req.params.id, (error, results) => {
+app.get("/get_user_from_token/:id", (req, res) => {
+  let sql_query = 'SELECT u.fullname, s.type_user FROM staff AS s JOIN user as u ON u.email = s.email WHERE u.token = ?';
+  db.query(sql_query, req.params.id , (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("get_user_from_token");
   });
 });
 
-app.get('/chart_dash', (req, res) => {
+app.get("/chart_dash", (req, res) => {
   let sql_query = 'SELECT * FROM chart_info';
   db.query(sql_query, (error, results) => {
     if (error) throw error;
     res.send(results);
+    console.log("chart_dash");
   });
 });
-
-app.post('/save_pdf/:pdf_file', (req, res) => {
-  var jsfile = Buffer.concat(req.params.pdf_file);
-  let sql_query = 'INSERT INTO store_pdf SET ?';
-  let post = { pdf_file: jsfile };
-  db.query(sql_query, post, (error, results) => {
-    if (error) throw error;
-    res.send(results);
-  });
-});
-
-
-app.get('/get_pdf', (req, res) => {
-  let sql_query = 'SELECT * FROM store_pdf';
-  db.query(sql_query, (error, results) => {
-    if (error) throw error;
-    res.send(results);
-  });
-});
-
 
 app.get('/testar_insert', (req, res) => {
   let post = {
@@ -154,24 +136,6 @@ app.get('/testar_insert_with_params/:email/:fullname/:password', (req, res) => {
     if (error) throw error;
     res.send(results);
     //console.log(results);
-  });
-});
-
-app.post('/register_request/:name/:email/:password/:hospital/:professional_id/:type', (req, res) => {
-  let post = {
-    email: req.params.email,
-    fullname: req.params.name,
-    password: req.params.password,
-    professional_id: req.params.professional_id,
-    hospital: req.params.hospital,
-    type_user: req.params.type,
-
-  };
-  let sql_query = 'INSERT INTO `not_accepted` SET ?';
-  db.query(sql_query, post, (error, results) => {
-    if (error) throw error;
-    res.send(results);
-    return results;
   });
 });
 

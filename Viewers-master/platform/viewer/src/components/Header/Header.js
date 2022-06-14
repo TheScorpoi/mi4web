@@ -139,7 +139,8 @@ function Header(props) {
                 className="button-3"
                 onClick={e => {
                   e.preventDefault();
-                  window.location.href = 'http://localhost:9874/show_login';
+                  window.location.href =
+                    'http://mednat.ieeta.pt:8755/show_login';
                 }}
               >
                 Login
@@ -161,7 +162,7 @@ function Header(props) {
               className="button-3"
               onClick={e => {
                 e.preventDefault();
-                window.location.href = 'http://localhost:3000';
+                window.location.href = 'http://mednat.ieeta.pt:8754/';
                 localStorage.removeItem('user');
                 localStorage.removeItem('type_user');
               }}

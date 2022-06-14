@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 class ChartInformation:
     
     def __init__(self) -> None:
-        self.connection = mysql.connector.connect(host='localhost', port=3306, database='mi4web', user='root', password='YES')
+        self.connection = mysql.connector.connect(host='localhost', port=3306, database='mi4web', user='root', password='password')
         self.cursor = None
         self.URL = "http://mednat.ieeta.pt:8765/"
         
@@ -34,7 +34,7 @@ class ChartInformation:
             return 0
         except:
             print("Error while making request to server")
-            return 0
+            return -1
     
     def store_on_db(self, count_studies: int, day: str):
         try:
@@ -49,3 +49,4 @@ if __name__ == "__main__":
     chart_info.connectionDB()
     study = chart_info.make_request_to_server()
     chart_info.store_on_db(study, datetime.now().strftime("%Y-%m-%d"))
+    

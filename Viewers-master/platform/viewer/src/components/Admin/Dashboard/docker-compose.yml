@@ -8,8 +8,11 @@ services:
       - '3005:3005'
     restart: unless-stopped
     networks:
-    - shared
+      - all
+
 networks:
-  shared: 
-    external:
-      name: shared
+ all:
+  ipam:
+   driver: default
+   config:
+    - subnet: 10.5.0.0/16
