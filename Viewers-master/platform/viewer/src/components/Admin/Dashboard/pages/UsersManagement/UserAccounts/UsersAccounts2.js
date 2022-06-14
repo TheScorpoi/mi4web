@@ -71,7 +71,7 @@ function UsersAccounts() {
                     &times;
                   </button>
                   <div className="header"> Confirmation - Elimination </div>
-                  <div className="content">
+                  <div className="header" style={{ color: "white" , align: "center", borderBottomWidth: 0 }}>
                     {' '}
                     Are you sure you want to eliminate this user?
                   </div>

@@ -14,3 +14,9 @@ services:
     restart: always
     volumes:
       - ./data/db:/var/lib/mysql
+    networks:
+    - authentication_all
+
+networks:
+ authentication_all: 
+  external: true

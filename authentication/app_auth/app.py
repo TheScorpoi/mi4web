@@ -15,22 +15,26 @@ app = Flask(__name__)
 api = Api(app)
 connection = None
 cursor = None
+flag = False
 
 dict_info = {}
 
 @app.route('/')
 def home():
-    pass
+    return "ENTREI AQUI NA ROOT DISTO"
 
 @app.route('/send_hello', methods=['POST'])
 def response():
     """Envia a resposta à mensagem da UAP. Verifica se o utilizador existe no servidor. Em caso afirmatico envia o challenge, em caso negativo envia uma mensagem de erro"""
     global connection, cursor, dict_info
+    connect_db()
     user = request.form.get('username')
     query = "Select email, password from user where email='"+user+"';"
+    print(query)
     cursor = connection.cursor()
     cursor.execute(query)
     result = cursor.fetchone()
+    print(result)
 
     server_url = request.url_root[0:-1] + url_for('response_to_chanllenge') #  [0:-1] para retirar a barra (/)
     # server_url é o link para onde a uap terá de enviar os pedidos de  challenge
@@ -57,6 +61,7 @@ def response_to_chanllenge():
     Caso seja verdadade, calcula uma nova mensagem com a password, o proximo challenge dele, e o bit do resultado do dele.
     Caso seja Falso, ele apenas envia o challenge e um bit aleatório.
     Quando chega ao fim (fez tantas vezes quanto o tamanho da mensagem), envia uma mensagem de sucesso se for o caso, ou de insucesso se não for."""
+    
     global connection, cursor, dict_info
     token_tmp = request.form.get('token_tmp')
     
@@ -111,10 +116,10 @@ def response_to_chanllenge():
             
             # MANDAR URL DO LOGIN DONE
             server_url = request.url_root[0:-1] + url_for('redirectPage') #  [0:-1] para retirar a barra (/)
-            dict = {'finnish': True, 'token_tmp': token_tmp, 'done_url': server_url} # finish corresponde ao success
+            dict = {'finnish': True, 'token_tmp': token, 'done_url': "http://mednat.ieeta.pt:8754"} # finish corresponde ao success
         else:
             server_url = request.url_root[0:-1] + url_for('redirectPage') #  [0:-1] para retirar a barra (/)
-            dict = {'finnish': False, 'token_tmp': token_tmp, 'done_url': server_url} # finish corresponde ao success
+            dict = {'finnish': False, 'token_tmp': token, 'done_url': "http://mednat.ieeta.pt:8754"} # finish corresponde ao success
             dict_info.pop(token_tmp)
         return dict
 
@@ -128,29 +133,30 @@ def redirectPage():
     cursor.execute(query)
     result = cursor.fetchone()
     token = result[0]
-    return redirect('http://localhost:3000/?token=' + token, code=302)
+    return redirect('http://mednat.ieeta.pt:8754/?token=' + token, code=302)
 
 def connect_db():
-    global connection, cursor
-    try:
-        connection = mysql.connector.connect(host='localhost', database='mi4web', user='root', passwd='password')
-        if connection.is_connected():
-            db_Info = connection.get_server_info()
-            print("Connected to MySQL Server version ", db_Info)
-            cursor = connection.cursor()
-            #cursor.execute("select database();")
-            #record = cursor.fetchone()
-            #print("You're connected to database: ", record)
-            return True
-    except Error as e:
-        print("Error while connecting to MySQL", e)
-        return False
+    global connection, cursor, flag
+    print("aqui 2")
+    while not flag:
+        try:
+            connection = mysql.connector.connect(host='10.4.0.4', port= 3306, database='mi4web', user='root', passwd='password')
+            if connection.is_connected():
+                db_Info = connection.get_server_info()
+                print("Connected to MySQL Server version ", db_Info)
+                cursor = connection.cursor()
+                cursor.execute("select database();")
+                record = cursor.fetchone()
+                print("You're connected to database: ", record)
+                flag = True
+        except Error as e:
+            print("Error while connecting to MySQL", e)
+            flag = False
+
 
 if __name__ == '__main__':
-    while not connect_db():
-        continue
+    app.run(host='0.0.0.0', port=5001)
     
-    app.run(host='localhost', port=5000)
     if connection.is_connected():
             cursor.close()
             connection.close()

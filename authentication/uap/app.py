@@ -39,10 +39,9 @@ password_key = ""
 salt = ""
 logged_in = False
 
-
-server_hello = 'http://auth_server:5000/send_hello'
+server_hello = 'http://auth_server:5001/send_hello'
 server_challenge = ''
-server_done = ''
+server_done = 'http://mednat.ieeta.pt:8754'
 
 
 @app.route('/show_login', methods=['GET'])
@@ -259,6 +258,8 @@ def get_informations():
     password = request.form['password']
     bd = {}
 
+    print("user: ", user, " password: ", password)
+
     # só vai buscar os dados se o user estiver logado
     if logged_in and os.path.isfile('bd.json') and os.stat('bd.json').st_size != 0:
         kdf = PBKDF2HMAC(
@@ -369,7 +370,7 @@ def send_hello(user):
     # uap_url é o link para onde o servidor terá de responder
 
     dict_ = {"username": user}
-    _request = requests.post(server_hello, data=dict_)
+    _request = requests.post("http://auth_server:5001/send_hello", data=dict_)
     _request = _request.json()
     if 'error' in _request:
         print(_request['error'])
