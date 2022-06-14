@@ -128,16 +128,15 @@ function Information() {
                   <DefaultInfoCard
                     icon="content_copy"
                     title="WEB PLATAFORM"
-                    description="Having a web plataform in the Web that allows us to visualize image studies using a visualizer
+                    description="Web plataform that allows to visualize image studies using a visualizer
                   in conjunction with a server."
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <DefaultInfoCard
                     icon="flip_to_front"
-                    title="VIEWS"
-                    description="The visualisation of the images will have to allow canonical views and three-dimensional
-                  object views."
+                    title="2D VIEWS"
+                    description="The visualisation of the images have to allow canonical views."
                   />
                 </Grid>
               </Grid>
@@ -145,15 +144,15 @@ function Information() {
                 <Grid item xs={12} md={6}>
                   <DefaultInfoCard
                     icon="settings_suggest"
-                    title="DISTRIBUTED SYSTEM"
-                    description="The implemented system will have to be distributed."
+                    title="3D VIEWS"
+                    description="The visualisation of the images have to allow three-dimensional object views."
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <DefaultInfoCard
                     icon="devices"
                     title="CLIENT-SERVER"
-                    description="The services will have to run in the web, in a client-server structure."
+                    description="The services have to run in the web, in a client-server structure."
                   />
                 </Grid>
               </Grid>
@@ -168,8 +167,8 @@ function Information() {
                 <Grid item xs={12} md={6}>
                   <DefaultInfoCard
                     icon="image_search"
-                    title="IMAGE MANIPULATION"
-                    description="Multiplanar image display functionalities"
+                    title="IMAGE REFORMATTING"
+                    description="Multiplanar image display functionalities and synchronization."
                   />
                 </Grid>
               </Grid>
@@ -177,8 +176,8 @@ function Information() {
                 <Grid item xs={12} md={6}>
                   <DefaultInfoCard
                     icon="burst_mode"
-                    title="IMAGE SEGMENTATION"
-                    description="Interactive image segmentation tools."
+                    title="REPORT"
+                    description="Able to generate reports associated with a study and stored in the application."
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
