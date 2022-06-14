@@ -46,7 +46,7 @@ class DicomPDFViewport extends Component {
   };
 
   async componentDidMount() {
-    const { rawPdf } = this.props
+    const { rawPdf } = this.props;
     const dataSet = !rawPdf && this.parseByteArray(this.props.byteArray);
     const fileURL = this.getPDFFileUrl(dataSet, this.props.byteArray);
 

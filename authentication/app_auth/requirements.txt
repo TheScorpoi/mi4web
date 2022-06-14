@@ -1,0 +1,7 @@
+mysql-connector-python
+requests
+flask
+pandas
+flask_restful
+cryptography == 3.4.7
+bitstring

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import OHIF from '@ohif/core';
 import { withRouter } from 'react-router-dom';
@@ -191,6 +191,14 @@ function StudyListRoute(props) {
     });
   }
 
+  const signIn = useRef(false);
+
+  if (localStorage.getItem('user') == null) {
+    signIn.current = false;
+  } else {
+    signIn.current = true;
+  }
+
   function handleFilterChange(fieldName, value) {
     setFilterValues(state => {
       return {
@@ -239,7 +247,7 @@ function StudyListRoute(props) {
               onImport={() => setActiveModalId('DicomFilesUploader')}
             />
           )}
-          <span className="study-count">{studies.length}</span>
+          {!signIn.current ? <span className="study-count">3</span> : <span className="study-count">{studies.length}</span>}
         </div>
       </div>
 

@@ -58,8 +58,13 @@ const appProps = {
   ],
 };
 
-/** Create App */
+
+// Create App
 const app = React.createElement(App, appProps, null);
 
-/** Render */
+// Render
 ReactDOM.render(app, document.getElementById('root'));
+ 
+
+//const app = React.createElement(Dashboard);
+//ReactDOM.render(app, document.getElementById('root'));
