@@ -1,5 +1,5 @@
 {
-  "Name": "Orthanc inside Docker",
+  "Name": "MI4WEB Orthanc Server",
   "StorageDirectory": "/var/lib/orthanc/db",
   "IndexDirectory": "/var/lib/orthanc/db",
   "StorageCompression": false,
@@ -34,7 +34,7 @@
   "RegisteredUsers": {
     "test": "test"
   },
-  "DicomModalities": {},
+  "DicomModalities": {"getscu" : [ "GETSCU", "localhost", 4242 ]},
   "DicomModalitiesInDatabase": false,
   "DicomAlwaysAllowEcho": true,
   "DicomAlwaysAllowStore": true,

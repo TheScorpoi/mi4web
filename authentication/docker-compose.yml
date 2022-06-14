@@ -1,0 +1,35 @@
+version: '3.3' 
+services: 
+  auth_uap: 
+    build:
+      context: ./uap
+      dockerfile: ./Dockerfile
+    ports: 
+      - '8085:9874'
+    networks:
+      - all
+  auth_server:
+    build:
+      context: ./app_auth
+      dockerfile: ./Dockerfile 
+    ports: 
+      - '8086:5001'
+    networks:
+      - all
+  mysql-api: 
+    build: 
+      context: ./api
+      dockerfile: Dockerfile 
+    ports: 
+      - '8087:3005'
+    restart: unless-stopped
+    networks:
+      - all
+
+networks:
+ all:
+  ipam:
+   driver: default
+   config:
+    - subnet: 10.4.0.0/16
+

@@ -126,6 +126,8 @@ class App extends Component {
       ...appDefaultConfig,
       ...(typeof config === 'function' ? config({ servicesManager }) : config),
     };
+    console.log('AQUI');
+    console.log(this._appConfig);
 
     const {
       servers,

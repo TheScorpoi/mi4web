@@ -31,22 +31,13 @@ import routes from "routes";
 import footerRoutes from "footer.routes";
 
 // Images
-import bgImage from "assets/images/bg-about-us.jpg";
+import bgImage from "assets/images/documentation.png";
 import Information from "./sections/Information";
 
 function AboutUs() {
   return (
     <>
-      <DefaultNavbar
-        routes={routes}
-        action={{
-          type: "external",
-          route: "https://github.com/TheScorpoi/mi4web",
-          label: "Visit our MEDICAL IMAGE viewer",
-          color: "info",
-        }}
-        sticky
-      />
+      <DefaultNavbar routes={routes} sticky />
       <MKBox
         minHeight="60vh"
         width="100%"

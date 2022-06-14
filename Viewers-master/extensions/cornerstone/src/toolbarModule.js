@@ -26,6 +26,8 @@ const TOOLBAR_BUTTON_TYPES = {
 const TOOLBAR_BUTTON_BEHAVIORS = {
   CINE: 'CINE',
   DOWNLOAD_SCREEN_SHOT: 'DOWNLOAD_SCREEN_SHOT',
+  MAKE_REPORT: 'MAKE_REPORT',
+  SEE_REPORT : 'SEE_REPORT',
 };
 
 /* TODO: Export enums through a extension manager. */
@@ -236,6 +238,27 @@ const definitions = [
     type: TOOLBAR_BUTTON_TYPES.COMMAND,
     commandName: 'setCornerstoneLayout',
     context: 'ACTIVE_VIEWPORT::VTK',
+  },
+  {
+    id: 'report',
+    label: 'Make Report',
+    icon: 'edit',
+    //
+    type: TOOLBAR_BUTTON_TYPES.BUILT_IN,
+    options: {
+      behavior: TOOLBAR_BUTTON_BEHAVIORS.MAKE_REPORT,
+      togglable: true,
+    },
+  },{
+    id: 'see_report',
+    label: 'See Report',
+    icon: 'chevron-down',
+    //
+    type: TOOLBAR_BUTTON_TYPES.BUILT_IN,
+    options: {
+      behavior: TOOLBAR_BUTTON_BEHAVIORS.SEE_REPORT,
+      togglable: true,
+    },
   },
 ];
 

@@ -38,18 +38,24 @@ Coded by www.creative-tim.com
 
 // @mui icons
 import GitHubIcon from "@mui/icons-material/GitHub";
-import FindInPageIcon from "@mui/icons-material/FindInPage";
 
 const routes = [
-  {
-    name: "documentation",
-    icon: <FindInPageIcon />,
-    href: "/documentation",
-  },
   {
     name: "github",
     icon: <GitHubIcon />,
     href: "https://github.com/TheScorpoi/mi4web",
+  },
+  {
+    name: "Acess our VIEWER",
+    icon: <GitHubIcon />,
+    href: "http://mednat.ieeta.pt:8754",
+    collapse: [
+      {
+        name: "Visit our medical image viewer",
+        description: "You can only access it through UA VPN or using UA Network",
+        href: "http://mednat.ieeta.pt:8754",
+      },
+    ],
   },
 ];
 

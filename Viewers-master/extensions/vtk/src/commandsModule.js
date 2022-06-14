@@ -1,3 +1,4 @@
+import React from 'react';
 import throttle from 'lodash.throttle';
 import {
   vtkInteractorStyleMPRWindowLevel,
@@ -11,8 +12,12 @@ import setMPRLayout from './utils/setMPRLayout.js';
 import setViewportToVTK from './utils/setViewportToVTK.js';
 import Constants from 'vtk.js/Sources/Rendering/Core/VolumeMapper/Constants.js';
 import OHIFVTKViewport from './OHIFVTKViewport';
+import VTKVolumeRenderingExample from './VTKVolumeRenderingExample.js';
+import ReactDOM from 'react-dom';
+import presets from './presets';
 
 const { BlendMode } = Constants;
+let active;
 
 const commandsModule = ({ commandsManager, servicesManager }) => {
   const { UINotificationService, LoggerService } = servicesManager.services;
@@ -56,6 +61,125 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
     }
 
     return api;
+  }
+
+  function feature3D() {
+    const vistaActivada = Array.from(
+      document.getElementsByClassName('vtk-viewport-handler')
+    );
+    vistaActivada[0].innerHTML = '';
+
+    //Create div
+    const content0 = document.createElement('div');
+    content0.className = 'row';
+    vistaActivada[0].appendChild(content0);
+
+    // Create div
+    const content = document.createElement('div');
+    content.style.color = 'white';
+    content.id = 'content';
+    content0.appendChild(content);
+
+    // Create Widget container
+    const widgetContainer = document.createElement('div');
+    widgetContainer.id = 'widgetContainer';
+    widgetContainer.style.position = 'absolute';
+    widgetContainer.style.top = 'calc(10px + 2em)';
+    widgetContainer.style.right = '5px';
+    widgetContainer.style.background = 'rgba(255, 255, 255, 0.3)';
+    content0.appendChild(widgetContainer);
+
+    // Create Label for preset
+    const labelContainer = document.createElement('div');
+    labelContainer.id = 'labelContainer';
+    labelContainer.style.position = 'absolute';
+    labelContainer.style.top = '10px';
+    labelContainer.style.left = '500px';
+    labelContainer.style.width = '100%';
+    labelContainer.style.color = 'white';
+    labelContainer.style.textAlign = 'center';
+    labelContainer.style.userSelect = 'none';
+    labelContainer.style.cursor = 'pointer';
+    content0.appendChild(labelContainer);
+
+    ReactDOM.render(<VTKVolumeRenderingExample />, content);
+  }
+
+  function buttons(activate, hideTransferFunctions) {
+    if (active) {
+      let msgExit;
+      let state;
+      if (activate) {
+        msgExit = 'Exit 2D MPR';
+        state = 'visible';
+      } else {
+        msgExit = 'Exit 3D';
+        state = 'hidden';
+      }
+
+      const toolBar = document.getElementsByClassName('ToolbarRow');
+
+      const controller = document.createElement('div');
+      controller.style.width = '200px';
+      controller.className = 'controller';
+
+      const elementp = document.createElement('p');
+      elementp.innerHTML =
+        '<p style="font-size: 10px; padding-top: 10px; position: absolute; top:0; left:210px; width: 100px">Transfer Function</p>';
+      controller.appendChild(elementp);
+
+      const selectList = document.createElement('select');
+      selectList.id = 'selectTransferFunction';
+      selectList.style.width = '190px';
+      selectList.className = 'select-ohif';
+      presets.forEach(element => {
+        var option = document.createElement('option');
+        option.value = element['id'];
+        option.text = element['name'];
+        selectList.appendChild(option);
+      });
+      controller.appendChild(selectList);
+
+      for (let index = 2; index < toolBar[0].childElementCount - 1; index++) {
+        let element = toolBar[0].children[index];
+        if (index == 2 && activate && hideTransferFunctions) {
+          element.innerHTML = '';
+        } else if (index == 2 && !activate) {
+          element.style.visibility = 'visible';
+          element.innerHTML = '';
+          element.className = 'toolbar-button slab-thickness';
+          element.appendChild(controller);
+        } else if (!activate && index == 3) {
+          element.style.visibility = 'visible';
+          element.addEventListener('click', feature3D);
+        } else if (activate && index == 3) {
+          element.style.visibility = state;
+          element.removeEventListener('click', feature3D);
+        } else {
+          element.style.visibility = state;
+        }
+      }
+
+      toolBar[0].children[1].children[1].innerText = msgExit;
+      toolBar[0].children[1].addEventListener('click', event => {
+        active = true;
+        buttons(true, false);
+      });
+      const studies = document.getElementsByClassName('study-browser')[0]
+        .children[0];
+
+      for (let index = 0; index < studies.childElementCount; index++) {
+        studies.children[index].children[0].addEventListener('click', event => {
+          active = true;
+          buttons(true, false);
+        });
+        document.addEventListener('drop', event => {
+          active = true;
+          buttons(true, false);
+        });
+      }
+      active = false;
+    }
   }
 
   function _setView(api, sliceNormal, viewUp) {
@@ -420,6 +544,8 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
 
       try {
         apis = await setMPRLayout(displaySet, viewportProps, 1, 3);
+        active = true;
+        buttons(true, true);
       } catch (error) {
         throw new Error(error);
       }
@@ -486,6 +612,26 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
           });
         }
       }
+    },
+    command3D: async ({ viewports }) => {
+      const displaySet =
+        viewports.viewportSpecificData[viewports.activeViewportIndex];
+      const viewportProps = [
+        {
+          orientation: {
+            sliceNormal: [0, 0, 1],
+            viewUp: [0, -1, 0],
+          },
+        },
+      ];
+      try {
+        await setMPRLayout(displaySet, viewportProps, 1, 1);
+        active = true;
+        buttons(false, false);
+      } catch (error) {
+        throw new Error(error);
+      }
+      feature3D();
     },
   };
 
@@ -578,6 +724,18 @@ const commandsModule = ({ commandsManager, servicesManager }) => {
     },
     mpr2d: {
       commandFn: actions.mpr2d,
+      storeContexts: ['viewports'],
+      options: {},
+      context: 'VIEWER',
+    },
+    command3D: {
+      commandFn: actions.command3D,
+      storeContexts: ['viewports'],
+      options: {},
+      context: 'VIEWER',
+    },
+    report: {
+      commandFn: actions.report,
       storeContexts: ['viewports'],
       options: {},
       context: 'VIEWER',
