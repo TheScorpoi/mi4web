@@ -16,15 +16,12 @@ Coded by www.creative-tim.com
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
-
-import { Link } from "react-router-dom";
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 
-function BuiltByDevelopers() {
+function Demo() {
   return (
     <MKBox
       display="flex"
@@ -42,19 +39,18 @@ function BuiltByDevelopers() {
       <Container>
         <Grid container item xs={12} lg={6} sx={{ ml: { xs: 0, lg: 6 } }}>
           <MKTypography variant="h1" color="dark" mb={1}>
-            Documentation
+            Demonstration VIEWER
           </MKTypography>
           <MKTypography variant="body1" color="dark" opacity={0.8} mb={2}>
-            Here you can find all the documentation for the components
-          </MKTypography>
-          <MKTypography
-            component={Link}
-            to="/documentation"
-            variant="body"
-            color="dark"
-            fontWeight="regular"
-          >
-            See documentation <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
+            <iframe
+              width="1000"
+              height="500"
+              src="https://www.youtube.com/embed/avFWvRrvVhc"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
           </MKTypography>
         </Grid>
       </Container>
@@ -62,4 +58,4 @@ function BuiltByDevelopers() {
   );
 }
 
-export default BuiltByDevelopers;
+export default Demo;

@@ -30,9 +30,6 @@ import DefaultFooter from "examples/Footers/DefaultFooter";
 import Counters from "pages/Presentation/sections/Counters";
 import Information from "pages/Presentation/sections/Information";
 import DesignBlocks from "pages/Presentation/sections/DesignBlocks";
-import Pages from "pages/Presentation/sections/Pages";
-import Testimonials from "pages/Presentation/sections/Testimonials";
-import Download from "pages/Presentation/sections/Download";
 
 // Presentation page components
 import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
@@ -43,6 +40,7 @@ import footerRoutes from "footer.routes";
 
 // Images
 import bgImage from "assets/images/BGpreto.png";
+import Demo from "./components/Demo";
 
 function Presentation() {
   return (
@@ -99,14 +97,13 @@ function Presentation() {
       >
         <Counters />
         <Information />
-        <DesignBlocks />
-        <Pages />
+        <Container sx={{ mt: 6 }}>
+          <Demo />
+        </Container>
         <Container sx={{ mt: 6 }}>
           <BuiltByDevelopers />
         </Container>
-
-        <Testimonials />
-        <Download />
+        <DesignBlocks />
       </Card>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
