@@ -9,22 +9,8 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import './ViewportReportForm.styl';
-import { TextInput, Select, Icon } from '@ohif/ui';
-import Pdf from 'react-to-pdf';
+import { TextInput } from '@ohif/ui';
 import PDF from './PDF';
-
-const ref = React.createRef();
-
-const FILE_TYPE_OPTIONS = [
-  {
-    key: 'jpg',
-    value: 'jpg',
-  },
-  {
-    key: 'png',
-    value: 'png',
-  },
-];
 
 const REFRESH_VIEWPORT_TIMEOUT = 1000;
 
@@ -36,11 +22,9 @@ const ViewportReportForm = ({
   disableViewport,
   toggleAnnotations,
   loadImage,
-  downloadBlob,
   defaultSize,
   minimumSize,
   maximumSize,
-  canvasClass,
 }) => {
   const [t] = useTranslation('ViewportReportForm');
 
@@ -184,12 +168,11 @@ const ViewportReportForm = ({
       width: width < minimumSize,
       height: height < minimumSize,
       patientname: !patientname,
-      processnumber: !processnumber,
       annotations: !annotations,
     };
 
     setError({ ...hasError });
-  }, [dimensions, patientname, processnumber, annotations, minimumSize]);
+  }, [dimensions, patientname, annotations, minimumSize]);
 
   const current = new Date();
   const date = `${current.getDate()}/${current.getMonth() +
@@ -254,12 +237,12 @@ const ViewportReportForm = ({
                     <TextInput
                       type="text"
                       data-cy="process-number"
-                      value={processnumber}
+                      value={localStorage.getItem('StudyInstanceUID')}
                       onChange={event => setProcessnumber(event.target.value)}
                       label={t('processnumber')}
                       id="process-number"
+                      disabled={true}
                     />
-                    {renderErrorHandler('processnumber')}
                   </div>
                 </div>
               </div>
@@ -322,7 +305,6 @@ const ViewportReportForm = ({
                   </div>
                 </div>
               </div>
-
               <div
                 className="file-info-container"
                 data-cy="file-info-container"
@@ -370,15 +352,13 @@ const ViewportReportForm = ({
           </div>
         </div>
       ) : (
-        <div>
-          <PDF
-            patientname={patientname}
-            processnumber={processnumber}
-            annotations={annotations}
-            doutor={doutor}
-            date={date}
-          />
-        </div>
+        <PDF
+          patientname={patientname}
+          processnumber={processnumber}
+          annotations={annotations}
+          doutor={doutor}
+          date={date}
+        />
       )}
     </>
   );

@@ -13,7 +13,6 @@ import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import api from '../Admin/Dashboard/pages/ApiConnections/apiManageAccess';
 import { SignUp } from '../Login/SignUp';
 
-
 function Header(props) {
   const {
     t,
@@ -34,14 +33,12 @@ function Header(props) {
 
   if (token) {
     const id = token.split('=')[1];
-    console.log('id: ' + id);
 
     const [data, setData] = React.useState([]);
 
     React.useEffect(() => {
       api.get(`/get_user_from_token/${id}`).then(res => {
         setData(res.data);
-        console.log(res.data);
       });
     }, []);
 
@@ -80,10 +77,19 @@ function Header(props) {
 
   const signIn = useRef(false);
 
-  if (localStorage.getItem('user') == null) {
+  const logged = localStorage.getItem('user');
+
+  if (logged == null) {
     signIn.current = false;
   } else {
-    signIn.current = true;
+    if (logged == '["José  Trancoso"]') {
+      window.location.href = '/dashboard';
+    }
+    if (logged == '[]') {
+      signIn.current = false;
+    } else {
+      signIn.current = true;
+    }
   }
 
   function putNameOnHeader() {
@@ -128,16 +134,28 @@ function Header(props) {
           </div>
 
           {!signIn.current ? (
-            <button
-              className="button-3"
-              onClick={e => {
-                e.preventDefault();
-                window.location.href = 'http://mednat.ieeta.pt:8755/show_login';
-              }}
-            >
-              Login
-            </button>
-            
+            <>
+              <button
+                className="button-3"
+                onClick={e => {
+                  e.preventDefault();
+                  window.location.href = 'http://mednat.ieeta.pt:8755/show_login';
+                }}
+              >
+                Login
+              </button>
+              <button
+                className="button-3"
+                onClick={() =>
+                  show({
+                    content: SignUp,
+                    title: t('Regist account'),
+                  })
+                }
+              >
+                SignUp
+              </button>
+            </>
           ) : (
             <button
               className="button-3"

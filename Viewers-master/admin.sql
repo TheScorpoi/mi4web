@@ -36,6 +36,17 @@ CREATE TABLE not_accepted (
 	PRIMARY KEY(email)
 );
 
+create table store_pdf (
+    id_     int AUTO_INCREMENT NOT NULL,
+    pdf_file text not null,
+    study_id text,
+
+    primary key (id_)
+);
+
+#drop table store_pdf;
+#select * from store_pdf;
+
 CREATE TABLE chart_info (
 	day_ 			DATE	NOT NULL,
     count_studies	INT 	NOT NULL,
@@ -63,6 +74,8 @@ INSERT INTO chart_info (day_, count_studies) VALUES
 ('2022-05-30', 7),
 ('2022-05-31', 9),
 ('2022-06-1', 8);
+
+select * from chart_info;
 
 -- INSERTS STAFF
 INSERT INTO staff (email, professional_id, hospital, type_user) VALUES 
@@ -103,3 +116,6 @@ INSERT INTO user(email, fullname, password) VALUES
 ('josetrancoso@gmail.com', 'José  Trancoso', '78df9eab81df7435cd560ce0d2f0f8adc3bcb30a78e374891b3e459b3f0207b1099f15f51d030be62906c0e0da5a47145376025316eea4618002559f8da1e599'),
 ('luisvasques@gmail.com', 'Luís Vasques', '2307d27bb2d8cdac51d9b5a5754118ae7b42d531c24b00f6dca090783e34f135f97d9615541e7fa147e4cef333091b6c7caa6975e63f02c5fd42cdcdefc2be25');
 
+#UPDATE user SET token="2dsfs12e" WHERE email="andrefreixo@gmail.com";
+
+#select * from user;

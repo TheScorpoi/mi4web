@@ -30,7 +30,7 @@ export default class DicomNodes extends React.Component {
         data: {
           id: 'one',
           label: 'Viewer-2',
-          description: 'Temos aqui o Viewer-2 muito bonito',
+          description: 'Another user using our viewer',
           ae_title: 'AETITULO 2',
           usage_type: 'Retrieve',
         },
@@ -52,7 +52,17 @@ export default class DicomNodes extends React.Component {
           id: 'three',
           label: 'Viewer-1',
           ae_title: 'AETITULO 1',
-          description: 'Temos aqui o Viewer-1 mais bonito q o viewer 2',
+          description: 'One user using our viewer',
+          usage_type: 'Retrieve',
+        },
+        style: { color: 'SkyBlue', 'font-size': '10px' },
+      },
+      {
+        data: {
+          id: 'four',
+          label: 'Echocardiogram Machine',
+          ae_title: 'AETITULO 1',
+          description: 'Machine to perform exams on patients',
           usage_type: 'Retrieve',
         },
         style: { color: 'SkyBlue', 'font-size': '10px' },
@@ -67,6 +77,13 @@ export default class DicomNodes extends React.Component {
       {
         data: {
           source: 'three',
+          target: 'two',
+          label: 'Edge from Node1 to Node2',
+        },
+      },
+      {
+        data: {
+          source: 'four',
           target: 'two',
           label: 'Edge from Node1 to Node2',
         },
