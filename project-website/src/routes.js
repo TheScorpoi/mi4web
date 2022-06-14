@@ -38,14 +38,8 @@ Coded by www.creative-tim.com
 
 // @mui icons
 import GitHubIcon from "@mui/icons-material/GitHub";
-import FindInPageIcon from "@mui/icons-material/FindInPage";
 
 const routes = [
-  {
-    name: "documentation",
-    icon: <FindInPageIcon />,
-    href: "/documentation",
-  },
   {
     name: "github",
     icon: <GitHubIcon />,
