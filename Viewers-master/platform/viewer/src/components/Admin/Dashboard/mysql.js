@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
 });
 
 const db = mysql.createConnection({
-  host: '10.4.0.4',
+  host: 'localhost',
   user: 'root',
   password: 'password',
   database: 'mi4web',
