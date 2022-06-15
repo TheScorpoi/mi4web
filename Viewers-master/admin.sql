@@ -20,7 +20,7 @@ CREATE TABLE staff (
 	professional_id 	VARCHAR(256)			NOT NULL,
     hospital	    	VARCHAR(256)	        NOT NULL,
 	type_user		ENUM('Clinical Imaging Staff', 'Referring Clinical Staff')		NOT NULL,
-    
+
 	PRIMARY KEY(email),
     FOREIGN KEY(email) REFERENCES user(email)  ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -44,13 +44,13 @@ create table store_pdf (
     primary key (id_)
 );
 
-#drop table store_pdf;
-#select * from store_pdf;
+-- drop table store_pdf;
+-- select * from store_pdf;
 
 CREATE TABLE chart_info (
 	day_ 			DATE	NOT NULL,
     count_studies	INT 	NOT NULL,
-    
+
     PRIMARY KEY (day_)
 );
 
@@ -58,13 +58,13 @@ DELIMITER $$
 CREATE PROCEDURE `AcceptOnStaff` (IN Email VARCHAR(256))
 BEGIN
 	INSERT INTO `staff` SELECT * from `not_accepted` as na WHERE na.`email` = Email ;
-END $$  
+END $$
 
 DELIMITER $$
 CREATE PROCEDURE `DeleteOnNotAcceptedTable` (IN Email VARCHAR(256))
 BEGIN
 	DELETE FROM `not_accepted` as na WHERE na.`email` = Email;
-END $$ 
+END $$
 
 INSERT INTO chart_info (day_, count_studies) VALUES
 ('2022-05-26', 5),
@@ -78,7 +78,7 @@ INSERT INTO chart_info (day_, count_studies) VALUES
 select * from chart_info;
 
 -- INSERTS STAFF
-INSERT INTO staff (email, professional_id, hospital, type_user) VALUES 
+INSERT INTO staff (email, professional_id, hospital, type_user) VALUES
 ('andrefreixo@gmail.com', '506984765', 'Hospital do Incesto', 'Clinical Imaging Staff'),
 ('pedrosobral@gmail.com', '012938477', 'Hospital da Luz', 'Clinical Imaging Staff'),
 ('filipefreixo@gmail.com', '012345678', 'Hospital da Incesto', 'Clinical Imaging Staff'),
@@ -93,7 +93,7 @@ INSERT INTO staff (email, professional_id, hospital, type_user) VALUES
 ('luisvasques@gmail.com', '019283746', 'Hospital da Luz', 'Referring Clinical Staff');
 
 -- INSERTS NOT_ACCEPTED
-INSERT INTO not_accepted (email, fullname, password, professional_id, hospital,type_user) VALUES 
+INSERT INTO not_accepted (email, fullname, password, professional_id, hospital,type_user) VALUES
 ('luisao@gmail.com', 'Luís Albedo', '7c5fbdaf56b64306126c9ecaf464f4589dd4cef34d31b28d8233667d6c281b695653872b509578a422ab141cbcfdba0111db811fd97314af304824180ab72ad2', '334221234', 'Hospital da Luz', 'Clinical Imaging Staff'),
 ('ricardoalmeida@gmail.com', 'Ricardo Almeida', '1b6174b04d6ffae0ca1dc05c3fc0f210b3e8838f13fc971ce3b91e8853c10e2f3757c12b37c1a125cd2a98fee262cc8912ad86862b160be65be36468f19e52dc', '777896540', 'Hospital do Porto', 'Clinical Imaging Staff'),
 ('inesfreixo@gmail.com', 'Inês Freixo', 'c27bce6521a53cdae49583cda071a2a9002d5b48dfff0b8131c2f8f68b29e5df3ebf229829dbd96f4c8f8f060ea0711fe90b5fb271683156c99aea5b7eda0be3', '012345678', 'Hospital da Luz', 'Referring Clinical Staff'),
@@ -102,7 +102,7 @@ INSERT INTO not_accepted (email, fullname, password, professional_id, hospital,t
 ('verapomp@gmail.com', 'Vera Pomposo', 'db19fb5b845b5a1f53ff7395bdd818f8aa7d4a558a35143d97ac7be9f4267cffb59eafd9d69e21121b1bec4e249c1cb433d891fb0923c5b07b1fb9e7c0c53217', '897969594', 'Hospital do Porto', 'Referring Clinical Staff');
 
 -- INSERTS USER
-INSERT INTO user(email, fullname, password) VALUES 
+INSERT INTO user(email, fullname, password) VALUES
 ('andrefreixo@gmail.com', 'André Freixo', 'e4aefa469a6d17fcf54b0c23dcdc19ebf81603d1773f3a2a7d1b01c5edaa0ee084c89b3ca0804f2476bec4ebd8b27fa9dd1cdd09c710e2d12385b6cf36f4d6c0'),
 ('pedrosobral@gmail.com', 'Pedro Sobral', 'd3cf120f85001acd4d20c9e961c8ae6ad9b505ce028b4c13a9e2589c4fbb8a35e41c04b3ad55296e170adb694fc1e487eeff70ade39a00742f8543610428351f'),
 ('filipefreixo@gmail.com', 'Filipe Freixo', '037c6563b6e92611cba1ad86355f34a27221b7f7434fba418393783f260d0ee4a676d8ef224641a031d4a448b817dee86d6f73fac0ac93b3776f2eea43bd7407'),
