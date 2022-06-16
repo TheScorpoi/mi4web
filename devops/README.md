@@ -3,7 +3,10 @@
 ## Prequisites
  
 - Yarn
-- 
+- Docker
+- nginx
+- nodejs
+- mysql
 
 ## How to run the application
 
