@@ -8,32 +8,15 @@
 - nodejs
 - mysql
 
-## How to run the application
-
-If you want to run run the application, you need to enter on [Viewers-master](/Viewers-master/) directory and run the following command:
-
-```bash
-yarn install
-yarn start
-```
-
-To to put database up, you will need to run the docker-compose file in the root of the repository: 
-```bash
-docker-compose up
-```
-
-Run the authentication protocol, and the nodeJS APIS:
-
-Go to the [authentication](/authentication/) directory and run the following command:
-```bash
-docker-compose up
-```
-
 ## How we deploy the application on the VMs:
 
 The deploy process will be explain to deploy on linux virtual machines, if you are using azure, aws… the process will be diferente. Consult the [Deployment | OHIF](https://v3-docs.ohif.org/deployment/index/) to see more information.
 
 To deploy the dockers on VM some adjusts have to be done, in the dockers compose or in the configurations of the connection to the servides.
+
+The deploy diagram is the following:
+
+<img src="../images/deployment.png">
 
 ### Deploy the Server
 
