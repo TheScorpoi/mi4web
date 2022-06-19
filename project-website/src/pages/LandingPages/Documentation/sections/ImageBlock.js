@@ -45,16 +45,16 @@ function ImageBlock() {
           {image2 !== "" ? (
             <>
               <a href={image} target="_blank" rel="noreferrer noopener">
-                <img style={{ width: "800px" }} alt={title} src={image} />
+                <img style={{ width: "900px" }} alt={title} src={image} />
               </a>
               <a href={image2} target="_blank" rel="noreferrer noopener">
-                <img style={{ width: "800px", "margin-top": "50px" }} alt={title} src={image2} />
+                <img style={{ width: "900px", "margin-top": "50px" }} alt={title} src={image2} />
               </a>
             </>
           ) : (
             <>
               <a href={image} target="_blank" rel="noreferrer noopener">
-                <img alt={title} src={image} />
+                <img style={{ width: "800px" }} alt={title} src={image} />
               </a>
             </>
           )}
