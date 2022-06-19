@@ -13,7 +13,8 @@
 Nowadays, the zero-footprint fully web-based visualization is making its way and gaining wider acceptance within the medical imaging community. Since the level of acceptance is growing up, the necessity of upgrading and building new functionalities and features is mandatory, so that it can continue to gain recognition and grow. One of these applications is OHIF, a zero-footprint, open source and web-based medical imaging viewer, that gives us the ability to add and configure extensions, which makes it very expandable. Therefore , this platform will be the starting point of our project.
 
 ## Demo
-  <img  src="/images/Screen Recording 2022-06-19 at 21.06.29.gif">
+  Click on the image to see the demo.
+  <a href="https://www.youtube.com/watch?v=avFWvRrvVhc"> <img  src="/images/ezgif.com-gif-maker.gif"></a>
 
 
 ## Main goals
@@ -91,6 +92,7 @@ docker-compose up
 ## How to deploy the application on the VMs:
 
 The deploy proccess is fully documented in the [deploy](/deploy/) directory.
+<>
 
 ## Group members
 
