@@ -26,6 +26,9 @@ import CenteredBlogCard from "examples/Cards/BlogCards/CenteredBlogCard";
 import m1 from "Documents/MI4WEB-M1.pdf";
 import m2 from "Documents/MI4WEB-M2.pdf";
 import m3 from "Documents/MI4WEB-M3.pdf";
+import techReport from "Documents/Technical_Report_MI4WEB.pdf";
+import abstract from "Documents/Abstract_Report_MI4WEB.pdf";
+import api from "Documents/api_documentation.png";
 import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
 import ImageBlock from "./ImageBlock";
 
@@ -49,7 +52,7 @@ function Information() {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={6} mb={3}>
                 <DefaultInfoCard
                   color="info"
                   icon="flag"
@@ -62,7 +65,7 @@ function Information() {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={6} mb={3}>
                 <DefaultInfoCard
                   color="info"
                   icon="flag"
@@ -75,15 +78,67 @@ function Information() {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={6} mb={3}>
                 <DefaultInfoCard
                   color="info"
                   icon="flag"
-                  title="NOT YET..."
+                  title="M4 Presentation"
                   description=""
                   action={{
                     type: "external",
                     route: "",
+                    label: "Click here",
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} mb={3}>
+                <DefaultInfoCard
+                  color="info"
+                  icon="flag"
+                  title="API Documentation"
+                  description=""
+                  action={{
+                    type: "external",
+                    route: api,
+                    label: "Click here",
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} mb={3}>
+                <DefaultInfoCard
+                  color="info"
+                  icon="flag"
+                  title="Technical Report"
+                  description=""
+                  action={{
+                    type: "external",
+                    route: techReport,
+                    label: "Click here",
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} mb={3}>
+                <DefaultInfoCard
+                  color="info"
+                  icon="flag"
+                  title="Poster"
+                  description=""
+                  action={{
+                    type: "external",
+                    route: m1,
+                    label: "Click here",
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} mb={3}>
+                <DefaultInfoCard
+                  color="info"
+                  icon="flag"
+                  title="Abstract"
+                  description=""
+                  action={{
+                    type: "external",
+                    route: abstract,
                     label: "Click here",
                   }}
                 />

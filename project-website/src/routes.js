@@ -38,6 +38,7 @@ Coded by www.creative-tim.com
 
 // @mui icons
 import GitHubIcon from "@mui/icons-material/GitHub";
+import ViewCozyIcon from "@mui/icons-material/ViewCozy";
 
 const routes = [
   {
@@ -47,7 +48,7 @@ const routes = [
   },
   {
     name: "Acess our VIEWER",
-    icon: <GitHubIcon />,
+    icon: <ViewCozyIcon />,
     href: "http://mednat.ieeta.pt:8754",
     collapse: [
       {
