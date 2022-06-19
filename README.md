@@ -40,7 +40,7 @@ Finally, we plan to have a platform capable of supporting different users and an
 
 ## Project Documentation
 
-The project documentation can be found in the following [page](https://thescorpoi.github.io/documentation) in our project website, or in the [doc](/doc/) directory in this repository.
+The project documentation can be found in the following [page](https://thescorpoi.github.io/) (in documentation section) in our project website, or in the [doc](/doc/) directory in this repository.
 
 #### Arquitecture
 
@@ -91,8 +91,7 @@ docker-compose up
 
 ## How to deploy the application on the VMs:
 
-The deploy proccess is fully documented in the [deploy](/deploy/) directory.
-<>
+The deploy proccess is fully documented in the [deploy](/devops/) directory.
 
 ## Group members
 
