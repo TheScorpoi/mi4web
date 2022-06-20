@@ -26,6 +26,7 @@ import CenteredBlogCard from "examples/Cards/BlogCards/CenteredBlogCard";
 import m1 from "Documents/MI4WEB-M1.pdf";
 import m2 from "Documents/MI4WEB-M2.pdf";
 import m3 from "Documents/MI4WEB-M3.pdf";
+import m4 from "Documents/MI4WEB-M4.pdf";
 import techReport from "Documents/Technical_Report_MI4WEB.pdf";
 import abstract from "Documents/Abstract_Report_MI4WEB.pdf";
 import api from "Documents/api_documentation.png";
@@ -86,7 +87,7 @@ function Information() {
                   description=""
                   action={{
                     type: "external",
-                    route: "",
+                    route: m4,
                     label: "Click here",
                   }}
                 />
