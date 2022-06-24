@@ -1,7 +1,7 @@
 {
   "name": "mi4web",
   "version": "2.0.0",
-  "private": true,
+  "private": false,
   "author": "MI4WEB",
   "license": "See license in https://www.creative-tim.com/license",
   "description": "Medical Imaging 4 Web",
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/creativetimofficial/ct-material-kit-react.git"
   },
   "engines": {
-    "node": "14 || 15 || 16 || 17",
+    "node": "14 || 15 || 16 || 17 || 18",
     "npm": ">=6"
   },
   "dependencies": {

@@ -36,43 +36,27 @@ Coded by www.creative-tim.com
   10. The `rowsPerColumn` key is used to define that how many rows should be in a column.
 */
 
-// @mui material components
-import Icon from "@mui/material/Icon";
-
 // @mui icons
 import GitHubIcon from "@mui/icons-material/GitHub";
+import ViewCozyIcon from "@mui/icons-material/ViewCozy";
 
 const routes = [
-  {
-    name: "docs",
-    icon: <Icon>article</Icon>,
-    collapse: [
-      {
-        name: "All documentation",
-        description: "See all documentation",
-        href: "https://drive.google.com/drive/folders/1-hUIkkTqyByItie7QjvyHMO3qNoHl9sL?usp=sharing",
-      },
-      {
-        name: "Architecture",
-        description: "Not yet...",
-        href: "https://drive.google.com/drive/folders/1-hUIkkTqyByItie7QjvyHMO3qNoHl9sL?usp=sharing",
-      },
-      {
-        name: "Requirements",
-        description: "Not yet...",
-        href: "https://drive.google.com/drive/folders/1-hUIkkTqyByItie7QjvyHMO3qNoHl9sL?usp=sharing",
-      },
-      {
-        name: "Techical Report",
-        description: "Not Yet... ",
-        href: "https://drive.google.com/drive/folders/1-hUIkkTqyByItie7QjvyHMO3qNoHl9sL?usp=sharing",
-      },
-    ],
-  },
   {
     name: "github",
     icon: <GitHubIcon />,
     href: "https://github.com/TheScorpoi/mi4web",
+  },
+  {
+    name: "Acess our VIEWER",
+    icon: <ViewCozyIcon />,
+    href: "http://mednat.ieeta.pt:8754",
+    collapse: [
+      {
+        name: "Visit our medical image viewer",
+        description: "You can only access it through UA VPN or using UA Network",
+        href: "http://mednat.ieeta.pt:8754",
+      },
+    ],
   },
 ];
 

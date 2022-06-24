@@ -22,10 +22,45 @@ import Icon from "@mui/material/Icon";
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
+import MuiLink from "@mui/material/Link";
+import { Link } from "react-router-dom";
 
-function DefaultInfoCard({ color, icon, title, description, direction, small }) {
+function DefaultInfoCard({ color, icon, title, description, direction, small, action }) {
+  const buttonStyles = {
+    width: "max-content",
+    display: "flex",
+    alignItems: "center",
+
+    "& .material-icons-round": {
+      fontSize: "1.125rem",
+      transform: `translateX(3px)`,
+      transition: "transform 0.2s cubic-bezier(0.34, 1.61, 0.7, 1.3)",
+    },
+
+    "&:hover .material-icons-round, &:focus .material-icons-round": {
+      transform: `translateX(6px)`,
+    },
+  };
+
+  const presentationsStyles = {
+    width: "300px",
+    "background-color": `#F7F7F7`,
+    "border-radius": `10px`,
+    padding: `10px`,
+    "padding-left": `20px`,
+
+    "&:hover": {
+      "background-color": `#F3F3F3`,
+    },
+  };
+
   return (
-    <MKBox lineHeight={1} p={direction === "center" ? 2 : 0} textAlign={direction}>
+    <MKBox
+      lineHeight={1}
+      p={direction === "center" ? 2 : 0}
+      textAlign={direction}
+      sx={presentationsStyles}
+    >
       {typeof icon === "string" ? (
         <MKTypography
           display="block"
@@ -57,6 +92,30 @@ function DefaultInfoCard({ color, icon, title, description, direction, small }) 
       >
         {description}
       </MKTypography>
+      {action && action.type === "external" ? (
+        <MKTypography
+          component={MuiLink}
+          href={action.route}
+          target="_blank"
+          rel="noreferrer"
+          variant="body2"
+          fontWeight="regular"
+          sx={buttonStyles}
+        >
+          {action.label} <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
+        </MKTypography>
+      ) : null}
+      {action && action.type === "internal" ? (
+        <MKTypography
+          component={Link}
+          to={action.route}
+          variant="body2"
+          fontWeight="regular"
+          sx={buttonStyles}
+        >
+          {action.label} <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
+        </MKTypography>
+      ) : null}
     </MKBox>
   );
 }
@@ -66,6 +125,7 @@ DefaultInfoCard.defaultProps = {
   color: "info",
   direction: "left",
   small: false,
+  action: false,
 };
 
 // Typechecking props for the DefaultInfoCard
@@ -85,6 +145,14 @@ DefaultInfoCard.propTypes = {
   description: PropTypes.string.isRequired,
   direction: PropTypes.oneOf(["left", "right", "center"]),
   small: PropTypes.bool,
+  action: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      type: PropTypes.oneOf(["external", "internal"]).isRequired,
+      route: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    }),
+  ]),
 };
 
 export default DefaultInfoCard;
